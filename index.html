@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neil Surjiani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #04040f;
+            --navy: #07071a;
+            --purple: #7c5cbf;
+            --purple-bright: #a07ee8;
+            --purple-glow: rgba(124, 92, 191, 0.35);
+            --white: #ffffff;
+            --white-dim: rgba(255, 255, 255, 0.55);
+            --white-faint: rgba(255, 255, 255, 0.07);
+            --grid: rgba(255, 255, 255, 0.04);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Grid BG */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Purple corner bloom */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -200px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(80, 40, 180, 0.18) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bloomShift 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes bloomShift {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(60px, 80px);
+            }
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 48px 24px 56px;
+            max-width: 860px;
+            width: 100%;
+        }
+
+        /* Photo */
+        .photo-wrap {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        .photo-wrap::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 40px;
+            background: var(--purple-glow);
+            filter: blur(24px);
+            border-radius: 50%;
+        }
+
+        .photo-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 1.5px solid transparent;
+            background: linear-gradient(135deg, var(--purple-bright), transparent, var(--purple)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: spinRing 5s linear infinite;
+        }
+
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1a1a35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            color: var(--purple-bright);
+        }
+
+        /* Name tag */
+        .name-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(18px, 2.8vw, 26px);
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+        }
+
+        /* Headline */
+        .headline {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        }
+
+        .headline .accent {
+            color: var(--purple-bright);
+            position: relative;
+            display: inline-block;
+        }
+
+        .headline .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--purple-bright), var(--purple));
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+            border-radius: 2px;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Subtext */
+        .subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--white-dim);
+            margin-top: 18px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+        }
+
+        /* Link Cards (icon + label) */
+        .link-cards {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+        }
+
+        .link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 0;
+            width: 110px;
+            background: var(--white-faint);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--white-dim);
+            transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+            backdrop-filter: blur(8px);
+        }
+
+        .link-card:hover {
+            background: rgba(124, 92, 191, 0.15);
+            border-color: var(--purple-bright);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(124, 92, 191, 0.2);
+        }
+
+        .link-card svg {
+            width: 26px;
+            height: 26px;
+            fill: #ffffff;
+            transition: fill 0.25s;
+            flex-shrink: 0;
+        }
+
+        .link-card:hover svg {
+            fill: var(--purple-bright);
+        }
+
+        .link-card span {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Kreator CTA */
+        .kreator-cta {
+            opacity: 0;
+            animation: riseIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+        }
+
+        .btn-purple {
+            display: inline-block;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            background: var(--purple);
+            border: 1px solid var(--purple);
+            color: var(--white);
+            box-shadow: 0 0 28px rgba(124, 92, 191, 0.35);
+            transition: all 0.25s;
+        }
+
+        .btn-purple:hover {
+            background: var(--purple-bright);
+            border-color: var(--purple-bright);
+            box-shadow: 0 0 40px rgba(160, 126, 232, 0.55);
+            transform: translateY(-2px);
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .headline {
+                font-size: 38px;
+            }
+
+            .ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 220px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="c"></canvas>
+
+    <div class="page">
+
+        <div class="photo-wrap">
+            <img src="photo.jpg" class="photo-placeholder" alt="Neil Surjiani">
+        </div>
+
+        <p class="name-tag">Neil Surjiani</p>
+
+        <h1 class="headline">
+            AI Builder, Musician,<br>
+            <span class="accent">and Entrepreneur</span>
+        </h1>
+
+        <p class="subtext">Building things at the intersection of code, creativity &amp; sound.</p>
+
+        <div class="link-cards">
+            <a href="https://github.com/neil-surjiani/" target="_blank" class="link-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GitHub</span>
+            </a>
+            <a href="https://www.instagram.com/neilsurjiani28/reels/" target="_blank" class="link-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                </svg>
+                <span>Instagram</span>
+            </a>
+        </div>
+
+        <div class="kreator-cta">
+            <a href="#" class="btn-purple">Check out Kreator AI &nbsp;→</a>
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        let W, H, pts = [];
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function Pt() {
+            this.x = Math.random() * W;
+            this.y = Math.random() * H;
+            this.r = Math.random() * 1 + 0.3;
+            this.vx = (Math.random() - 0.5) * 0.2;
+            this.vy = (Math.random() - 0.5) * 0.2;
+            this.a = Math.random() * 0.25 + 0.05;
+            this.purple = Math.random() > 0.5;
+        }
+        for (let i = 0; i < 100; i++) pts.push(new Pt());
+
+        (function loop() {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < pts.length; i++) {
+                const p = pts[i];
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.purple
+                    ? `rgba(140,100,220,${p.a})`
+                    : `rgba(255,255,255,${p.a * 0.6})`;
+                ctx.fill();
+                for (let j = i + 1; j < pts.length; j++) {
+                    const q = pts[j];
+                    const d = Math.hypot(p.x - q.x, p.y - q.y);
+                    if (d < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
+                        ctx.strokeStyle = `rgba(124,92,191,${0.06 * (1 - d / 120)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(loop);
+        })();
+    </script>
+</body>
+
+</html>

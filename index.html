@@ -67,8 +67,11 @@
 
     /* ── NAV ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(20px, 5vw, 48px); background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; color: var(--white); text-decoration: none; flex-shrink: 0; z-index: 2; }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; z-index: 2; }
+    .nav-logo img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(200,180,255,0.3); transition: border-color 0.2s, transform 0.2s; display: block; }
+    .nav-logo:hover img { border-color: var(--accent); transform: scale(1.07); }
+    .nav-logo-fallback { width: 34px; height: 34px; border-radius: 50%; background: #1a1a35; border: 1.5px solid rgba(200,180,255,0.3); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: var(--accent); font-family: 'Outfit', sans-serif; }
+    .nav-logo span { display: none; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a { font-family: var(--mono); font-size: 12px; color: var(--dim); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; position: relative; }
     .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
@@ -593,7 +596,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo" onclick="showPage('home');event.preventDefault();">NS<span>.</span></a>
+    <a href="#" class="nav-logo" onclick="showPage('home');event.preventDefault();" title="Home"><img src="photo.png" alt="Neil Surjiani" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><div class="nav-logo-fallback" style="display:none;">N</div></a>
     <ul class="nav-links">
       <li><a href="#" onclick="showPage('home');event.preventDefault();">Home</a></li>
       <li><a href="#" onclick="showPage('about');event.preventDefault();">About</a></li>
@@ -1019,32 +1022,9 @@
       .ahb-chip-text strong { display: block; font-size: 12px; font-weight: 700; color: var(--white); }
       .ahb-chip-text span { font-family: var(--mono); font-size: 10px; color: var(--dim); }
 
-      /* Timeline scroll-reveal — each item slides in individually */
-      .atl-item.atl-reveal {
-        opacity: 0;
-        transform: translateX(-18px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .atl-item.atl-reveal.atl-visible {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      /* Timeline line draws downward when parent enters view */
+      /* Timeline */
       .about-timeline { position: relative; padding-left: 28px; margin-bottom: 0; }
-      .about-timeline::before {
-        content: '';
-        position: absolute;
-        left: 6px; top: 6px; bottom: 6px;
-        width: 1.5px;
-        background: linear-gradient(to bottom, var(--purple), rgba(124,92,191,0.1));
-        border-radius: 2px;
-        transform-origin: top;
-        transform: scaleY(0);
-        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-      }
-      .about-timeline.timeline-visible::before { transform: scaleY(1); }
-
+      .about-timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 1.5px; background: linear-gradient(to bottom, var(--purple), rgba(124,92,191,0.1)); border-radius: 2px; }
       .atl-item { position: relative; margin-bottom: 28px; }
       .atl-item:last-child { margin-bottom: 0; }
       .atl-dot { position: absolute; left: -25px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 12px rgba(124,92,191,0.5); border: 2px solid var(--bg); }
@@ -1090,22 +1070,22 @@
       <!-- Hero Banner -->
       <div class="about-hero-banner reveal">
         <div>
-          <p class="about-hero-tagline">16 · Pune, India · Builder & Musician</p>
+          <p class="about-hero-tagline">16 · Pune, India · Builder & Creator</p>
           <h3 class="about-hero-name">Neil <span>Surjiani</span></h3>
-          <p class="about-hero-desc">I picked up guitar during COVID, taught myself to code in Std 9, scored 96.4% in my ICSE boards, then spent the next year building three real products from scratch — all at 16. Code is my primary language, guitar is my second.</p>
+          <p class="about-hero-desc">I build real products, make music, and think about startups — all at 16. Code is my primary language, guitar is my second. I believe the best products feel inevitable once they exist. Building toward that.</p>
         </div>
         <div class="about-hero-badge">
           <div class="ahb-chip">
-            <span class="ahb-chip-icon">🎓</span>
-            <div class="ahb-chip-text"><strong>96.4% — ICSE Std 10</strong><span>Class of 2025</span></div>
-          </div>
-          <div class="ahb-chip">
-            <span class="ahb-chip-icon">🎸</span>
-            <div class="ahb-chip-text"><strong>TCL Grade 5</strong><span>Guitar · Working on Grade 6</span></div>
-          </div>
-          <div class="ahb-chip">
             <span class="ahb-chip-icon">🚀</span>
-            <div class="ahb-chip-text"><strong>3 Products Built</strong><span>EVMate · KreatorAI · Clipwise</span></div>
+            <div class="ahb-chip-text"><strong>Founder</strong><span>KreatorAI Studio</span></div>
+          </div>
+          <div class="ahb-chip">
+            <span class="ahb-chip-icon">🎓</span>
+            <div class="ahb-chip-text"><strong>TCL Grade 5</strong><span>Guitar Certified</span></div>
+          </div>
+          <div class="ahb-chip">
+            <span class="ahb-chip-icon">📍</span>
+            <div class="ahb-chip-text"><strong>Pune, India</strong><span>Building globally</span></div>
           </div>
         </div>
       </div>
@@ -1116,42 +1096,30 @@
         <div>
           <!-- Story timeline -->
           <div class="section-label reveal" style="margin-bottom:16px;">Journey</div>
-          <div class="about-timeline">
-            <div class="atl-item atl-reveal">
+          <div class="about-timeline reveal">
+            <div class="atl-item">
               <div class="atl-dot"></div>
-              <div class="atl-year">2022 · Std 7 · Age 13–14</div>
-              <div class="atl-title">Guitar during COVID lockdown</div>
-              <div class="atl-desc">Picked up guitar during COVID-19 when I was in Standard 7. What started as something to do at home became a serious pursuit — Trinity College London syllabus, scales, theory, and years of daily practice.</div>
+              <div class="atl-year">2023 · Age 14</div>
+              <div class="atl-title">Started coding seriously</div>
+              <div class="atl-desc">Picked up Python and Flutter, got obsessed. Went from "hello world" to full Firebase apps within months.</div>
             </div>
-            <div class="atl-item atl-reveal">
+            <div class="atl-item">
               <div class="atl-dot"></div>
-              <div class="atl-year">Std 9–10 · 2023–2025</div>
-              <div class="atl-title">First code: Java (ICSE syllabus)</div>
-              <div class="atl-desc">Started learning Java in Std 9 as part of the ICSE school curriculum. Spent two years going through the syllabus, graduated Std 10 with a <strong style="color:var(--accent)">96.4%</strong> — my academic foundation before going full self-taught.</div>
-            </div>
-            <div class="atl-item atl-reveal">
-              <div class="atl-dot"></div>
-              <div class="atl-year">Jun – Nov 2025 · Std 11</div>
-              <div class="atl-title">Python, data science & full-stack</div>
-              <div class="atl-desc">After boards, went deep into Python — NumPy, Pandas, Matplotlib. Then Flutter & Dart (Sep–Nov), followed by FastAPI, Next.js basics, Cloud Firestore, Firebase Auth, PostgreSQL, Supabase, and Render deployment. Four months, zero hand-holding.</div>
-            </div>
-            <div class="atl-item atl-reveal">
-              <div class="atl-dot"></div>
-              <div class="atl-year">Dec 2025 – Feb 2026</div>
+              <div class="atl-year">2024 · Age 15</div>
               <div class="atl-title">Built & shipped EVMate</div>
-              <div class="atl-desc">My first real full-stack product — a Flutter EV trip planning app with OpenStreetMap routing and Gemini AI integration. Real backend, real domain, real users.</div>
+              <div class="atl-desc">My first full-stack Flutter app — live EV trip planning with OpenStreetMap + Gemini AI. Real users, real backend, real domain.</div>
             </div>
-            <div class="atl-item atl-reveal">
+            <div class="atl-item">
               <div class="atl-dot"></div>
-              <div class="atl-year">Feb 2026</div>
+              <div class="atl-year">2025 · Age 16</div>
               <div class="atl-title">Founded KreatorAI Studio</div>
-              <div class="atl-desc">Built a full AI SaaS platform from the ground up — 15+ tools, four subscription tiers, FastAPI backend, Flutter front-end, Firebase + Supabase. Live at kreatoraistudio.com.</div>
+              <div class="atl-desc">Built a full AI SaaS platform from scratch — 15+ tools, four subscription tiers, FastAPI backend, Flutter app, live at kreatoraistudio.com.</div>
             </div>
-            <div class="atl-item atl-reveal">
+            <div class="atl-item">
               <div class="atl-dot" style="background:#38bdf8;box-shadow:0 0 12px rgba(56,189,248,0.5)"></div>
-              <div class="atl-year" style="color:#38bdf8;">May 2026 · Now</div>
-              <div class="atl-title">Building Clipwise</div>
-              <div class="atl-desc">My newest project — started May 2026. Still in early build. More to come.</div>
+              <div class="atl-year" style="color:#38bdf8;">2026 · Now</div>
+              <div class="atl-title">Designing TripWise</div>
+              <div class="atl-desc">A full travel platform — from "I want to go somewhere" to complete itinerary in under 2 minutes. Building with Next.js + AI.</div>
             </div>
           </div>
 
@@ -1165,17 +1133,17 @@
           <div class="reveal">
             <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
               <div class="about-proj-dot" style="background:var(--purple-bright)"></div>
-              <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI · Firebase · Feb 2026</span></div>
+              <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI · Firebase</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
             <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
               <div class="about-proj-dot" style="background:#00c96b"></div>
-              <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI · Dec 2025</span></div>
+              <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
             <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
               <div class="about-proj-dot" style="background:#38bdf8"></div>
-              <div class="about-proj-info"><strong>Clipwise</strong><span>In development · May 2026</span></div>
+              <div class="about-proj-info"><strong>TripWise</strong><span>Next.js · OpenAI · In Development</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
           </div>
@@ -1233,11 +1201,10 @@
           <!-- Tech chips -->
           <div class="section-label reveal" style="margin-bottom:12px;margin-top:24px;">Stack</div>
           <div class="tech-chips reveal">
-            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">Flutter / Dart</span>
-            <span class="chip">FastAPI</span><span class="chip">Firebase Auth</span><span class="chip">Cloud Firestore</span>
-            <span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Next.js</span>
-            <span class="chip">NumPy</span><span class="chip">Pandas</span><span class="chip">Matplotlib</span>
-            <span class="chip">OpenAI API</span><span class="chip">Gemini AI</span><span class="chip">Render</span>
+            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">Flutter/Dart</span>
+            <span class="chip">FastAPI</span><span class="chip">Firebase</span><span class="chip">Supabase</span>
+            <span class="chip">Next.js</span><span class="chip">NumPy</span>
+            <span class="chip">OpenAI API</span><span class="chip">Gemini AI</span>
           </div>
 
           <!-- Interests -->
@@ -1763,33 +1730,93 @@
       .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
       @media (max-width:700px) { .reels-grid{grid-template-columns:repeat(2,1fr);} }
       @media (max-width:440px) { .reels-grid{grid-template-columns:1fr;} }
+      /* Video reel cards */
+      .reels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      @media (max-width:900px) { .reels-grid { grid-template-columns: repeat(2,1fr); } }
+      @media (max-width:480px) { .reels-grid { grid-template-columns: repeat(2,1fr); gap:10px; } }
+
       .reel-card {
         position: relative;
-        border-radius: 14px;
+        border-radius: 16px;
         overflow: hidden;
-        background: var(--surface2);
+        background: #0a0a12;
         border: 1px solid var(--border);
         aspect-ratio: 9/16;
-        max-height: 280px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      }
+      .reel-card:hover { border-color: rgba(200,180,255,0.35); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,180,255,0.08); }
+      .reel-card video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 16px;
+      }
+      .reel-card-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(to top, rgba(5,5,8,0.85) 0%, rgba(5,5,8,0.1) 50%, transparent 100%);
+        border-radius: 16px;
+        pointer-events: none;
+      }
+      .reel-card-top {
+        position: absolute;
+        top: 10px; left: 10px; right: 10px;
+        z-index: 3;
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 10px;
-        cursor: pointer;
-        transition: border-color 0.25s, transform 0.25s;
-        text-decoration: none;
+        justify-content: space-between;
       }
-      .reel-card:hover { border-color: rgba(200,180,255,0.3); transform: translateY(-3px); }
-      .reel-card-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(124,92,191,0.08), rgba(200,180,255,0.04)); }
-      .reel-card-content { position: relative; z-index: 1; text-align: center; padding: 16px; }
-      .reel-play { width: 44px; height: 44px; background: rgba(200,180,255,0.12); border: 1.5px solid rgba(200,180,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
-      .reel-play svg { width: 16px; height: 16px; fill: var(--accent); }
-      .reel-label { font-weight: 700; font-size: 12px; color: var(--white); margin-bottom: 4px; }
-      .reel-sublabel { font-family: var(--mono); font-size: 10px; color: var(--dim); }
-      .reel-ig-badge { position: absolute; top: 10px; right: 10px; z-index: 2; }
-      .reel-ig-badge svg { width: 16px; height: 16px; fill: rgba(200,180,255,0.4); }
-      .reel-card-cta { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 8px; background: linear-gradient(to top, rgba(5,5,8,0.9), transparent); font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,180,255,0.5); text-align: center; }
+      .reel-song-badge {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(0,0,0,0.55);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 100px;
+        padding: 4px 10px;
+        font-family: var(--mono);
+        font-size: 9px;
+        color: rgba(255,255,255,0.7);
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 130px;
+      }
+      .reel-song-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
+      .reel-play-fab {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        width: 48px; height: 48px;
+        background: rgba(200,180,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1.5px solid rgba(200,180,255,0.3);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s;
+        pointer-events: none;
+      }
+      .reel-card:hover .reel-play-fab,
+      .reel-card.playing .reel-play-fab { opacity: 0; }
+      .reel-play-fab svg { width: 16px; height: 16px; fill: var(--white); }
+      .reel-card-bottom {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        z-index: 3;
+        padding: 10px 12px;
+      }
+      .reel-title { font-weight: 700; font-size: 13px; color: var(--white); margin-bottom: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+      .reel-artist { font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
 
       /* Audio player */
       .beats-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -1902,172 +1929,135 @@
       <!-- Tabs -->
       <div class="music-tabs reveal">
         <button class="music-tab active" onclick="switchMusicTab('guitar', this)">🎸 Guitar Reels</button>
-        <button class="music-tab" onclick="switchMusicTab('photos', this)">📸 Photos</button>
         <button class="music-tab" onclick="switchMusicTab('beats', this)">🎛️ Produced Beats</button>
       </div>
 
       <!-- Guitar reels panel -->
       <div id="music-panel-guitar" class="music-panel active reveal">
-        <style>
-          .video-reels-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-          @media (max-width: 700px) { .video-reels-grid { grid-template-columns: 1fr; } }
-          .video-reel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
-          .video-reel-card:hover { border-color: rgba(200,180,255,0.3); transform: translateY(-3px); }
-          .video-reel-card video { width: 100%; display: block; max-height: 420px; background: #000; object-fit: cover; }
-          .video-reel-meta { padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
-          .video-reel-icon { font-size: 18px; flex-shrink: 0; }
-          .video-reel-title { font-weight: 700; font-size: 14px; color: var(--white); }
-          .video-reel-sub { font-family: var(--mono); font-size: 11px; color: var(--dim); margin-top: 2px; }
-        </style>
-        <div class="video-reels-grid">
-          <div class="video-reel-card">
-            <video controls preload="metadata">
-              <source src="reels/Bohemian Rhapsody Final.mp4" type="video/mp4">
-            </video>
-            <div class="video-reel-meta">
-              <div class="video-reel-icon">🎸</div>
-              <div>
-                <div class="video-reel-title">Bohemian Rhapsody</div>
-                <div class="video-reel-sub">Guitar cover · Queen</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-reel-card">
-            <video controls preload="metadata">
-              <source src="reels/Numb.mp4" type="video/mp4">
-            </video>
-            <div class="video-reel-meta">
-              <div class="video-reel-icon">🎸</div>
-              <div>
-                <div class="video-reel-title">Numb</div>
-                <div class="video-reel-sub">Guitar cover · Linkin Park</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-reel-card">
-            <video controls preload="metadata">
-              <source src="reels/Where Down We Go.mp4" type="video/mp4">
-            </video>
-            <div class="video-reel-meta">
-              <div class="video-reel-icon">🎸</div>
-              <div>
-                <div class="video-reel-title">Where Did We Go</div>
-                <div class="video-reel-sub">Guitar cover</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-reel-card">
-            <video controls preload="metadata">
-              <source src="reels/VID-20250825-WA0017.mp4" type="video/mp4">
-            </video>
-            <div class="video-reel-meta">
-              <div class="video-reel-icon">🎸</div>
-              <div>
-                <div class="video-reel-title">Guitar Session</div>
-                <div class="video-reel-sub">Original performance</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:16px;text-align:center;">
-          <a href="https://www.instagram.com/neilsurjiani28/reels/" target="_blank" class="music-link-card" style="display:inline-flex;width:auto;margin:0 auto;">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-            <div class="music-link-info"><strong>View all reels on Instagram</strong><span>@neilsurjiani28</span></div>
-          </a>
-        </div>
-      </div>
+        <div class="reels-grid">
 
-      <!-- Photos panel -->
-      <div id="music-panel-photos" class="music-panel reveal">
-        <style>
-          .guitar-photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-          @media (max-width: 700px) { .guitar-photos-grid { grid-template-columns: repeat(2, 1fr); } }
-          @media (max-width: 440px) { .guitar-photos-grid { grid-template-columns: 1fr; } }
-          .guitar-photo-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
-          .guitar-photo-card:hover { border-color: rgba(200,180,255,0.35); transform: translateY(-4px); }
-          .guitar-photo-card img { width: 100%; height: 280px; object-fit: cover; display: block; }
-          .guitar-photo-meta { padding: 12px 16px; }
-          .guitar-photo-title { font-weight: 700; font-size: 13px; color: var(--white); }
-          .guitar-photo-sub { font-family: var(--mono); font-size: 10px; color: var(--dim); margin-top: 3px; }
-        </style>
-        <div class="guitar-photos-grid">
-          <div class="guitar-photo-card">
-            <img src="photos/DSC01497.JPG" alt="Neil playing guitar" loading="lazy" />
-            <div class="guitar-photo-meta">
-              <div class="guitar-photo-title">In Session</div>
-              <div class="guitar-photo-sub">Guitar performance</div>
+          <!-- Way Down We Go -->
+          <div class="reel-card" onclick="toggleReel(this)">
+            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097058/Where_Down_We_Go_qthaiq.mp4"
+              playsinline loop preload="metadata" muted></video>
+            <div class="reel-card-overlay"></div>
+            <div class="reel-card-top">
+              <div class="reel-song-badge"><span class="reel-song-dot"></span>Way Down We Go</div>
+            </div>
+            <div class="reel-play-fab"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="reel-card-bottom">
+              <div class="reel-title">Way Down We Go</div>
+              <div class="reel-artist">KALEO · Guitar Cover</div>
             </div>
           </div>
-          <div class="guitar-photo-card">
-            <img src="photos/DSC01558.JPG" alt="Neil playing guitar" loading="lazy" />
-            <div class="guitar-photo-meta">
-              <div class="guitar-photo-title">Strings & Soul</div>
-              <div class="guitar-photo-sub">Guitar performance</div>
+
+          <!-- Bohemian Rhapsody -->
+          <div class="reel-card" onclick="toggleReel(this)">
+            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Bohemian_Rhapsody_Final_wyidhq.mp4"
+              playsinline loop preload="metadata" muted></video>
+            <div class="reel-card-overlay"></div>
+            <div class="reel-card-top">
+              <div class="reel-song-badge"><span class="reel-song-dot"></span>Bohemian Rhapsody</div>
+            </div>
+            <div class="reel-play-fab"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="reel-card-bottom">
+              <div class="reel-title">Bohemian Rhapsody</div>
+              <div class="reel-artist">Queen · Guitar Cover</div>
             </div>
           </div>
-          <div class="guitar-photo-card">
-            <img src="photos/DSC01725.JPG" alt="Neil playing guitar" loading="lazy" />
-            <div class="guitar-photo-meta">
-              <div class="guitar-photo-title">Stage Ready</div>
-              <div class="guitar-photo-sub">Guitar performance</div>
+
+          <!-- Numb -->
+          <div class="reel-card" onclick="toggleReel(this)">
+            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Numb_vlxkmm.mp4"
+              playsinline loop preload="metadata" muted></video>
+            <div class="reel-card-overlay"></div>
+            <div class="reel-card-top">
+              <div class="reel-song-badge"><span class="reel-song-dot"></span>Numb</div>
+            </div>
+            <div class="reel-play-fab"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="reel-card-bottom">
+              <div class="reel-title">Numb</div>
+              <div class="reel-artist">Linkin Park · Guitar Cover</div>
             </div>
           </div>
+
+          <!-- Stormbringer -->
+          <div class="reel-card" onclick="toggleReel(this)">
+            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097038/VID-20250825-WA0017_vbqljz.mp4"
+              playsinline loop preload="metadata" muted></video>
+            <div class="reel-card-overlay"></div>
+            <div class="reel-card-top">
+              <div class="reel-song-badge"><span class="reel-song-dot"></span>Stormbringer</div>
+            </div>
+            <div class="reel-play-fab"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="reel-card-bottom">
+              <div class="reel-title">Stormbringer</div>
+              <div class="reel-artist">Deep Purple · Guitar Cover</div>
+            </div>
+          </div>
+
         </div>
+        <p style="font-family:var(--mono);font-size:10px;color:rgba(200,180,255,0.3);margin-top:14px;letter-spacing:1px;">
+          Tap any video to play · tap again to pause
+        </p>
       </div>
 
       <!-- Beats panel -->
       <div id="music-panel-beats" class="music-panel reveal">
         <div class="beats-grid">
+
           <div class="beat-card">
             <div class="beat-num">01</div>
-            <button class="beat-play-btn" onclick="playBeat(this, 'beats/Der Lagi lekin Remix.wav')" title="Play">
+            <button class="beat-play-btn" onclick="playBeat(this, 'https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097340/Der_Lagi_lekin_Remix_o9btia.wav')" title="Play">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <div class="beat-info">
-              <div class="beat-title">Der Lagi Lekin Remix</div>
-              <div class="beat-meta">Ableton Live · Remix</div>
+              <div class="beat-title">Der Lagi — Remix</div>
+              <div class="beat-meta">Ableton Live · Bollywood Remix</div>
             </div>
-            <div class="beat-waveform" id="wf-1">
-              <!-- bars generated by JS -->
-            </div>
+            <div class="beat-waveform" id="wf-1"></div>
             <span class="beat-tag">Remix</span>
           </div>
+
           <div class="beat-card">
             <div class="beat-num">02</div>
-            <button class="beat-play-btn" onclick="playBeat(this, 'beats/Dil Se Remix.mp3')" title="Play">
+            <button class="beat-play-btn" onclick="playBeat(this, 'https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097326/Dil_Se_Remix_cekp0m.mp3')" title="Play">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <div class="beat-info">
-              <div class="beat-title">Dil Se Remix</div>
-              <div class="beat-meta">Ableton Live · Remix</div>
+              <div class="beat-title">Dil Se — Remix</div>
+              <div class="beat-meta">Ableton Live · Bollywood Remix</div>
             </div>
             <div class="beat-waveform" id="wf-2"></div>
             <span class="beat-tag">Remix</span>
           </div>
+
           <div class="beat-card">
             <div class="beat-num">03</div>
-            <button class="beat-play-btn" onclick="playBeat(this, 'beats/lofi beat.wav')" title="Play">
+            <button class="beat-play-btn" onclick="playBeat(this, 'https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097333/lofi_beat_fzwgek.wav')" title="Play">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <div class="beat-info">
-              <div class="beat-title">Lofi Beat</div>
-              <div class="beat-meta">Ableton Live · Lo-fi</div>
+              <div class="beat-title">Lo-fi Beat</div>
+              <div class="beat-meta">Ableton Live · Lo-fi / Chill</div>
             </div>
             <div class="beat-waveform" id="wf-3"></div>
             <span class="beat-tag">Lo-fi</span>
           </div>
+
           <div class="beat-card">
             <div class="beat-num">04</div>
-            <button class="beat-play-btn" onclick="playBeat(this, 'beats/Trap Beat.wav')" title="Play">
+            <button class="beat-play-btn" onclick="playBeat(this, 'https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097328/Trap_Beat_x1pnpk.wav')" title="Play">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <div class="beat-info">
               <div class="beat-title">Trap Beat</div>
-              <div class="beat-meta">Ableton Live · Trap</div>
+              <div class="beat-meta">Ableton Live · Trap / Hip-hop</div>
             </div>
             <div class="beat-waveform" id="wf-4"></div>
             <span class="beat-tag">Trap</span>
           </div>
+
         </div>
       </div>
 
@@ -2161,8 +2151,6 @@
           closeMobileMenu();
           // Reinit canvases when work page opens
           if (id === 'work') { setTimeout(function(){ initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); }, 350); }
-          // Reinit timeline when about page opens
-          if (id === 'about') { setTimeout(initTimelineReveal, 350); }
         }, 300);
       };
 
@@ -2181,35 +2169,6 @@
       }
       window.initReveal = initReveal;
       initReveal();
-
-      // ── Timeline per-item scroll reveal ──
-      function initTimelineReveal() {
-        var timeline = document.querySelector('.about-timeline');
-        if (!timeline) return;
-
-        // Animate the vertical line drawing in
-        var lineObs = new IntersectionObserver(function(entries) {
-          entries.forEach(function(e) {
-            if (e.isIntersecting) { e.target.classList.add('timeline-visible'); lineObs.unobserve(e.target); }
-          });
-        }, { threshold: 0.05 });
-        lineObs.observe(timeline);
-
-        // Animate each item sliding in with stagger
-        var items = timeline.querySelectorAll('.atl-reveal');
-        var itemObs = new IntersectionObserver(function(entries) {
-          entries.forEach(function(e) {
-            if (e.isIntersecting) {
-              var idx = Array.prototype.indexOf.call(items, e.target);
-              setTimeout(function() { e.target.classList.add('atl-visible'); }, idx * 100);
-              itemObs.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        items.forEach(function(el) { itemObs.observe(el); });
-      }
-      initTimelineReveal();
-
 
       // Custom cursor
       var cursor = document.getElementById('cursor');
@@ -2413,6 +2372,37 @@
           currentBtn = btn;
         }).catch(function() {});
       };
+
+      // ── Reel video tap-to-play ──
+      window.toggleReel = function(card) {
+        var vid = card.querySelector('video');
+        if (!vid) return;
+        // pause all others
+        document.querySelectorAll('.reel-card video').forEach(function(v) {
+          if (v !== vid) { v.pause(); v.closest('.reel-card').classList.remove('playing'); }
+        });
+        if (vid.paused) {
+          vid.muted = false;
+          vid.play().catch(function(){ vid.muted = true; vid.play(); });
+          card.classList.add('playing');
+        } else {
+          vid.pause();
+          card.classList.remove('playing');
+        }
+      };
+
+      // Pause reels when switching away from music page
+      var origShowPage = window.showPage;
+      window.showPage = function(id) {
+        if (id !== 'music') {
+          document.querySelectorAll('.reel-card video').forEach(function(v){ v.pause(); });
+          if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+          if (currentBtn) { currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; currentBtn = null; }
+        }
+        origShowPage(id);
+        if (id === 'music') { setTimeout(initWaveforms, 400); }
+      };
+
     })();
   </script>
 </body>

@@ -1537,6 +1537,7 @@ FOpen
       box-shadow: 0 0 50px rgba(200, 180, 255, 0.4);
     }
 
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -1560,16 +1561,66 @@ FOpen
       }
     }
 
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-36px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(36px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.88);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    /* Stagger children inside a .stagger-parent */
+    .stagger-parent > * { opacity: 0; transform: translateY(22px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-parent.visible > *:nth-child(1) { opacity:1;transform:none;transition-delay:0.05s }
+    .stagger-parent.visible > *:nth-child(2) { opacity:1;transform:none;transition-delay:0.13s }
+    .stagger-parent.visible > *:nth-child(3) { opacity:1;transform:none;transition-delay:0.21s }
+    .stagger-parent.visible > *:nth-child(4) { opacity:1;transform:none;transition-delay:0.29s }
+    .stagger-parent.visible > *:nth-child(5) { opacity:1;transform:none;transition-delay:0.37s }
+    .stagger-parent.visible > *:nth-child(6) { opacity:1;transform:none;transition-delay:0.45s }
+
+    /* Float animation for hero icons */
+    .float-anim { animation: floatY 4s ease-in-out infinite; }
 
     /* ── PAGE TRANSITION ── */
     .page-transition {
@@ -3596,6 +3647,7 @@ FOpen
       <li><a href="#" onclick="showPage('home');event.preventDefault();">Home</a></li>
       <li><a href="#" onclick="showPage('about');event.preventDefault();">About</a></li>
       <li><a href="#" onclick="showPage('work');event.preventDefault();">Work</a></li>
+      <li><a href="#" onclick="showPage('content');event.preventDefault();">Content</a></li>
       <li><a href="#" onclick="showPage('music');event.preventDefault();">Music</a></li>
       <li><a href="#" onclick="showPage('contact');event.preventDefault();">Contact</a></li>
     </ul>
@@ -3610,6 +3662,7 @@ FOpen
       <li><a href="#" onclick="showPage('home');event.preventDefault();">Home</a></li>
       <li><a href="#" onclick="showPage('about');event.preventDefault();">About</a></li>
       <li><a href="#" onclick="showPage('work');event.preventDefault();">Work</a></li>
+      <li><a href="#" onclick="showPage('content');event.preventDefault();">Content</a></li>
       <li><a href="#" onclick="showPage('music');event.preventDefault();">Music</a></li>
       <li><a href="#" onclick="showPage('contact');event.preventDefault();">Contact</a></li>
     </ul>
@@ -4530,10 +4583,10 @@ FOpen
             <span class="ahb-chip-icon">🚀</span>
             <div class="ahb-chip-text"><strong>Founder</strong><span>KreatorAI Studio</span></div>
           </div>
-          <div class="ahb-chip">
+          <a href="https://www.credential.net/2daa90de-1d29-4787-9c0c-ec5cc0a1614a?username=neilsurjiani" target="_blank" class="ahb-chip" style="text-decoration:none;color:inherit;cursor:pointer;">
             <span class="ahb-chip-icon">🎓</span>
-            <div class="ahb-chip-text"><strong>TCL Grade 5</strong><span>Guitar Certified</span></div>
-          </div>
+            <div class="ahb-chip-text"><strong>TCL Grade 5</strong><span>Guitar Certified · View ↗</span></div>
+          </a>
           <div class="ahb-chip">
             <span class="ahb-chip-icon">📍</span>
             <div class="ahb-chip-text"><strong>Pune, India</strong><span>Building globally</span></div>
@@ -4548,34 +4601,91 @@ FOpen
           <!-- Story timeline -->
           <div class="section-label reveal" style="margin-bottom:16px;">Journey</div>
           <div class="about-timeline reveal">
+
             <div class="atl-item">
-              <div class="atl-dot"></div>
-              <div class="atl-year">2023 · Age 14</div>
-              <div class="atl-title">Started coding seriously</div>
-              <div class="atl-desc">Picked up Python and Flutter, got obsessed. Went from "hello world" to full Firebase
-                apps within months.</div>
+              <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
+              <div class="atl-year">2022 · May · Age 13</div>
+              <div class="atl-title">Started learning guitar 🎸</div>
+              <div class="atl-desc">Picked up my first guitar and never put it down. Classical foundations, then pop, rock and fingerstyle. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
             </div>
+
             <div class="atl-item">
               <div class="atl-dot"></div>
+              <div class="atl-year">2023 · June · Age 14</div>
+              <div class="atl-title">Started learning Java — ICSE syllabus</div>
+              <div class="atl-desc">Two-year ICSE Java curriculum. Built logic, OOP fundamentals, and a serious appreciation for typed languages.</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
+              <div class="atl-year">2023 · Aug · Age 14</div>
+              <div class="atl-title">Started music production 🎛️</div>
+              <div class="atl-desc">Dove into Ableton, Cubase and FL Studio — crafting beats, original songs and remixes from scratch. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
               <div class="atl-year">2024 · Age 15</div>
-              <div class="atl-title">Built & shipped EVMate</div>
-              <div class="atl-desc">My first full-stack Flutter app — live EV trip planning with OpenStreetMap + Gemini
-                AI. Real users, real backend, real domain.</div>
+              <div class="atl-title">Advanced guitar + mastered Ableton Live</div>
+              <div class="atl-desc">Produced 40+ beats and remixes, pushed into more complex arrangements and sound design. Then in December — <strong style="color:var(--white);">Trinity College London Grade 3 Acoustic Guitar certified.</strong> <a href="https://www.credential.net/cceee6e4-5871-40c7-96ec-c740deb9ae71?username=neilsurjiani" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;">View cert →</a></div>
             </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#facc15;box-shadow:0 0 10px rgba(250,204,21,0.45)"></div>
+              <div class="atl-year">2025 · May · Age 16</div>
+              <div class="atl-title">96.4% in Std 10 Boards — 100 in Maths 🏆</div>
+              <div class="atl-desc">Top 0.1% in the country, topped school in Maths <em>and</em> History. <a href="https://www.credential.net/c3824895-56ce-465d-81ef-cfaf56bba63b?username=neilsurjiani" target="_blank" style="color:#facc15;text-decoration:none;font-weight:600;">View certificate →</a></div>
+            </div>
+
             <div class="atl-item">
               <div class="atl-dot"></div>
-              <div class="atl-year">2025 · Age 16</div>
-              <div class="atl-title">Founded KreatorAI Studio</div>
-              <div class="atl-desc">Built a full AI SaaS platform from scratch — 15+ tools, four subscription tiers,
-                FastAPI backend, Flutter app, live at kreatoraistudio.com.</div>
+              <div class="atl-year">2025 · Aug · Age 16</div>
+              <div class="atl-title">Started coding seriously — full stack</div>
+              <div class="atl-desc">Picked up Python, Flutter, Firebase, Dart, Google Cloud Console, Supabase and Next.js all at once. Went from zero to shipping in months.</div>
             </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
+              <div class="atl-year">2025 · Aug</div>
+              <div class="atl-title">Started posting guitar reels on Instagram 📱</div>
+              <div class="atl-desc">Began sharing covers publicly — built an audience one reel at a time. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#00c96b;box-shadow:0 0 10px rgba(0,201,107,0.45)"></div>
+              <div class="atl-year">2025 · Nov</div>
+              <div class="atl-title">Built & shipped EVMate 🚗⚡</div>
+              <div class="atl-desc">My first real SaaS — a full-stack Flutter app for EV trip planning with OpenStreetMap + Gemini AI. Real users, real backend, real domain.</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
+              <div class="atl-year">2026 · Feb</div>
+              <div class="atl-title">Trinity College London Grade 5 — Acoustic Guitar 🎓</div>
+              <div class="atl-desc">Passed the Grade 5 performance exam. <a href="https://www.credential.net/2daa90de-1d29-4787-9c0c-ec5cc0a1614a?username=neilsurjiani" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;">View certificate →</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot"></div>
+              <div class="atl-year">2026 · Mar</div>
+              <div class="atl-title">Built & shipped KreatorAI Studio 🤖</div>
+              <div class="atl-desc">Full AI SaaS platform — 15+ tools, four subscription tiers, FastAPI backend, Flutter app, live at kreatoraistudio.com.</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#ff6a2f;box-shadow:0 0 10px rgba(255,106,47,0.45)"></div>
+              <div class="atl-year">2026 · Apr</div>
+              <div class="atl-title">Started YouTube — content creation 🎬</div>
+              <div class="atl-desc">Launched my channel: tech, building, music — the full journey. <a href="#" onclick="showPage('content');event.preventDefault();" style="color:#ff6a2f;text-decoration:none;font-weight:600;">→ Content page</a></div>
+            </div>
+
             <div class="atl-item">
               <div class="atl-dot" style="background:#38bdf8;box-shadow:0 0 12px rgba(56,189,248,0.5)"></div>
-              <div class="atl-year" style="color:#38bdf8;">2026 · Now</div>
-              <div class="atl-title">Designing TripWise</div>
-              <div class="atl-desc">A full travel platform — from "I want to go somewhere" to complete itinerary in
-                under 2 minutes. Building with Next.js + AI.</div>
+              <div class="atl-year" style="color:#38bdf8;">2026 · May · Now</div>
+              <div class="atl-title">Building TripWise ✈️</div>
+              <div class="atl-desc">A full travel platform — from "I want to go somewhere" to complete itinerary in under 2 minutes. Next.js + AI + Amadeus API.</div>
             </div>
+
           </div>
 
           <div class="about-quote reveal" style="margin-top:24px;">
@@ -5014,8 +5124,10 @@ FOpen
           </div>
         </div>
 
-        <!-- ══ EVMATE ══ -->
-        <div class="ev-project reveal" style="margin-bottom:24px;">
+      </div>
+
+      <!-- ══ EVMATE ══ -->
+      <div class="ev-project reveal" style="margin-bottom:24px;">
           <div class="ev-top-bar"></div>
           <canvas class="ev-canvas" id="evCanvas"></canvas>
 
@@ -5173,7 +5285,521 @@ FOpen
             style="white-space:nowrap;flex-shrink:0;">View GitHub →</a>
         </div>
       </div>
-      <footer>© 2026 Neil Surjiani</footer>
+<footer>© 2026 Neil Surjiani</footer>
+  </section>
+
+
+  <!-- ===== CONTENT CREATION ===== -->
+  <section id="content" class="page">
+    <style>
+      .content-page-wrap {
+        padding: calc(var(--nav-h) + clamp(40px, 6vw, 80px)) clamp(20px, 5vw, 48px) clamp(40px, 6vw, 80px);
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* YouTube hero */
+      .yt-hero {
+        position: relative;
+        background: var(--surface);
+        border: 1px solid rgba(255, 80, 0, 0.2);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 28px;
+        padding: clamp(28px, 5vw, 48px);
+      }
+      .yt-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, #ff4500, #ff7c00, #ffb347, #ff4500);
+        background-size: 300% 100%;
+        animation: shimmer 4s linear infinite;
+      }
+      .yt-hero-top-bar {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 80% 20%, rgba(255, 69, 0, 0.08) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .yt-hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 32px;
+        align-items: center;
+      }
+      @media (max-width: 700px) {
+        .yt-hero-inner { grid-template-columns: 1fr; }
+        .yt-hero-visual { display: none; }
+      }
+      .yt-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #ff6a2f;
+        background: rgba(255, 106, 47, 0.1);
+        border: 1px solid rgba(255, 106, 47, 0.25);
+        padding: 5px 12px;
+        border-radius: 100px;
+        margin-bottom: 18px;
+      }
+      .yt-badge-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #ff6a2f;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .yt-title {
+        font-weight: 800;
+        font-size: clamp(26px, 5vw, 44px);
+        letter-spacing: -1.5px;
+        margin-bottom: 14px;
+        line-height: 1.05;
+      }
+      .yt-title span { color: #ff6a2f; }
+      .yt-desc {
+        font-size: clamp(14px, 2vw, 15px);
+        font-weight: 300;
+        color: var(--dim);
+        line-height: 1.8;
+        max-width: 560px;
+        margin-bottom: 24px;
+      }
+      .yt-stats-row {
+        display: flex;
+        gap: 28px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+      }
+      .yt-stat { text-align: left; }
+      .yt-stat-num {
+        font-weight: 800;
+        font-size: clamp(20px, 3vw, 28px);
+        color: #ff6a2f;
+        letter-spacing: -0.5px;
+      }
+      .yt-stat-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--dim);
+      }
+      .yt-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+      .yt-cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: #ff4500;
+        border: 1px solid #ff4500;
+        border-radius: 8px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 0 32px rgba(255, 69, 0, 0.35);
+        transition: all 0.25s;
+      }
+      .yt-cta-primary:hover {
+        background: #ff6a2f;
+        border-color: #ff6a2f;
+        box-shadow: 0 0 52px rgba(255, 106, 47, 0.55);
+        transform: translateY(-2px);
+      }
+      .yt-cta-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--dim);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.25s;
+      }
+      .yt-cta-ghost:hover {
+        border-color: rgba(255, 106, 47, 0.3);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+      .yt-hero-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .yt-icon-circle {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 69, 0, 0.1);
+        border: 1px solid rgba(255, 69, 0, 0.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        font-size: 48px;
+      }
+      .yt-icon-circle::before {
+        content: '';
+        position: absolute;
+        inset: -12px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 106, 47, 0.15);
+        animation: ringPulse 3s ease-in-out infinite;
+      }
+      .yt-icon-circle::after {
+        content: '';
+        position: absolute;
+        inset: -24px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 106, 47, 0.07);
+        animation: ringPulse 3s ease-in-out infinite 0.5s;
+      }
+
+      /* Featured video embed */
+      .yt-featured-video {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 28px;
+      }
+      .yt-featured-header {
+        padding: 24px 28px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .yt-featured-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #ff6a2f;
+        margin-bottom: 6px;
+      }
+      .yt-featured-title {
+        font-weight: 700;
+        font-size: clamp(16px, 2.5vw, 20px);
+        color: var(--white);
+      }
+      .yt-embed-wrap {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        margin: 0 28px 28px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+      }
+      .yt-embed-wrap iframe {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: 0;
+        border-radius: 12px;
+      }
+
+      /* Content skills */
+      .content-skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      @media (max-width: 800px) {
+        .content-skills-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 500px) {
+        .content-skills-grid { grid-template-columns: 1fr; }
+      }
+      .cskill-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 22px 20px;
+        transition: border-color 0.25s, transform 0.25s;
+      }
+      .cskill-card:hover {
+        border-color: rgba(255, 106, 47, 0.25);
+        transform: translateY(-3px);
+      }
+      .cskill-icon { font-size: 26px; margin-bottom: 12px; }
+      .cskill-name {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+      .cskill-desc {
+        font-size: 12px;
+        font-weight: 300;
+        color: var(--dim);
+        line-height: 1.65;
+      }
+      .cskill-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+      }
+      .cskill-tool {
+        font-family: var(--mono);
+        font-size: 9px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(255, 106, 47, 0.08);
+        border: 1px solid rgba(255, 106, 47, 0.2);
+        color: #ff8c5a;
+      }
+
+      /* More videos row */
+      .yt-more-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+      .yt-videos-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      @media (max-width: 700px) {
+        .yt-videos-row { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 480px) {
+        .yt-videos-row { grid-template-columns: 1fr; }
+      }
+      .yt-video-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color 0.25s, transform 0.25s;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+      .yt-video-card:hover {
+        border-color: rgba(255, 106, 47, 0.3);
+        transform: translateY(-4px);
+      }
+      .yt-video-thumb {
+        position: relative;
+        padding-bottom: 56.25%;
+        background: #0a0a14;
+        overflow: hidden;
+      }
+      .yt-video-thumb iframe {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: 0;
+        pointer-events: none;
+      }
+      .yt-video-info {
+        padding: 14px 16px;
+      }
+      .yt-video-title {
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--white);
+        margin-bottom: 4px;
+        line-height: 1.4;
+      }
+      .yt-video-sub {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--dim);
+      }
+      .yt-channel-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        background: rgba(255, 69, 0, 0.06);
+        border: 1px dashed rgba(255, 69, 0, 0.2);
+        border-radius: 14px;
+        text-decoration: none;
+        color: var(--dim);
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.25s;
+        margin-bottom: 28px;
+      }
+      .yt-channel-link:hover {
+        border-color: rgba(255, 106, 47, 0.4);
+        color: var(--white);
+        background: rgba(255, 69, 0, 0.1);
+      }
+    </style>
+
+    <div class="content-page-wrap">
+      <p class="section-label reveal">03 — Content Creation</p>
+      <h2 class="section-title reveal">Videos & <span>Editing</span></h2>
+
+      <!-- YouTube channel hero -->
+      <div class="yt-hero reveal">
+        <div class="yt-hero-top-bar"></div>
+        <div class="yt-hero-inner">
+          <div>
+            <div class="yt-badge"><span class="yt-badge-dot"></span>YouTube Creator</div>
+            <h3 class="yt-title">Neil <span>Surjiani</span></h3>
+            <p class="yt-desc">I make videos about tech, building, and creative work — sharing the journey of a 16-year-old founder, musician, and builder. From product deep-dives to coding tutorials and music content, everything lands here.</p>
+            <div class="yt-stats-row">
+              <div class="yt-stat">
+                <div class="yt-stat-num">▶</div>
+                <div class="yt-stat-label">YouTube Channel</div>
+              </div>
+              <div class="yt-stat">
+                <div class="yt-stat-num">✂️</div>
+                <div class="yt-stat-label">Video Editing</div>
+              </div>
+              <div class="yt-stat">
+                <div class="yt-stat-num">🎬</div>
+                <div class="yt-stat-label">Content Creator</div>
+              </div>
+            </div>
+            <div class="yt-cta-row">
+              <a href="https://www.youtube.com/@NeilSurjiani" target="_blank" class="yt-cta-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                Visit Channel
+              </a>
+              <a href="https://www.instagram.com/neilsurjiani28/reels/" target="_blank" class="yt-cta-ghost">Reels →</a>
+            </div>
+          </div>
+          <div class="yt-hero-visual">
+            <div class="yt-icon-circle float-anim">🎬</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured video embed -->
+      <div class="yt-featured-video reveal">
+        <div class="yt-featured-header">
+          <div>
+            <div class="yt-featured-label">Featured Video</div>
+            <div class="yt-featured-title">Watch my latest content</div>
+          </div>
+          <a href="https://www.youtube.com/@NeilSurjiani" target="_blank" class="yt-cta-ghost" style="font-size:12px;padding:8px 16px;">See all →</a>
+        </div>
+        <div class="yt-embed-wrap" id="ytEmbedWrap">
+          <!-- Thumbnail shown first; click loads the real iframe -->
+          <div class="yt-thumb-overlay" id="ytThumb" onclick="loadYTEmbed()" style="cursor:pointer;">
+            <img src="https://img.youtube.com/vi/trPL636BeyY/maxresdefault.jpg"
+                 onerror="this.src='https://img.youtube.com/vi/trPL636BeyY/hqdefault.jpg'"
+                 alt="Neil Surjiani video thumbnail"
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;" />
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-radius:12px;"></div>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:rgba(255,69,0,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 32px rgba(255,69,0,0.5);transition:transform 0.2s;" onmouseover="this.style.transform='translate(-50%,-50%) scale(1.12)'" onmouseout="this.style.transform='translate(-50%,-50%) scale(1)'">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white" style="margin-left:4px;"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <script>
+          function loadYTEmbed() {
+            var wrap = document.getElementById('ytEmbedWrap');
+            var thumb = document.getElementById('ytThumb');
+            if (thumb) thumb.style.display = 'none';
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/trPL636BeyY?start=83&rel=0&modestbranding=1&autoplay=1';
+            iframe.title = 'Neil Surjiani - Featured Video';
+            iframe.allowFullscreen = true;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;';
+            wrap.appendChild(iframe);
+          }
+        </script>
+      </div>
+
+      <!-- Content & editing skills -->
+      <p class="section-label reveal" style="margin-bottom:16px;">What I Do</p>
+      <div class="content-skills-grid stagger-parent reveal">
+        <div class="cskill-card">
+          <div class="cskill-icon">✂️</div>
+          <div class="cskill-name">Video Editing</div>
+          <div class="cskill-desc">Cutting, colour grading, transitions, and motion graphics — I edit my own content end-to-end for a polished, punchy look.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">Premiere Pro</span>
+            <span class="cskill-tool">After Effects</span>
+            <span class="cskill-tool">DaVinci</span>
+          </div>
+        </div>
+        <div class="cskill-card">
+          <div class="cskill-icon">📱</div>
+          <div class="cskill-name">Short-form Reels</div>
+          <div class="cskill-desc">Hook-driven vertical content for Instagram and YouTube Shorts — fast cuts, captions, trending audio, and story arcs that retain.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">CapCut</span>
+            <span class="cskill-tool">Instagram</span>
+            <span class="cskill-tool">Shorts</span>
+          </div>
+        </div>
+        <div class="cskill-card">
+          <div class="cskill-icon">🎙️</div>
+          <div class="cskill-name">Scripting & Voiceover</div>
+          <div class="cskill-desc">Writing tight, engaging scripts and recording clean voiceovers — clarity and personality in every line.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">Script writing</span>
+            <span class="cskill-tool">Audio editing</span>
+          </div>
+        </div>
+        <div class="cskill-card">
+          <div class="cskill-icon">🎨</div>
+          <div class="cskill-name">Thumbnail Design</div>
+          <div class="cskill-desc">High-contrast, clickable thumbnails with intentional typography and composition that stand out in feed.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">Photoshop</span>
+            <span class="cskill-tool">Figma</span>
+            <span class="cskill-tool">Canva</span>
+          </div>
+        </div>
+        <div class="cskill-card">
+          <div class="cskill-icon">📊</div>
+          <div class="cskill-name">Analytics & Strategy</div>
+          <div class="cskill-desc">Understanding what performs and why — retention curves, CTR optimization, and content calendars built on data.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">YT Studio</span>
+            <span class="cskill-tool">Notion</span>
+          </div>
+        </div>
+        <div class="cskill-card">
+          <div class="cskill-icon">🤖</div>
+          <div class="cskill-name">AI-Assisted Creation</div>
+          <div class="cskill-desc">Leveraging AI tools for faster ideation, script drafts, and asset generation — the creator-builder crossover.</div>
+          <div class="cskill-tools">
+            <span class="cskill-tool">KreatorAI</span>
+            <span class="cskill-tool">Claude</span>
+            <span class="cskill-tool">Midjourney</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channel link -->
+      <a href="https://www.youtube.com/@NeilSurjiani" target="_blank" class="yt-channel-link reveal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#ff4500"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        See everything on @NeilSurjiani →
+      </a>
+
+    </div>
+<footer>© 2026 Neil Surjiani</footer>
   </section>
 
   <!-- ===== MUSIC ===== -->
@@ -5875,7 +6501,7 @@ FOpen
     </style>
 
     <div class="music-page-wrap">
-      <p class="section-label reveal">03 — Music</p>
+      <p class="section-label reveal">04 — Music</p>
       <h2 class="section-title reveal">Sound & <span>Strings</span></h2>
 
       <!-- Intro band -->
@@ -5897,17 +6523,21 @@ FOpen
             original beats in Ableton Live — building tracks from scratch with layered synths, custom samples, and sound
             design. Two creative modes, one brain.</p>
           <div class="music-cert-row">
-            <div class="music-cert-chip"><span class="mcc-icon">🎓</span>
-              <div class="mcc-text"><strong>Trinity College London</strong><span>Grade 5 Certified · Working on Grade
-                  6</span></div>
-            </div>
+            <a href="https://www.credential.net/2daa90de-1d29-4787-9c0c-ec5cc0a1614a?username=neilsurjiani" target="_blank" class="music-cert-chip" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(200,180,255,0.4)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+              <span class="mcc-icon">🎓</span>
+              <div class="mcc-text"><strong>TCL Grade 5 — Acoustic Guitar</strong><span>Trinity College London · View certificate ↗</span></div>
+            </a>
+            <a href="https://www.credential.net/cceee6e4-5871-40c7-96ec-c740deb9ae71?username=neilsurjiani" target="_blank" class="music-cert-chip" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(200,180,255,0.4)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+              <span class="mcc-icon">🎓</span>
+              <div class="mcc-text"><strong>TCL Grade 3 — Acoustic Guitar</strong><span>Trinity College London · View certificate ↗</span></div>
+            </a>
             <div class="music-cert-chip"><span class="mcc-icon">🎛️</span>
               <div class="mcc-text"><strong>Ableton Live</strong><span>Music production & beat making</span></div>
             </div>
           </div>
         </div>
         <div class="music-guitar-vis">
-          <div class="music-guitar-ring">🎸</div>
+          <div class="music-guitar-ring float-anim">🎸</div>
         </div>
       </div>
 
@@ -5949,84 +6579,301 @@ FOpen
         <button class="music-tab" onclick="switchMusicTab('beats', this)">🎛️ Produced Beats</button>
       </div>
 
-      <!-- Guitar reels panel -->
+      <!-- Guitar reels panel — cinematic carousel (matches image style) -->
       <div id="music-panel-guitar" class="music-panel active reveal">
-        <div class="reels-grid">
+        <style>
+          /* ── REEL CAROUSEL ── */
+          .reel-carousel-scene {
+            position: relative;
+            width: 100%;
+            height: clamp(440px, 65vw, 640px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: transparent;
+          }
 
-          <!-- Way Down We Go -->
-          <div class="reel-card" onclick="toggleReel(this)">
-            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097058/Where_Down_We_Go_qthaiq.mp4"
-              playsinline loop preload="metadata" muted></video>
-            <div class="reel-card-overlay"></div>
-            <div class="reel-card-top">
-              <div class="reel-song-badge"><span class="reel-song-dot"></span>Way Down We Go</div>
+          .reel-carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .rc-card {
+            position: absolute;
+            aspect-ratio: 9/16;
+            height: clamp(340px, 52vw, 520px);
+            border-radius: 22px;
+            overflow: hidden;
+            background: #0a0a12;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.3s;
+            user-select: none;
+          }
+
+          .rc-card video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+
+          .rc-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,8,0.88) 0%, rgba(5,5,8,0.1) 50%, transparent 100%);
+            z-index: 2;
+            border-radius: 22px;
+            pointer-events: none;
+          }
+
+          /* Position states */
+          .rc-card[data-pos="center"] {
+            transform: translateX(0) scale(1);
+            z-index: 10;
+            opacity: 1;
+            filter: none;
+            border-color: rgba(200, 180, 255, 0.3);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,180,255,0.08) inset;
+          }
+
+          .rc-card[data-pos="left"] {
+            transform: translateX(calc(-52% - 20px)) scale(0.85);
+            z-index: 5;
+            opacity: 0.65;
+            filter: brightness(0.55);
+          }
+
+          .rc-card[data-pos="right"] {
+            transform: translateX(calc(52% + 20px)) scale(0.85);
+            z-index: 5;
+            opacity: 0.65;
+            filter: brightness(0.55);
+          }
+
+          .rc-card[data-pos="left2"] {
+            transform: translateX(calc(-94% - 20px)) scale(0.72);
+            z-index: 2;
+            opacity: 0.25;
+            filter: brightness(0.3);
+          }
+
+          .rc-card[data-pos="right2"] {
+            transform: translateX(calc(94% + 20px)) scale(0.72);
+            z-index: 2;
+            opacity: 0.25;
+            filter: brightness(0.3);
+          }
+
+          .rc-card[data-pos="hidden"] {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(0) scale(0.5);
+            z-index: 0;
+          }
+
+          /* Song badge */
+          .rc-song-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            padding: 4px 10px;
+            font-family: var(--mono);
+            font-size: 9px;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+          }
+
+          .rc-song-dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+          }
+
+          /* Play button */
+          .rc-play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            width: 56px; height: 56px;
+            background: rgba(200,180,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(200,180,255,0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s, transform 0.2s, background 0.2s;
+            pointer-events: none;
+          }
+
+          .rc-card[data-pos="center"]:hover .rc-play-btn {
+            background: rgba(200,180,255,0.3);
+            transform: translate(-50%, -50%) scale(1.1);
+          }
+
+          .rc-card.playing .rc-play-btn {
+            opacity: 0;
+          }
+
+          .rc-play-btn svg {
+            width: 18px; height: 18px;
+            fill: var(--white);
+            margin-left: 2px;
+          }
+
+          /* Card bottom info */
+          .rc-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 3;
+            padding: 14px 16px;
+          }
+
+          .rc-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--white);
+            margin-bottom: 2px;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+          }
+
+          .rc-artist {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+          }
+
+          /* Nav arrows */
+          .rc-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 46px; height: 46px;
+            background: rgba(255,165,80,0.92);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: transform 0.2s, background 0.2s;
+          }
+          .rc-nav-btn:hover { transform: translateY(-50%) scale(1.1); background: #ff9040; }
+          .rc-nav-prev { left: clamp(8px, 3vw, 28px); }
+          .rc-nav-next { right: clamp(8px, 3vw, 28px); }
+          .rc-nav-btn svg { width: 18px; height: 18px; fill: #fff; }
+
+          /* Dots */
+          .rc-dots {
+            display: flex;
+            gap: 7px;
+            justify-content: center;
+            margin-top: 8px;
+          }
+          .rc-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(200,180,255,0.2);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+          }
+          .rc-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+          }
+        </style>
+
+        <div class="reel-carousel-scene">
+          <!-- Nav buttons -->
+          <button class="rc-nav-btn rc-nav-prev" onclick="rcPrev()" aria-label="Previous">
+            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+          </button>
+          <button class="rc-nav-btn rc-nav-next" onclick="rcNext()" aria-label="Next">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+          </button>
+
+          <div class="reel-carousel-track" id="rcTrack">
+            <!-- Card 0 — Way Down We Go -->
+            <div class="rc-card" data-idx="0">
+              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097058/Where_Down_We_Go_qthaiq.mp4" playsinline loop preload="metadata" muted></video>
+              <div class="rc-card-overlay"></div>
+              <div class="rc-song-badge"><span class="rc-song-dot"></span>Way Down We Go</div>
+              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="rc-bottom">
+                <div class="rc-title">Way Down We Go</div>
+                <div class="rc-artist">KALEO · Guitar Cover</div>
+              </div>
             </div>
-            <div class="reel-play-fab"><svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg></div>
-            <div class="reel-card-bottom">
-              <div class="reel-title">Way Down We Go</div>
-              <div class="reel-artist">KALEO · Guitar Cover</div>
+            <!-- Card 1 — Bohemian Rhapsody -->
+            <div class="rc-card" data-idx="1">
+              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Bohemian_Rhapsody_Final_wyidhq.mp4" playsinline loop preload="metadata" muted></video>
+              <div class="rc-card-overlay"></div>
+              <div class="rc-song-badge"><span class="rc-song-dot"></span>Bohemian Rhapsody</div>
+              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="rc-bottom">
+                <div class="rc-title">Bohemian Rhapsody</div>
+                <div class="rc-artist">Queen · Guitar Cover</div>
+              </div>
+            </div>
+            <!-- Card 2 — Numb -->
+            <div class="rc-card" data-idx="2">
+              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Numb_vlxkmm.mp4" playsinline loop preload="metadata" muted></video>
+              <div class="rc-card-overlay"></div>
+              <div class="rc-song-badge"><span class="rc-song-dot"></span>Numb</div>
+              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="rc-bottom">
+                <div class="rc-title">Numb</div>
+                <div class="rc-artist">Linkin Park · Guitar Cover</div>
+              </div>
+            </div>
+            <!-- Card 3 — Stormbringer -->
+            <div class="rc-card" data-idx="3">
+              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097038/VID-20250825-WA0017_vbqljz.mp4" playsinline loop preload="metadata" muted></video>
+              <div class="rc-card-overlay"></div>
+              <div class="rc-song-badge"><span class="rc-song-dot"></span>Stormbringer</div>
+              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="rc-bottom">
+                <div class="rc-title">Stormbringer</div>
+                <div class="rc-artist">Deep Purple · Guitar Cover</div>
+              </div>
             </div>
           </div>
-
-          <!-- Bohemian Rhapsody -->
-          <div class="reel-card" onclick="toggleReel(this)">
-            <video
-              src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Bohemian_Rhapsody_Final_wyidhq.mp4"
-              playsinline loop preload="metadata" muted></video>
-            <div class="reel-card-overlay"></div>
-            <div class="reel-card-top">
-              <div class="reel-song-badge"><span class="reel-song-dot"></span>Bohemian Rhapsody</div>
-            </div>
-            <div class="reel-play-fab"><svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg></div>
-            <div class="reel-card-bottom">
-              <div class="reel-title">Bohemian Rhapsody</div>
-              <div class="reel-artist">Queen · Guitar Cover</div>
-            </div>
-          </div>
-
-          <!-- Numb -->
-          <div class="reel-card" onclick="toggleReel(this)">
-            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Numb_vlxkmm.mp4" playsinline loop
-              preload="metadata" muted></video>
-            <div class="reel-card-overlay"></div>
-            <div class="reel-card-top">
-              <div class="reel-song-badge"><span class="reel-song-dot"></span>Numb</div>
-            </div>
-            <div class="reel-play-fab"><svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg></div>
-            <div class="reel-card-bottom">
-              <div class="reel-title">Numb</div>
-              <div class="reel-artist">Linkin Park · Guitar Cover</div>
-            </div>
-          </div>
-
-          <!-- Stormbringer -->
-          <div class="reel-card" onclick="toggleReel(this)">
-            <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097038/VID-20250825-WA0017_vbqljz.mp4"
-              playsinline loop preload="metadata" muted></video>
-            <div class="reel-card-overlay"></div>
-            <div class="reel-card-top">
-              <div class="reel-song-badge"><span class="reel-song-dot"></span>Stormbringer</div>
-            </div>
-            <div class="reel-play-fab"><svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg></div>
-            <div class="reel-card-bottom">
-              <div class="reel-title">Stormbringer</div>
-              <div class="reel-artist">Deep Purple · Guitar Cover</div>
-            </div>
-          </div>
-
         </div>
-        <p
-          style="font-family:var(--mono);font-size:10px;color:rgba(200,180,255,0.3);margin-top:14px;letter-spacing:1px;">
-          Tap any video to play · tap again to pause
-        </p>
+
+        <!-- Dots -->
+        <div class="rc-dots" id="rcDots">
+          <div class="rc-dot active" onclick="rcGoTo(0)"></div>
+          <div class="rc-dot" onclick="rcGoTo(1)"></div>
+          <div class="rc-dot" onclick="rcGoTo(2)"></div>
+          <div class="rc-dot" onclick="rcGoTo(3)"></div>
+        </div>
+        <p style="font-family:var(--mono);font-size:10px;color:rgba(200,180,255,0.3);margin-top:12px;text-align:center;letter-spacing:1px;">Tap center card to play · arrows or swipe to browse</p>
       </div>
 
       <!-- Beats panel -->
@@ -6122,13 +6969,13 @@ FOpen
         </a>
       </div>
     </div>
-    <footer>© 2026 Neil Surjiani</footer>
+<footer>© 2026 Neil Surjiani</footer>
   </section>
 
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="page">
     <div class="section-wrap">
-      <p class="section-label reveal">04 — Contact</p>
+      <p class="section-label reveal">05 — Contact</p>
       <h2 class="section-title reveal">Let's <span>connect</span></h2>
       <div class="contact-grid">
         <div class="contact-left reveal">
@@ -6169,7 +7016,7 @@ FOpen
         </div>
       </div>
     </div>
-    <footer>© 2026 Neil Surjiani</footer>
+<footer>© 2026 Neil Surjiani</footer>
   </section>
 
   <script>
@@ -6217,12 +7064,12 @@ FOpen
 
       // Scroll reveal
       function initReveal() {
-        var els = document.querySelectorAll('.reveal');
+        var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-parent');
         var obs = new IntersectionObserver(function (entries) {
           entries.forEach(function (e, i) {
             if (e.isIntersecting) setTimeout(function () { e.target.classList.add('visible'); }, i * 80);
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.08 });
         els.forEach(function (el) { el.classList.remove('visible'); obs.observe(el); });
         setTimeout(function () {
           els.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); });
@@ -6456,13 +7303,111 @@ FOpen
       var origShowPage = window.showPage;
       window.showPage = function (id) {
         if (id !== 'music') {
-          document.querySelectorAll('.reel-card video').forEach(function (v) { v.pause(); });
+          document.querySelectorAll('.reel-card video, .rc-card video').forEach(function (v) { v.pause(); });
           if (currentAudio) { currentAudio.pause(); currentAudio = null; }
           if (currentBtn) { currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; currentBtn = null; }
         }
         origShowPage(id);
-        if (id === 'music') { setTimeout(initWaveforms, 400); }
+        if (id === 'music') { setTimeout(initWaveforms, 400); setTimeout(rcInit, 450); }
       };
+
+      // ── REEL CAROUSEL ──
+      var RC_TOTAL = 4;
+      var rcActive = 0;
+      var rcAnimating = false;
+      var rcTouchStartX = 0;
+
+      var RC_POSITIONS = ['left2', 'left', 'center', 'right', 'right2', 'hidden'];
+      function rcGetPos(cardIdx, activeIdx) {
+        var diff = cardIdx - activeIdx;
+        if (diff === 0) return 'center';
+        if (diff === 1 || diff === -(RC_TOTAL - 1)) return 'right';
+        if (diff === -1 || diff === (RC_TOTAL - 1)) return 'left';
+        if (diff === 2 || diff === -(RC_TOTAL - 2)) return 'right2';
+        if (diff === -2 || diff === (RC_TOTAL - 2)) return 'left2';
+        return 'hidden';
+      }
+
+      function rcRender(active) {
+        var cards = document.querySelectorAll('#rcTrack .rc-card');
+        if (!cards.length) return;
+        rcActive = ((active % RC_TOTAL) + RC_TOTAL) % RC_TOTAL;
+        cards.forEach(function(card, i) {
+          var pos = rcGetPos(i, rcActive);
+          card.setAttribute('data-pos', pos);
+          // Only center card is clickable for play
+          card.onclick = pos === 'center' ? function() { rcPlayCenter(); } : function() {
+            var idx = parseInt(card.getAttribute('data-idx'));
+            var diff = idx - rcActive;
+            if (diff === 1 || diff === -(RC_TOTAL - 1)) rcNext();
+            else if (diff === -1 || diff === (RC_TOTAL - 1)) rcPrev();
+          };
+        });
+        // Update dots
+        document.querySelectorAll('#rcDots .rc-dot').forEach(function(dot, i) {
+          dot.classList.toggle('active', i === rcActive);
+        });
+      }
+
+      window.rcNext = function() {
+        // Pause currently playing
+        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
+        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
+        rcRender(rcActive + 1);
+      };
+
+      window.rcPrev = function() {
+        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
+        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
+        rcRender(rcActive - 1);
+      };
+
+      window.rcGoTo = function(idx) {
+        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
+        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
+        rcRender(idx);
+      };
+
+      function rcPlayCenter() {
+        var center = document.querySelector('#rcTrack .rc-card[data-pos="center"]');
+        if (!center) return;
+        var vid = center.querySelector('video');
+        if (!vid) return;
+        // Pause all others
+        document.querySelectorAll('#rcTrack .rc-card video').forEach(function(v) {
+          if (v !== vid) { v.pause(); v.closest('.rc-card').classList.remove('playing'); }
+        });
+        if (vid.paused) {
+          vid.muted = false;
+          vid.play().catch(function() { vid.muted = true; vid.play(); });
+          center.classList.add('playing');
+        } else {
+          vid.pause();
+          center.classList.remove('playing');
+        }
+      }
+
+      function rcInit() {
+        var track = document.getElementById('rcTrack');
+        if (!track) return;
+        rcRender(0);
+        // Touch/swipe
+        track.addEventListener('touchstart', function(e) { rcTouchStartX = e.touches[0].clientX; }, {passive: true});
+        track.addEventListener('touchend', function(e) {
+          var dx = e.changedTouches[0].clientX - rcTouchStartX;
+          if (Math.abs(dx) > 40) { if (dx < 0) rcNext(); else rcPrev(); }
+        }, {passive: true});
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+          var musicActive = document.getElementById('music') && document.getElementById('music').classList.contains('active');
+          if (!musicActive) return;
+          if (e.key === 'ArrowRight') rcNext();
+          if (e.key === 'ArrowLeft') rcPrev();
+        });
+      }
+      rcInit();
+
+
 
     })();
   </script>

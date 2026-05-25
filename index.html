@@ -6579,301 +6579,113 @@ FOpen
         <button class="music-tab" onclick="switchMusicTab('beats', this)">🎛️ Produced Beats</button>
       </div>
 
-      <!-- Guitar reels panel — cinematic carousel (matches image style) -->
+      <!-- Guitar reels panel — Instagram official embeds -->
       <div id="music-panel-guitar" class="music-panel active reveal">
         <style>
-          /* ── REEL CAROUSEL ── */
-          .reel-carousel-scene {
-            position: relative;
-            width: 100%;
-            height: clamp(440px, 65vw, 640px);
+          /* ── IG REELS GRID ── */
+          .ig-reels-intro {
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 10px;
-            background: transparent;
+            gap: 10px;
+            margin-bottom: 20px;
           }
-
-          .reel-carousel-track {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .rc-card {
-            position: absolute;
-            aspect-ratio: 9/16;
-            height: clamp(340px, 52vw, 520px);
-            border-radius: 22px;
-            overflow: hidden;
-            background: #0a0a12;
-            border: 1.5px solid var(--border);
-            cursor: pointer;
-            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.3s;
-            user-select: none;
-          }
-
-          .rc-card video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-          }
-
-          .rc-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(5,5,8,0.88) 0%, rgba(5,5,8,0.1) 50%, transparent 100%);
-            z-index: 2;
-            border-radius: 22px;
-            pointer-events: none;
-          }
-
-          /* Position states */
-          .rc-card[data-pos="center"] {
-            transform: translateX(0) scale(1);
-            z-index: 10;
-            opacity: 1;
-            filter: none;
-            border-color: rgba(200, 180, 255, 0.3);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,180,255,0.08) inset;
-          }
-
-          .rc-card[data-pos="left"] {
-            transform: translateX(calc(-52% - 20px)) scale(0.85);
-            z-index: 5;
-            opacity: 0.65;
-            filter: brightness(0.55);
-          }
-
-          .rc-card[data-pos="right"] {
-            transform: translateX(calc(52% + 20px)) scale(0.85);
-            z-index: 5;
-            opacity: 0.65;
-            filter: brightness(0.55);
-          }
-
-          .rc-card[data-pos="left2"] {
-            transform: translateX(calc(-94% - 20px)) scale(0.72);
-            z-index: 2;
-            opacity: 0.25;
-            filter: brightness(0.3);
-          }
-
-          .rc-card[data-pos="right2"] {
-            transform: translateX(calc(94% + 20px)) scale(0.72);
-            z-index: 2;
-            opacity: 0.25;
-            filter: brightness(0.3);
-          }
-
-          .rc-card[data-pos="hidden"] {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(0) scale(0.5);
-            z-index: 0;
-          }
-
-          /* Song badge */
-          .rc-song-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 100px;
-            padding: 4px 10px;
-            font-family: var(--mono);
-            font-size: 9px;
-            color: rgba(255,255,255,0.75);
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-          }
-
-          .rc-song-dot {
-            width: 5px; height: 5px; border-radius: 50%;
-            background: var(--accent);
-            animation: pulse 2s ease-in-out infinite;
+          .ig-reels-intro svg {
+            width: 22px; height: 22px;
             flex-shrink: 0;
           }
-
-          /* Play button */
-          .rc-play-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 4;
-            width: 56px; height: 56px;
-            background: rgba(200,180,255,0.15);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(200,180,255,0.35);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.2s, transform 0.2s, background 0.2s;
-            pointer-events: none;
-          }
-
-          .rc-card[data-pos="center"]:hover .rc-play-btn {
-            background: rgba(200,180,255,0.3);
-            transform: translate(-50%, -50%) scale(1.1);
-          }
-
-          .rc-card.playing .rc-play-btn {
-            opacity: 0;
-          }
-
-          .rc-play-btn svg {
-            width: 18px; height: 18px;
-            fill: var(--white);
-            margin-left: 2px;
-          }
-
-          /* Card bottom info */
-          .rc-bottom {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            z-index: 3;
-            padding: 14px 16px;
-          }
-
-          .rc-title {
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--white);
-            margin-bottom: 2px;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-          }
-
-          .rc-artist {
+          .ig-reels-intro span {
             font-family: var(--mono);
-            font-size: 10px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 1px;
+            font-size: 11px;
+            color: var(--dim);
+            letter-spacing: 0.5px;
           }
-
-          /* Nav arrows */
-          .rc-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            width: 46px; height: 46px;
-            background: rgba(255,165,80,0.92);
-            border: none;
-            border-radius: 50%;
+          .ig-reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+          }
+          .ig-reel-item {
             display: flex;
-            align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: transform 0.2s, background 0.2s;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
           }
-          .rc-nav-btn:hover { transform: translateY(-50%) scale(1.1); background: #ff9040; }
-          .rc-nav-prev { left: clamp(8px, 3vw, 28px); }
-          .rc-nav-next { right: clamp(8px, 3vw, 28px); }
-          .rc-nav-btn svg { width: 18px; height: 18px; fill: #fff; }
-
-          /* Dots */
-          .rc-dots {
-            display: flex;
-            gap: 7px;
-            justify-content: center;
-            margin-top: 8px;
+          .ig-reel-item:hover {
+            border-color: rgba(200,180,255,0.25);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
           }
-          .rc-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: rgba(200,180,255,0.2);
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
+          .ig-reel-item blockquote {
+            margin: 0 !important;
+            width: 100% !important;
           }
-          .rc-dot.active {
-            background: var(--accent);
-            transform: scale(1.3);
+          @media (max-width: 700px) {
+            .ig-reels-grid {
+              grid-template-columns: 1fr;
+            }
           }
         </style>
 
-        <div class="reel-carousel-scene">
-          <!-- Nav buttons -->
-          <button class="rc-nav-btn rc-nav-prev" onclick="rcPrev()" aria-label="Previous">
-            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
-          </button>
-          <button class="rc-nav-btn rc-nav-next" onclick="rcNext()" aria-label="Next">
-            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-          </button>
+        <!-- Instagram embed script (loaded once) -->
+        <script async src="//www.instagram.com/embed.js"></script>
 
-          <div class="reel-carousel-track" id="rcTrack">
-            <!-- Card 0 — Way Down We Go -->
-            <div class="rc-card" data-idx="0">
-              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097058/Where_Down_We_Go_qthaiq.mp4" playsinline loop preload="metadata" muted></video>
-              <div class="rc-card-overlay"></div>
-              <div class="rc-song-badge"><span class="rc-song-dot"></span>Way Down We Go</div>
-              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-              <div class="rc-bottom">
-                <div class="rc-title">Way Down We Go</div>
-                <div class="rc-artist">KALEO · Guitar Cover</div>
-              </div>
-            </div>
-            <!-- Card 1 — Bohemian Rhapsody -->
-            <div class="rc-card" data-idx="1">
-              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Bohemian_Rhapsody_Final_wyidhq.mp4" playsinline loop preload="metadata" muted></video>
-              <div class="rc-card-overlay"></div>
-              <div class="rc-song-badge"><span class="rc-song-dot"></span>Bohemian Rhapsody</div>
-              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-              <div class="rc-bottom">
-                <div class="rc-title">Bohemian Rhapsody</div>
-                <div class="rc-artist">Queen · Guitar Cover</div>
-              </div>
-            </div>
-            <!-- Card 2 — Numb -->
-            <div class="rc-card" data-idx="2">
-              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097048/Numb_vlxkmm.mp4" playsinline loop preload="metadata" muted></video>
-              <div class="rc-card-overlay"></div>
-              <div class="rc-song-badge"><span class="rc-song-dot"></span>Numb</div>
-              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-              <div class="rc-bottom">
-                <div class="rc-title">Numb</div>
-                <div class="rc-artist">Linkin Park · Guitar Cover</div>
-              </div>
-            </div>
-            <!-- Card 3 — Stormbringer -->
-            <div class="rc-card" data-idx="3">
-              <video src="https://res.cloudinary.com/dlm0jn7dx/video/upload/v1779097038/VID-20250825-WA0017_vbqljz.mp4" playsinline loop preload="metadata" muted></video>
-              <div class="rc-card-overlay"></div>
-              <div class="rc-song-badge"><span class="rc-song-dot"></span>Stormbringer</div>
-              <div class="rc-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-              <div class="rc-bottom">
-                <div class="rc-title">Stormbringer</div>
-                <div class="rc-artist">Deep Purple · Guitar Cover</div>
-              </div>
-            </div>
+        <div class="ig-reels-intro">
+          <!-- Instagram icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-grad)"/>
+            <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.5" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+          </svg>
+          <span>@neilsurjiani28 · Guitar Reels on Instagram</span>
+        </div>
+
+        <div class="ig-reels-grid">
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DU3B5FBD9iS/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
           </div>
-        </div>
 
-        <!-- Dots -->
-        <div class="rc-dots" id="rcDots">
-          <div class="rc-dot active" onclick="rcGoTo(0)"></div>
-          <div class="rc-dot" onclick="rcGoTo(1)"></div>
-          <div class="rc-dot" onclick="rcGoTo(2)"></div>
-          <div class="rc-dot" onclick="rcGoTo(3)"></div>
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTm6aUejD-v/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DP_ulxOD0jW/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPwIE7xDzW2/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPrAKvwDDoH/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPYh--KDFcU/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DO-znEhj-dl/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DVqk4ijDIys/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOs18ZSjOio/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
+          <div class="ig-reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DODqomjDOoz/" data-instgrm-version="14" style="width:100%;min-width:280px;"></blockquote>
+          </div>
+
         </div>
-        <p style="font-family:var(--mono);font-size:10px;color:rgba(200,180,255,0.3);margin-top:12px;text-align:center;letter-spacing:1px;">Tap center card to play · arrows or swipe to browse</p>
       </div>
 
       <!-- Beats panel -->
@@ -7281,131 +7093,23 @@ FOpen
         }).catch(function () { });
       };
 
-      // ── Reel video tap-to-play ──
-      window.toggleReel = function (card) {
-        var vid = card.querySelector('video');
-        if (!vid) return;
-        // pause all others
-        document.querySelectorAll('.reel-card video').forEach(function (v) {
-          if (v !== vid) { v.pause(); v.closest('.reel-card').classList.remove('playing'); }
-        });
-        if (vid.paused) {
-          vid.muted = false;
-          vid.play().catch(function () { vid.muted = true; vid.play(); });
-          card.classList.add('playing');
-        } else {
-          vid.pause();
-          card.classList.remove('playing');
-        }
-      };
-
-      // Pause reels when switching away from music page
+      // Stop beat audio when switching away from music page
       var origShowPage = window.showPage;
       window.showPage = function (id) {
         if (id !== 'music') {
-          document.querySelectorAll('.reel-card video, .rc-card video').forEach(function (v) { v.pause(); });
           if (currentAudio) { currentAudio.pause(); currentAudio = null; }
           if (currentBtn) { currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; currentBtn = null; }
         }
         origShowPage(id);
-        if (id === 'music') { setTimeout(initWaveforms, 400); setTimeout(rcInit, 450); }
+        if (id === 'music') { setTimeout(initWaveforms, 400); setTimeout(reprocessIGEmbeds, 450); }
       };
 
-      // ── REEL CAROUSEL ──
-      var RC_TOTAL = 4;
-      var rcActive = 0;
-      var rcAnimating = false;
-      var rcTouchStartX = 0;
-
-      var RC_POSITIONS = ['left2', 'left', 'center', 'right', 'right2', 'hidden'];
-      function rcGetPos(cardIdx, activeIdx) {
-        var diff = cardIdx - activeIdx;
-        if (diff === 0) return 'center';
-        if (diff === 1 || diff === -(RC_TOTAL - 1)) return 'right';
-        if (diff === -1 || diff === (RC_TOTAL - 1)) return 'left';
-        if (diff === 2 || diff === -(RC_TOTAL - 2)) return 'right2';
-        if (diff === -2 || diff === (RC_TOTAL - 2)) return 'left2';
-        return 'hidden';
-      }
-
-      function rcRender(active) {
-        var cards = document.querySelectorAll('#rcTrack .rc-card');
-        if (!cards.length) return;
-        rcActive = ((active % RC_TOTAL) + RC_TOTAL) % RC_TOTAL;
-        cards.forEach(function(card, i) {
-          var pos = rcGetPos(i, rcActive);
-          card.setAttribute('data-pos', pos);
-          // Only center card is clickable for play
-          card.onclick = pos === 'center' ? function() { rcPlayCenter(); } : function() {
-            var idx = parseInt(card.getAttribute('data-idx'));
-            var diff = idx - rcActive;
-            if (diff === 1 || diff === -(RC_TOTAL - 1)) rcNext();
-            else if (diff === -1 || diff === (RC_TOTAL - 1)) rcPrev();
-          };
-        });
-        // Update dots
-        document.querySelectorAll('#rcDots .rc-dot').forEach(function(dot, i) {
-          dot.classList.toggle('active', i === rcActive);
-        });
-      }
-
-      window.rcNext = function() {
-        // Pause currently playing
-        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
-        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
-        rcRender(rcActive + 1);
-      };
-
-      window.rcPrev = function() {
-        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
-        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
-        rcRender(rcActive - 1);
-      };
-
-      window.rcGoTo = function(idx) {
-        var playing = document.querySelector('#rcTrack .rc-card[data-pos="center"].playing');
-        if (playing) { var v = playing.querySelector('video'); if (v) { v.pause(); } playing.classList.remove('playing'); }
-        rcRender(idx);
-      };
-
-      function rcPlayCenter() {
-        var center = document.querySelector('#rcTrack .rc-card[data-pos="center"]');
-        if (!center) return;
-        var vid = center.querySelector('video');
-        if (!vid) return;
-        // Pause all others
-        document.querySelectorAll('#rcTrack .rc-card video').forEach(function(v) {
-          if (v !== vid) { v.pause(); v.closest('.rc-card').classList.remove('playing'); }
-        });
-        if (vid.paused) {
-          vid.muted = false;
-          vid.play().catch(function() { vid.muted = true; vid.play(); });
-          center.classList.add('playing');
-        } else {
-          vid.pause();
-          center.classList.remove('playing');
+      // ── Instagram embeds: re-process when music tab is shown ──
+      window.reprocessIGEmbeds = function() {
+        if (window.instgrm && window.instgrm.Embeds) {
+          window.instgrm.Embeds.process();
         }
-      }
-
-      function rcInit() {
-        var track = document.getElementById('rcTrack');
-        if (!track) return;
-        rcRender(0);
-        // Touch/swipe
-        track.addEventListener('touchstart', function(e) { rcTouchStartX = e.touches[0].clientX; }, {passive: true});
-        track.addEventListener('touchend', function(e) {
-          var dx = e.changedTouches[0].clientX - rcTouchStartX;
-          if (Math.abs(dx) > 40) { if (dx < 0) rcNext(); else rcPrev(); }
-        }, {passive: true});
-        // Keyboard
-        document.addEventListener('keydown', function(e) {
-          var musicActive = document.getElementById('music') && document.getElementById('music').classList.contains('active');
-          if (!musicActive) return;
-          if (e.key === 'ArrowRight') rcNext();
-          if (e.key === 'ArrowLeft') rcPrev();
-        });
-      }
-      rcInit();
+      };
 
 
 

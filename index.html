@@ -3597,6 +3597,480 @@ FOpen
         height: 40px;
       }
     }
+    /* ══════════════════════════════════════════
+       FOLIOAI PROJECT CARD
+       Brand palette: blue #4f8ef7 · teal #00c9a7
+    ══════════════════════════════════════════ */
+    :root {
+      --folio-blue: #4f8ef7;
+      --folio-blue-bright: #7aabff;
+      --folio-teal: #00c9a7;
+      --folio-glow: rgba(79, 142, 247, 0.25);
+    }
+
+    .folioai-project {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(79, 142, 247, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .folioai-project:hover {
+      border-color: rgba(79, 142, 247, 0.45);
+      transform: translateY(-4px);
+    }
+
+    .folioai-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #4f8ef7, #00c9a7, #7aabff, #4f8ef7);
+      background-size: 300% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .folioai-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    .folioai-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 48px);
+      padding: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+
+    .folioai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--folio-blue-bright);
+      background: rgba(79, 142, 247, 0.1);
+      border: 1px solid rgba(79, 142, 247, 0.3);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .folioai-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--folio-teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .folioai-title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .folioai-icon-wrap {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      background: rgba(79, 142, 247, 0.1);
+      border: 1px solid rgba(79, 142, 247, 0.28);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .folioai-title {
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .folioai-title span {
+      background: linear-gradient(135deg, #4f8ef7, #00c9a7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .folioai-subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(79, 142, 247, 0.5);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .folioai-desc {
+      font-size: clamp(13px, 1.8vw, 15px);
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .folioai-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .folioai-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 14px;
+      background: rgba(79, 142, 247, 0.04);
+      border: 1px solid rgba(79, 142, 247, 0.1);
+      border-radius: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .folioai-feature:hover {
+      border-color: rgba(79, 142, 247, 0.3);
+      background: rgba(79, 142, 247, 0.08);
+    }
+
+    .folioai-feature-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .folioai-feature strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .folioai-feature span {
+      font-size: 10px;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .folioai-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .folioai-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 5px 11px;
+      border-radius: 6px;
+      background: rgba(79, 142, 247, 0.08);
+      border: 1px solid rgba(79, 142, 247, 0.18);
+      color: rgba(122, 171, 255, 0.8);
+      text-transform: uppercase;
+    }
+
+    .folioai-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .folioai-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: linear-gradient(135deg, #4f8ef7, #00c9a7);
+      color: #ffffff;
+      border: 1px solid rgba(79, 142, 247, 0.5);
+      box-shadow: 0 0 32px rgba(79, 142, 247, 0.35);
+      transition: all 0.25s;
+    }
+
+    .folioai-cta-primary:hover {
+      background: linear-gradient(135deg, #7aabff, #00e6bf);
+      box-shadow: 0 0 50px rgba(79, 142, 247, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Browser mockup */
+    .folioai-right {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .folioai-browser-mockup {
+      position: relative;
+      width: 280px;
+    }
+
+    .folioai-browser-frame {
+      background: #0a0f1a;
+      border: 1px solid rgba(79, 142, 247, 0.18);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(79,142,247,0.06);
+    }
+
+    .folioai-browser-bar {
+      background: #0d1220;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(79, 142, 247, 0.1);
+    }
+
+    .folioai-browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .folioai-browser-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .folioai-browser-dots span:nth-child(1) { background: #ff5f57; }
+    .folioai-browser-dots span:nth-child(2) { background: #febc2e; }
+    .folioai-browser-dots span:nth-child(3) { background: #28c840; }
+
+    .folioai-browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(79, 142, 247, 0.5);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .folioai-browser-screen {
+      padding: 16px 14px;
+      min-height: 320px;
+      background: linear-gradient(160deg, #08101e 0%, #0a1525 100%);
+    }
+
+    .fb-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .fb-logo {
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .fb-logo span {
+      background: linear-gradient(135deg, #4f8ef7, #00c9a7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .fb-live-chip {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #00c9a7;
+      background: rgba(0, 201, 167, 0.1);
+      border: 1px solid rgba(0, 201, 167, 0.28);
+      padding: 3px 8px;
+      border-radius: 100px;
+    }
+
+    .fb-hero {
+      background: rgba(79, 142, 247, 0.08);
+      border: 1px solid rgba(79, 142, 247, 0.18);
+      border-radius: 10px;
+      padding: 14px 12px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .fb-hero-tag {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #7aabff;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+
+    .fb-hero-headline {
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .fb-hero-sub {
+      font-size: 9px;
+      color: var(--dim);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .fb-hero-btn {
+      display: inline-block;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, #4f8ef7, #00c9a7);
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .fb-templates-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(79, 142, 247, 0.45);
+      margin-bottom: 8px;
+    }
+
+    .fb-templates {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .fb-template-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 7px;
+      padding: 8px 6px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .fb-template-card:hover {
+      border-color: rgba(79,142,247,0.25);
+    }
+
+    .fb-template-icon {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .fb-template-name {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .fb-template-sub {
+      font-family: var(--mono);
+      font-size: 7px;
+      color: var(--dim);
+    }
+
+    .fb-ai-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 10px;
+      background: rgba(0, 201, 167, 0.06);
+      border: 1px solid rgba(0, 201, 167, 0.15);
+      border-radius: 8px;
+    }
+
+    .fb-ai-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00c9a7;
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .fb-ai-text {
+      font-size: 9px;
+      color: var(--dim);
+      flex: 1;
+    }
+
+    .fb-ai-text strong {
+      color: #00c9a7;
+      font-weight: 600;
+    }
+
+    .folioai-browser-glow {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 80px;
+      background: radial-gradient(ellipse, rgba(79, 142, 247, 0.35), transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .folioai-inner {
+        grid-template-columns: 1fr;
+      }
+      .folioai-right {
+        justify-content: flex-start;
+      }
+      .folioai-browser-mockup {
+        width: 100%;
+        max-width: 300px;
+      }
+      .folioai-features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   </style>
 </head>
 
@@ -4697,6 +5171,11 @@ FOpen
           <div class="section-label reveal" style="margin-bottom:12px;">Projects</div>
           <div class="reveal">
             <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
+              <div class="about-proj-dot" style="background:var(--accent)"></div>
+              <div class="about-proj-info"><strong>FolioAI</strong><span>Next.js · OpenAI · Vercel · Live Product</span></div>
+              <div class="about-proj-arrow">→</div>
+            </a>
+            <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
               <div class="about-proj-dot" style="background:var(--purple-bright)"></div>
               <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI ·
                   Firebase</span></div>
@@ -4829,6 +5308,140 @@ FOpen
     <div class="section-wrap">
       <p class="section-label reveal">02 — Work</p>
       <h2 class="section-title reveal">What I've <span>been building</span></h2>
+
+      <!-- ══ TRIPWISE ══ -->
+      <div class="tripwise-project reveal">
+        <div class="tripwise-top-bar"></div>
+        <canvas class="tripwise-canvas" id="tripwiseCanvas"></canvas>
+
+        <div class="tripwise-inner">
+          <!-- Left -->
+          <div class="tripwise-left">
+            <div class="tripwise-badge">
+              <span class="tripwise-badge-dot"></span>
+              In the Lab
+            </div>
+
+            <div class="tripwise-title-row">
+              <div class="tripwise-icon-wrap">✈️</div>
+              <div>
+                <h3 class="tripwise-title">Trip<span>Wise</span></h3>
+                <p class="tripwise-subtitle">Next.js · FastAPI · Supabase · OpenAI · Amadeus API</p>
+              </div>
+            </div>
+
+            <p class="tripwise-desc">TripWise takes you from "I want to travel" to "trip fully planned" in under 2
+              minutes. No more switching between 8 tabs for flights, hotels, itinerary, maps, visa info, and exchange
+              rates. One platform handles it all — intelligently.</p>
+            <p class="tripwise-desc">Enter your destination and dates, and TripWise runs a full Trip Viability Report —
+              weather, crowds, visa, currency, safety — before generating a complete day-by-day itinerary with real cost
+              breakdowns, local food recommendations, advance booking flags, and a packing list. Group trip? Invite
+              friends, vote on activities, split bills.</p>
+
+            <!-- Module pills -->
+            <div class="tripwise-modules">
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">🔍</div>
+                <div><strong>Viability Report</strong><span>Weather, visa, crowds, price intel, safety & currency before
+                    you book</span></div>
+              </div>
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">🗓️</div>
+                <div><strong>AI Itinerary</strong><span>Full day-by-day plan with time slots, costs, booking flags &
+                    rainy-day backups</span></div>
+              </div>
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">✈️</div>
+                <div><strong>Flights & Hotels</strong><span>Cheapest options, layover intel, neighborhood
+                    recommender</span></div>
+              </div>
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">👥</div>
+                <div><strong>Group Co-op</strong><span>Invite link, real-time sync, activity voting & bill
+                    splitting</span></div>
+              </div>
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">🎒</div>
+                <div><strong>Smart Packing List</strong><span>Generated from weather, duration & activities — tap to
+                    check off</span></div>
+              </div>
+              <div class="tripwise-module">
+                <div class="tripwise-module-icon">📱</div>
+                <div><strong>Live Companion</strong><span>Offline itinerary, real-time alerts, emergency info & expense
+                    logger</span></div>
+              </div>
+            </div>
+
+            <div class="tripwise-tags">
+              <span class="tripwise-tag">Next.js</span>
+              <span class="tripwise-tag">FastAPI</span>
+              <span class="tripwise-tag">Python</span>
+              <span class="tripwise-tag">Supabase</span>
+              <span class="tripwise-tag">OpenAI GPT-4o</span>
+              <span class="tripwise-tag">Amadeus API</span>
+              <span class="tripwise-tag">Booking.com Affiliate</span>
+              <span class="tripwise-tag">Railway</span>
+              <span class="tripwise-tag">Vercel</span>
+            </div>
+
+            <div>
+              <a href="https://tripwiseai.vercel.app/" target="_blank" class="tripwise-cta-ghost">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+                Open TripWise ↗
+              </a>
+            </div>
+            <!-- Right — TripWise phone mockup -->
+            <div class="tripwise-right">
+              <div class="tripwise-phone-mockup">
+                <div class="tripwise-phone-frame">
+                  <div class="tripwise-phone-notch"></div>
+                  <div class="tw-screen">
+                    <div class="tw-header">
+                      <div class="tw-logo">Trip<span>Wise</span></div>
+                      <div class="tw-beta-chip">BETA</div>
+                    </div>
+                    <div class="tw-hero-card">
+                      <div class="tw-hero-eyebrow">Trip Viability</div>
+                      <div class="tw-hero-title">Tokyo, <span>Japan</span></div>
+                      <div class="tw-hero-sub">Jul 15 – Jul 22 · 7 days · 2 people</div>
+                      <div class="tw-viability-row">
+                        <div class="tw-stat-chip"><span>🟢</span><small>Good Time</small></div>
+                        <div class="tw-stat-chip"><span>High</span><small>Crowds</small></div>
+                        <div class="tw-stat-chip"><span>E-Visa</span><small>₹2,500</small></div>
+                      </div>
+                    </div>
+                    <div class="tw-day-label">Day 1 — Arrival & First Impressions</div>
+                    <div class="tw-itinerary-row">
+                      <div class="tw-time">10:00 AM</div>
+                      <div class="tw-dot" style="background:#38bdf8"></div>
+                      <div class="tw-activity">Tsukiji Market Breakfast</div>
+                      <div class="tw-cost">₹600</div>
+                    </div>
+                    <div class="tw-itinerary-row">
+                      <div class="tw-time">01:00 PM</div>
+                      <div class="tw-dot" style="background:#38bdf8"></div>
+                      <div class="tw-activity">Senso-ji Temple</div>
+                      <div class="tw-book-flag">Book</div>
+                    </div>
+                    <div class="tw-itinerary-row">
+                      <div class="tw-time">06:00 PM</div>
+                      <div class="tw-dot" style="background:#38bdf8"></div>
+                      <div class="tw-activity">Dinner Cruise — Asiatique</div>
+                      <div class="tw-cost">₹2k</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tripwise-phone-glow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
 
       <!-- ══ KREATORAI STUDIO ══ -->
       <div class="kreator-project reveal">
@@ -4992,138 +5605,128 @@ FOpen
         </div>
       </div>
 
-      <!-- ══ TRIPWISE ══ -->
-      <div class="tripwise-project reveal">
-        <div class="tripwise-top-bar"></div>
-        <canvas class="tripwise-canvas" id="tripwiseCanvas"></canvas>
+      <!-- ══ FOLIOAI ══ -->
+      <div class="folioai-project reveal">
+        <div class="folioai-top-bar"></div>
+        <canvas class="folioai-canvas" id="folioaiCanvas"></canvas>
 
-        <div class="tripwise-inner">
+        <div class="folioai-inner">
           <!-- Left -->
-          <div class="tripwise-left">
-            <div class="tripwise-badge">
-              <span class="tripwise-badge-dot"></span>
-              In the Lab
+          <div class="folioai-left">
+            <div class="folioai-badge">
+              <span class="folioai-badge-dot"></span>
+              Live Product
             </div>
 
-            <div class="tripwise-title-row">
-              <div class="tripwise-icon-wrap">✈️</div>
+            <div class="folioai-title-row">
+              <div class="folioai-icon-wrap">✨</div>
               <div>
-                <h3 class="tripwise-title">Trip<span>Wise</span></h3>
-                <p class="tripwise-subtitle">Next.js · FastAPI · Supabase · OpenAI · Amadeus API</p>
+                <h3 class="folioai-title">Folio<span>AI</span></h3>
+                <p class="folioai-subtitle">Next.js · Vercel · Google Gemini AI · Tailwind CSS</p>
               </div>
             </div>
 
-            <p class="tripwise-desc">TripWise takes you from "I want to travel" to "trip fully planned" in under 2
-              minutes. No more switching between 8 tabs for flights, hotels, itinerary, maps, visa info, and exchange
-              rates. One platform handles it all — intelligently.</p>
-            <p class="tripwise-desc">Enter your destination and dates, and TripWise runs a full Trip Viability Report —
-              weather, crowds, visa, currency, safety — before generating a complete day-by-day itinerary with real cost
-              breakdowns, local food recommendations, advance booking flags, and a packing list. Group trip? Invite
-              friends, vote on activities, split bills.</p>
+            <p class="folioai-desc">Build stunning AI-powered portfolios, websites, and resumes in minutes. FolioAI eliminates the blank-page problem — describe yourself, pick a style, and watch a fully structured, design-ready portfolio come to life.</p>
+            <p class="folioai-desc">No design skills required. No templates to wrestle with. Just your story, amplified by AI — then deployed instantly with a shareable link.</p>
 
-            <!-- Module pills -->
-            <div class="tripwise-modules">
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">🔍</div>
-                <div><strong>Viability Report</strong><span>Weather, visa, crowds, price intel, safety & currency before
-                    you book</span></div>
+            <!-- Feature grid -->
+            <div class="folioai-features">
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">🪄</div>
+                <div><strong>AI Portfolio Builder</strong><span>Describe your work — AI structures and writes it beautifully</span></div>
               </div>
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">🗓️</div>
-                <div><strong>AI Itinerary</strong><span>Full day-by-day plan with time slots, costs, booking flags &
-                    rainy-day backups</span></div>
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">📄</div>
+                <div><strong>Resume Generator</strong><span>One-click ATS-friendly resumes from your portfolio data</span></div>
               </div>
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">✈️</div>
-                <div><strong>Flights & Hotels</strong><span>Cheapest options, layover intel, neighborhood
-                    recommender</span></div>
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">🌐</div>
+                <div><strong>Instant Website</strong><span>Publish a personal site with a live shareable link in seconds</span></div>
               </div>
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">👥</div>
-                <div><strong>Group Co-op</strong><span>Invite link, real-time sync, activity voting & bill
-                    splitting</span></div>
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">🎨</div>
+                <div><strong>Style Themes</strong><span>Multiple design personalities — minimal, bold, creative & more</span></div>
               </div>
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">🎒</div>
-                <div><strong>Smart Packing List</strong><span>Generated from weather, duration & activities — tap to
-                    check off</span></div>
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">⚡</div>
+                <div><strong>Minutes, Not Days</strong><span>From zero to deployed portfolio faster than writing a bio</span></div>
               </div>
-              <div class="tripwise-module">
-                <div class="tripwise-module-icon">📱</div>
-                <div><strong>Live Companion</strong><span>Offline itinerary, real-time alerts, emergency info & expense
-                    logger</span></div>
+              <div class="folioai-feature">
+                <div class="folioai-feature-icon">🔗</div>
+                <div><strong>Shareable Link</strong><span>Live URL ready to drop in job apps, LinkedIn & cold emails</span></div>
               </div>
             </div>
 
-            <div class="tripwise-tags">
-              <span class="tripwise-tag">Next.js</span>
-              <span class="tripwise-tag">FastAPI</span>
-              <span class="tripwise-tag">Python</span>
-              <span class="tripwise-tag">Supabase</span>
-              <span class="tripwise-tag">OpenAI GPT-4o</span>
-              <span class="tripwise-tag">Amadeus API</span>
-              <span class="tripwise-tag">Booking.com Affiliate</span>
-              <span class="tripwise-tag">Railway</span>
-              <span class="tripwise-tag">Vercel</span>
+            <div class="folioai-tags">
+              <span class="folioai-tag">Next.js</span>
+              <span class="folioai-tag">React</span>
+              <span class="folioai-tag">Gemini AI</span>
+              <span class="folioai-tag">Tailwind CSS</span>
+              <span class="folioai-tag">Vercel</span>
+              <span class="folioai-tag">TypeScript</span>
             </div>
 
-            <div>
-              <a href="https://tripwiseai.vercel.app/" target="_blank" class="tripwise-cta-ghost">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 17L17 7" />
-                  <path d="M7 7h10v10" />
+            <div class="folioai-ctas">
+              <a href="https://tryfolioai.vercel.app/builder" target="_blank" class="folioai-cta-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
                 </svg>
-                Open TripWise ↗
+                Try FolioAI Live ↗
               </a>
             </div>
-            <!-- Right — TripWise phone mockup -->
-            <div class="tripwise-right">
-              <div class="tripwise-phone-mockup">
-                <div class="tripwise-phone-frame">
-                  <div class="tripwise-phone-notch"></div>
-                  <div class="tw-screen">
-                    <div class="tw-header">
-                      <div class="tw-logo">Trip<span>Wise</span></div>
-                      <div class="tw-beta-chip">BETA</div>
+          </div>
+
+          <!-- Right — Browser mockup -->
+          <div class="folioai-right">
+            <div class="folioai-browser-mockup">
+              <div class="folioai-browser-frame">
+                <div class="folioai-browser-bar">
+                  <div class="folioai-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="folioai-browser-url">tryfolioai.vercel.app/builder</div>
+                </div>
+                <div class="folioai-browser-screen">
+                  <div class="fb-header">
+                    <div class="fb-logo">Folio<span>AI</span></div>
+                    <div class="fb-live-chip">● Live</div>
+                  </div>
+                  <div class="fb-hero">
+                    <div class="fb-hero-tag">AI Portfolio Builder</div>
+                    <div class="fb-hero-headline">Your portfolio,<br>built in minutes</div>
+                    <div class="fb-hero-sub">Describe yourself. Pick a style.<br>Get a stunning site instantly.</div>
+                    <div class="fb-hero-btn">Start Building →</div>
+                  </div>
+                  <div class="fb-templates-label">Choose a template</div>
+                  <div class="fb-templates">
+                    <div class="fb-template-card">
+                      <div class="fb-template-icon">💼</div>
+                      <div class="fb-template-name">Portfolio</div>
+                      <div class="fb-template-sub">Projects & work</div>
                     </div>
-                    <div class="tw-hero-card">
-                      <div class="tw-hero-eyebrow">Trip Viability</div>
-                      <div class="tw-hero-title">Tokyo, <span>Japan</span></div>
-                      <div class="tw-hero-sub">Jul 15 – Jul 22 · 7 days · 2 people</div>
-                      <div class="tw-viability-row">
-                        <div class="tw-stat-chip"><span>🟢</span><small>Good Time</small></div>
-                        <div class="tw-stat-chip"><span>High</span><small>Crowds</small></div>
-                        <div class="tw-stat-chip"><span>E-Visa</span><small>₹2,500</small></div>
-                      </div>
+                    <div class="fb-template-card">
+                      <div class="fb-template-icon">📄</div>
+                      <div class="fb-template-name">Resume</div>
+                      <div class="fb-template-sub">ATS-ready</div>
                     </div>
-                    <div class="tw-day-label">Day 1 — Arrival & First Impressions</div>
-                    <div class="tw-itinerary-row">
-                      <div class="tw-time">10:00 AM</div>
-                      <div class="tw-dot" style="background:#38bdf8"></div>
-                      <div class="tw-activity">Tsukiji Market Breakfast</div>
-                      <div class="tw-cost">₹600</div>
-                    </div>
-                    <div class="tw-itinerary-row">
-                      <div class="tw-time">01:00 PM</div>
-                      <div class="tw-dot" style="background:#38bdf8"></div>
-                      <div class="tw-activity">Senso-ji Temple</div>
-                      <div class="tw-book-flag">Book</div>
-                    </div>
-                    <div class="tw-itinerary-row">
-                      <div class="tw-time">06:00 PM</div>
-                      <div class="tw-dot" style="background:#38bdf8"></div>
-                      <div class="tw-activity">Dinner Cruise — Asiatique</div>
-                      <div class="tw-cost">₹2k</div>
+                    <div class="fb-template-card">
+                      <div class="fb-template-icon">🌐</div>
+                      <div class="fb-template-name">Website</div>
+                      <div class="fb-template-sub">Personal brand</div>
                     </div>
                   </div>
+                  <div class="fb-ai-row">
+                    <div class="fb-ai-dot"></div>
+                    <div class="fb-ai-text"><strong>AI is ready</strong> — describe your experience to begin</div>
+                  </div>
                 </div>
-                <div class="tripwise-phone-glow"></div>
               </div>
+              <div class="folioai-browser-glow"></div>
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- ══ EVMATE ══ -->
@@ -7314,10 +7917,37 @@ FOpen
         loop();
       }
 
+      // FolioAI canvas — soft purple particle drift
+      function initFolioAICanvas() {
+        var canvas = document.getElementById('folioaiCanvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var W, H, particles = [];
+        function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+        resize(); window.addEventListener('resize', resize);
+        function Particle() { this.x = Math.random() * W; this.y = Math.random() * H; this.vx = (Math.random() - 0.5) * 0.25; this.vy = (Math.random() - 0.5) * 0.25; this.r = Math.random() * 1.5 + 0.5; }
+        for (var i = 0; i < 38; i++) particles.push(new Particle());
+        function loop() {
+          ctx.clearRect(0, 0, W, H);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i]; p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(79,142,247,0.8)'; ctx.fill();
+            for (var j = i + 1; j < particles.length; j++) {
+              var q = particles[j]; var d = Math.hypot(p.x - q.x, p.y - q.y);
+              if (d < 120) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = 'rgba(0,201,167,' + (0.07 * (1 - d / 120)) + ')'; ctx.lineWidth = 0.6; ctx.stroke(); }
+            }
+          }
+          requestAnimationFrame(loop);
+        }
+        loop();
+      }
+
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () { initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initWaveforms(); });
+        document.addEventListener('DOMContentLoaded', function () { initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initWaveforms(); });
       } else {
-        initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initWaveforms();
+        initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initWaveforms();
       }
 
       // ── Music tab switcher ──

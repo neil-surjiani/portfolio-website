@@ -7,18 +7,15 @@ FOpen
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neil Surjiani</title>
   <script>
+    // SPA scroll mode: showPage now smooth-scrolls to the section
     function showPage(id) {
-      var transition = document.getElementById('pageTransition');
-      if (transition) transition.classList.add('active');
-      setTimeout(function () {
-        document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
-        var target = document.getElementById(id);
-        if (target) target.classList.add('active');
-        window.scrollTo(0, 0);
-        if (transition) transition.classList.remove('active');
-        if (typeof window.initReveal === 'function') window.initReveal();
-        closeMobileMenu();
-      }, 300);
+      var target = document.getElementById(id);
+      if (target) {
+        var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+      if (typeof closeMobileMenu === 'function') closeMobileMenu();
     }
     window.showPage = showPage;
   </script>
@@ -312,18 +309,51 @@ FOpen
       border-left-color: var(--accent);
     }
 
-    /* ── PAGE SHELL ── */
+    /* ── PAGE SHELL — single-page scroll ── */
     .page {
-      display: none !important;
+      display: block !important;
       min-height: 100vh;
     }
 
-    .page.active {
-      display: block !important;
+    #home {
+      display: flex !important;
     }
 
-    #home.active {
-      display: flex !important;
+    /* Scroll-reveal base state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left.in-view { opacity:1; transform:translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right.in-view { opacity:1; transform:translateX(0); }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-scale.in-view { opacity:1; transform:scale(1); }
+
+    /* Section separator line */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,92,191,0.25), transparent);
+      margin: 0;
     }
 
     /* ── HOME ── */
@@ -712,9 +742,14 @@ FOpen
 
     /* ── SECTION SHELL ── */
     .section-wrap {
-      padding: calc(var(--nav-h) + clamp(40px, 6vw, 80px)) clamp(20px, 5vw, 48px) clamp(40px, 6vw, 80px);
+      padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 48px) clamp(60px, 8vw, 100px);
       max-width: 1080px;
       margin: 0 auto;
+    }
+
+    /* Ensure scroll lands below fixed nav */
+    section[id] {
+      scroll-margin-top: var(--nav-h);
     }
 
     .section-label {
@@ -4072,6 +4107,73 @@ FOpen
       }
     }
   </style>
+
+  <style>
+    /* ── SINGLE-PAGE SCROLL ENHANCEMENTS ── */
+
+    /* Offset scroll for fixed nav */
+    section[id] { scroll-margin-top: var(--nav-h); }
+
+    /* Alternate section backgrounds for visual rhythm */
+    #about, #content { background: rgba(12,12,20,0.6); }
+    #work, #music { background: var(--bg); }
+    #contact { background: rgba(12,12,20,0.8); }
+
+    /* Horizontal rule glow between sections */
+    .section-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(90deg, transparent 0%, rgba(124,92,191,0.3) 30%, rgba(200,180,255,0.15) 50%, rgba(124,92,191,0.3) 70%, transparent 100%);
+    }
+
+    /* Active nav link */
+    .nav-links a.active-section {
+      color: var(--white) !important;
+    }
+    .nav-links a.active-section::after {
+      width: 100% !important;
+    }
+
+    /* Smooth scroll globally */
+    html { scroll-behavior: smooth; }
+
+    /* Scroll-down indicator on hero */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(200,180,255,0.2);
+      border-radius: 50%;
+      color: rgba(200,180,255,0.4);
+      text-decoration: none;
+      animation: scrollBounce 2s ease-in-out infinite;
+      transition: border-color 0.2s, color 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 1.2s forwards, scrollBounce 2s ease-in-out 2.2s infinite;
+    }
+    .scroll-indicator:hover {
+      border-color: rgba(200,180,255,0.6);
+      color: rgba(200,180,255,0.9);
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* Stagger reveal delays for cards and grids */
+    .stagger-2 { transition-delay: 0.08s !important; }
+    .stagger-3 { transition-delay: 0.16s !important; }
+    .stagger-4 { transition-delay: 0.24s !important; }
+    .stagger-5 { transition-delay: 0.32s !important; }
+    .stagger-6 { transition-delay: 0.40s !important; }
+  </style>
 </head>
 
 <body>
@@ -4113,17 +4215,17 @@ FOpen
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo" onclick="showPage('home');event.preventDefault();" title="Home"><img src="photo.png"
+    <a href="#home" class="nav-logo" title="Home"><img src="photo.png"
         alt="Neil Surjiani" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
       <div class="nav-logo-fallback" style="display:none;">N</div>
     </a>
     <ul class="nav-links">
-      <li><a href="#" onclick="showPage('home');event.preventDefault();">Home</a></li>
-      <li><a href="#" onclick="showPage('about');event.preventDefault();">About</a></li>
-      <li><a href="#" onclick="showPage('work');event.preventDefault();">Work</a></li>
-      <li><a href="#" onclick="showPage('content');event.preventDefault();">Content</a></li>
-      <li><a href="#" onclick="showPage('music');event.preventDefault();">Music</a></li>
-      <li><a href="#" onclick="showPage('contact');event.preventDefault();">Contact</a></li>
+      <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+      <li><a href="#work" class="nav-link" data-section="work">Work</a></li>
+      <li><a href="#content" class="nav-link" data-section="content">Content</a></li>
+      <li><a href="#music" class="nav-link" data-section="music">Music</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
@@ -4133,17 +4235,17 @@ FOpen
   <!-- Mobile Drawer -->
   <div class="nav-drawer" id="navDrawer">
     <ul>
-      <li><a href="#" onclick="showPage('home');event.preventDefault();">Home</a></li>
-      <li><a href="#" onclick="showPage('about');event.preventDefault();">About</a></li>
-      <li><a href="#" onclick="showPage('work');event.preventDefault();">Work</a></li>
-      <li><a href="#" onclick="showPage('content');event.preventDefault();">Content</a></li>
-      <li><a href="#" onclick="showPage('music');event.preventDefault();">Music</a></li>
-      <li><a href="#" onclick="showPage('contact');event.preventDefault();">Contact</a></li>
+      <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+      <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+      <li><a href="#work" onclick="closeMobileMenu()">Work</a></li>
+      <li><a href="#content" onclick="closeMobileMenu()">Content</a></li>
+      <li><a href="#music" onclick="closeMobileMenu()">Music</a></li>
+      <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
     </ul>
   </div>
 
   <!-- ===== HOME ===== -->
-  <section id="home" class="page active">
+  <section id="home" class="page">
     <div class="home-bg">
       <canvas id="starCanvas"></canvas>
       <div class="home-bg-grid"></div>
@@ -4670,8 +4772,8 @@ FOpen
       <p class="home-bio">Building things at the intersection of code, creativity & sound. Founder of KreatorAI Studio —
         making the creator economy smarter, one tool at a time.</p>
       <div class="home-ctas">
-        <a href="#" class="btn-primary" onclick="showPage('work');event.preventDefault();">View My Work →</a>
-        <a href="#" class="btn-ghost" onclick="showPage('contact');event.preventDefault();">Get in Touch</a>
+        <a href="#work" class="btn-primary">View My Work →</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
       </div>
 
       <!-- Stats strip -->
@@ -4721,7 +4823,22 @@ FOpen
         </a>
       </div>
     </div>
+
+    <!-- Scroll down indicator -->
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </a>
+
   </section>
+  <div class="section-divider"></div>
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>Builder</span><span>·</span><span>Developer</span><span>·</span><span>Guitarist</span><span>·</span><span>Producer</span><span>·</span><span>Founder</span><span>·</span><span>Creator</span><span>·</span><span>16 · Pune</span><span>·</span>
+      <span>Builder</span><span>·</span><span>Developer</span><span>·</span><span>Guitarist</span><span>·</span><span>Producer</span><span>·</span><span>Founder</span><span>·</span><span>Creator</span><span>·</span><span>16 · Pune</span><span>·</span>
+    </div>
+  </div>
 
   <!-- ===== ABOUT ===== -->
   <section id="about" class="page">
@@ -5080,7 +5197,7 @@ FOpen
               <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
               <div class="atl-year">2022 · May · Age 13</div>
               <div class="atl-title">Started learning guitar 🎸</div>
-              <div class="atl-desc">Picked up my first guitar and never put it down. Classical foundations, then pop, rock and fingerstyle. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
+              <div class="atl-desc">Picked up my first guitar and never put it down. Classical foundations, then pop, rock and fingerstyle. <a href="#music" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
             </div>
 
             <div class="atl-item">
@@ -5094,7 +5211,7 @@ FOpen
               <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
               <div class="atl-year">2023 · Aug · Age 14</div>
               <div class="atl-title">Started music production 🎛️</div>
-              <div class="atl-desc">Dove into Ableton, Cubase and FL Studio — crafting beats, original songs and remixes from scratch. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
+              <div class="atl-desc">Dove into Ableton, Cubase and FL Studio — crafting beats, original songs and remixes from scratch. <a href="#music" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
             </div>
 
             <div class="atl-item">
@@ -5122,7 +5239,7 @@ FOpen
               <div class="atl-dot" style="background:#a07ee8;box-shadow:0 0 10px rgba(160,126,232,0.45)"></div>
               <div class="atl-year">2025 · Aug</div>
               <div class="atl-title">Started posting guitar reels on Instagram 📱</div>
-              <div class="atl-desc">Began sharing covers publicly — built an audience one reel at a time. <a href="#" onclick="showPage('music');event.preventDefault();" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
+              <div class="atl-desc">Began sharing covers publicly — built an audience one reel at a time. <a href="#music" style="color:var(--accent);text-decoration:none;font-weight:600;">→ Music page</a></div>
             </div>
 
             <div class="atl-item">
@@ -5150,7 +5267,7 @@ FOpen
               <div class="atl-dot" style="background:#ff6a2f;box-shadow:0 0 10px rgba(255,106,47,0.45)"></div>
               <div class="atl-year">2026 · Apr</div>
               <div class="atl-title">Started YouTube — content creation 🎬</div>
-              <div class="atl-desc">Launched my channel: tech, building, music — the full journey. <a href="#" onclick="showPage('content');event.preventDefault();" style="color:#ff6a2f;text-decoration:none;font-weight:600;">→ Content page</a></div>
+              <div class="atl-desc">Launched my channel: tech, building, music — the full journey. <a href="#content" style="color:#ff6a2f;text-decoration:none;font-weight:600;">→ Content page</a></div>
             </div>
 
             <div class="atl-item">
@@ -5158,6 +5275,13 @@ FOpen
               <div class="atl-year" style="color:#38bdf8;">2026 · May · Now</div>
               <div class="atl-title">Building TripWise ✈️</div>
               <div class="atl-desc">A full travel platform — from "I want to go somewhere" to complete itinerary in under 2 minutes. Next.js + AI + Amadeus API.</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:var(--accent);box-shadow:0 0 12px rgba(200,180,255,0.5)"></div>
+              <div class="atl-year" style="color:var(--accent);">2026 · May · Now</div>
+              <div class="atl-title">Building FolioAI 🤖✨</div>
+              <div class="atl-desc">AI-powered portfolio generator — paste your resume and get a live portfolio site in seconds. Next.js · OpenAI · Vercel. <a href="#work" style="color:var(--accent);text-decoration:none;font-weight:600;">→ See project</a></div>
             </div>
 
           </div>
@@ -5170,23 +5294,23 @@ FOpen
           <!-- Project links -->
           <div class="section-label reveal" style="margin-bottom:12px;">Projects</div>
           <div class="reveal">
-            <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
+            <a href="#work" class="about-proj-row">
               <div class="about-proj-dot" style="background:var(--accent)"></div>
               <div class="about-proj-info"><strong>FolioAI</strong><span>Next.js · OpenAI · Vercel · Live Product</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
+            <a href="#work" class="about-proj-row">
               <div class="about-proj-dot" style="background:var(--purple-bright)"></div>
               <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI ·
                   Firebase</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
+            <a href="#work" class="about-proj-row">
               <div class="about-proj-dot" style="background:#00c96b"></div>
               <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#" class="about-proj-row" onclick="showPage('work');event.preventDefault();">
+            <a href="#work" class="about-proj-row">
               <div class="about-proj-dot" style="background:#38bdf8"></div>
               <div class="about-proj-info"><strong>TripWise</strong><span>Next.js · OpenAI · In Development</span></div>
               <div class="about-proj-arrow">→</div>
@@ -5257,11 +5381,11 @@ FOpen
 
           <!-- Tech chips -->
           <div class="section-label reveal" style="margin-bottom:12px;margin-top:24px;">Stack</div>
-          <div class="tech-chips reveal">
-            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">Flutter/Dart</span>
-            <span class="chip">FastAPI</span><span class="chip">Firebase</span><span class="chip">Supabase</span>
-            <span class="chip">Next.js</span><span class="chip">NumPy</span>
-            <span class="chip">OpenAI API</span><span class="chip">Gemini AI</span>
+          <div class="skill-orbs-3d reveal">
+            <span class="sorb">Python</span><span class="sorb">Java</span><span class="sorb">Flutter/Dart</span>
+            <span class="sorb">FastAPI</span><span class="sorb">Firebase</span><span class="sorb">Supabase</span>
+            <span class="sorb">Next.js</span><span class="sorb">NumPy</span>
+            <span class="sorb">OpenAI API</span><span class="sorb">Gemini AI</span>
           </div>
 
           <!-- Interests -->
@@ -5300,9 +5424,9 @@ FOpen
 
       </div>
     </div>
-    <footer>© 2026 Neil Surjiani</footer>
   </section>
 
+  <div class="section-divider"></div>
   <!-- ===== WORK ===== -->
   <section id="work" class="page">
     <div class="section-wrap">
@@ -5888,10 +6012,10 @@ FOpen
             style="white-space:nowrap;flex-shrink:0;">View GitHub →</a>
         </div>
       </div>
-<footer>© 2026 Neil Surjiani</footer>
   </section>
 
 
+  <div class="section-divider"></div>
   <!-- ===== CONTENT CREATION ===== -->
   <section id="content" class="page">
     <style>
@@ -6402,9 +6526,9 @@ FOpen
       </a>
 
     </div>
-<footer>© 2026 Neil Surjiani</footer>
   </section>
 
+  <div class="section-divider"></div>
   <!-- ===== MUSIC ===== -->
   <section id="music" class="page">
 
@@ -7146,7 +7270,7 @@ FOpen
 
       <!-- Production story -->
       <div class="music-production-block reveal">
-        <div class="mpb-card">
+        <div class="mpb-card tilt-card">
           <div class="mpb-icon">🎸</div>
           <div class="mpb-title">Guitar — Performance & Theory</div>
           <div class="mpb-desc">Started with classical theory, moved into pop, rock, and fingerstyle. Trinity College
@@ -7159,7 +7283,7 @@ FOpen
             <span class="mpb-tool">Pop / Rock</span>
           </div>
         </div>
-        <div class="mpb-card">
+        <div class="mpb-card tilt-card">
           <div class="mpb-icon">🎛️</div>
           <div class="mpb-title">Ableton Live — Beat Making & Production</div>
           <div class="mpb-desc">I produce in Ableton Live — building beats from the ground up. My process: start with a
@@ -7176,6 +7300,11 @@ FOpen
         </div>
       </div>
 
+      <!-- 3D Vinyl Decoration -->
+      <div class="vinyl-3d-wrap reveal">
+        <div class="vinyl-3d"></div>
+      </div>
+
       <!-- Tabs -->
       <div class="music-tabs reveal">
         <button class="music-tab active" onclick="switchMusicTab('guitar', this)">🎸 Guitar Reels</button>
@@ -7189,7 +7318,7 @@ FOpen
           .reel-carousel-scene {
             position: relative;
             width: 100%;
-            height: clamp(440px, 65vw, 640px);
+            height: clamp(540px, 78vw, 760px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -7210,7 +7339,7 @@ FOpen
           .rc-card {
             position: absolute;
             aspect-ratio: 9/16;
-            height: clamp(340px, 52vw, 520px);
+            height: clamp(420px, 62vw, 620px);
             border-radius: 22px;
             overflow: hidden;
             background: #0a0a12;
@@ -7680,9 +7809,9 @@ FOpen
         </a>
       </div>
     </div>
-<footer>© 2026 Neil Surjiani</footer>
   </section>
 
+  <div class="section-divider"></div>
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="page">
     <div class="section-wrap">
@@ -7757,33 +7886,26 @@ FOpen
         if (loader) { loader.classList.add('hide'); setTimeout(function () { loader.style.display = 'none'; }, 650); }
       }, 2600);
 
-      var transition = document.getElementById('pageTransition');
-      window.showPage = function (id) {
-        if (transition) transition.classList.add('active');
-        setTimeout(function () {
-          document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
-          var target = document.getElementById(id);
-          if (target) target.classList.add('active');
-          window.scrollTo(0, 0);
-          if (transition) transition.classList.remove('active');
-          initReveal();
-          closeMobileMenu();
-          // Reinit canvases when work page opens
-          if (id === 'work') { setTimeout(function () { initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); }, 350); }
-        }, 300);
-      };
+      // SPA: showPage already defined at top as smooth-scroll; no override needed here
 
-      // Scroll reveal
+      // Scroll reveal — IntersectionObserver watching for .in-view trigger
       function initReveal() {
         var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-parent');
         var obs = new IntersectionObserver(function (entries) {
           entries.forEach(function (e, i) {
-            if (e.isIntersecting) setTimeout(function () { e.target.classList.add('visible'); }, i * 80);
+            if (e.isIntersecting) {
+              setTimeout(function () { e.target.classList.add('visible'); e.target.classList.add('in-view'); }, i * 80);
+            }
           });
         }, { threshold: 0.08 });
-        els.forEach(function (el) { el.classList.remove('visible'); obs.observe(el); });
+        els.forEach(function (el) { obs.observe(el); });
+        // Immediately reveal anything already in viewport
         setTimeout(function () {
-          els.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); });
+          els.forEach(function (el) {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+              el.classList.add('visible'); el.classList.add('in-view');
+            }
+          });
         }, 50);
       }
       window.initReveal = initReveal;
@@ -8037,17 +8159,24 @@ FOpen
         }
       };
 
-      // Pause reels when switching away from music page
-      var origShowPage = window.showPage;
-      window.showPage = function (id) {
-        if (id !== 'music') {
-          document.querySelectorAll('.reel-card video, .rc-card video').forEach(function (v) { v.pause(); });
-          if (currentAudio) { currentAudio.pause(); currentAudio = null; }
-          if (currentBtn) { currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; currentBtn = null; }
-        }
-        origShowPage(id);
-        if (id === 'music') { setTimeout(initWaveforms, 400); setTimeout(rcInit, 450); }
-      };
+      // Pause reels & audio when music section scrolls out of view
+      (function() {
+        var musicSection = document.getElementById('music');
+        if (!musicSection) return;
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (!entry.isIntersecting) {
+              document.querySelectorAll('.reel-card video, .rc-card video').forEach(function(v) { v.pause(); });
+              if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+              if (currentBtn) { currentBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; currentBtn = null; }
+            } else {
+              setTimeout(initWaveforms, 200);
+              setTimeout(rcInit, 250);
+            }
+          });
+        }, { threshold: 0.05 });
+        obs.observe(musicSection);
+      })();
 
       // ── REEL CAROUSEL ──
       var RC_TOTAL = 13;
@@ -8137,17 +8266,465 @@ FOpen
         }, {passive: true});
         // Keyboard
         document.addEventListener('keydown', function(e) {
-          var musicActive = document.getElementById('music') && document.getElementById('music').classList.contains('active');
-          if (!musicActive) return;
           if (e.key === 'ArrowRight') rcNext();
           if (e.key === 'ArrowLeft') rcPrev();
         });
       }
       rcInit();
 
+      // ── ACTIVE NAV HIGHLIGHT based on scroll position ──
+      (function() {
+        var sections = ['home','about','work','content','music','contact'];
+        var navLinks = document.querySelectorAll('.nav-link[data-section]');
+        var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
 
+        function updateActiveNav() {
+          var scrollY = window.pageYOffset;
+          var active = sections[0];
+          sections.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top + window.pageYOffset - navH - 80 <= scrollY) {
+              active = id;
+            }
+          });
+          navLinks.forEach(function(link) {
+            var sect = link.getAttribute('data-section');
+            link.classList.toggle('active-section', sect === active);
+          });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, {passive: true});
+        updateActiveNav();
+      })();
+
+      // ── SCROLL PROGRESS BAR ──
+      (function() {
+        var bar = document.createElement('div');
+        bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--purple),var(--accent));z-index:9999;transition:width 0.1s linear;pointer-events:none;';
+        document.body.appendChild(bar);
+        window.addEventListener('scroll', function() {
+          var scrolled = window.pageYOffset;
+          var total = document.body.scrollHeight - window.innerHeight;
+          bar.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+        }, {passive: true});
+      })();
 
     })();
+  </script>
+
+  <style>
+    /* Active nav link highlight */
+    .nav-links a.active-section {
+      color: var(--white) !important;
+    }
+    .nav-links a.active-section::after {
+      width: 100% !important;
+    }
+
+    /* Section backgrounds alternate subtly for visual rhythm */
+    #about { background: var(--surface); }
+    #work { background: var(--bg); }
+    #content { background: var(--surface); }
+    #music { background: var(--bg); }
+    #contact { background: var(--surface); }
+
+    /* Parallax-style section entrance: sections have slight overlap feel */
+    .section-divider {
+      background: linear-gradient(90deg, transparent, rgba(124,92,191,0.2), transparent);
+      height: 1px;
+    }
+
+    /* Extra scroll animations for section headers */
+    .section-label.in-view,
+    .section-title.in-view {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════
+       PREMIUM SCROLL ANIMATIONS + 3D WIDGETS
+       ═══════════════════════════════════════════ -->
+  <style>
+    /* ── SECTION ENTRANCE: clip-path wipe per section ── */
+    .section-scene {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .section-scene.scene-in { opacity: 1; transform: translateY(0); }
+    .section-scene.scene-out { opacity: 0; transform: translateY(-16px); }
+
+    /* ── ANIMATED TIMELINE LINE ── */
+    .about-timeline {
+      position: relative;
+    }
+    .atl-svg-line {
+      position: absolute;
+      left: 6px;
+      top: 0;
+      width: 2px;
+      pointer-events: none;
+      overflow: visible;
+    }
+    /* Hide the old ::before pseudo-line — override */
+    .about-timeline::before { display: none !important; }
+
+    .atl-item { transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .atl-item.tl-hidden { opacity: 0; transform: translateX(-12px); }
+    .atl-item.tl-visible { opacity: 1; transform: translateX(0); }
+
+    /* Dot pulse when entering */
+    .atl-dot {
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+    }
+    .atl-item.tl-visible .atl-dot {
+      animation: dotPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes dotPop {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* ── 3D TILT CARDS (work & about project rows) ── */
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: box-shadow 0.3s ease;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 28px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,180,255,0.1);
+    }
+    .tilt-card .tilt-shine {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tilt-card:hover .tilt-shine { opacity: 1; }
+
+    /* ── 3D VINYL / DISC in music section ── */
+    .vinyl-3d-wrap {
+      perspective: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 16px;
+      height: 120px;
+    }
+    .vinyl-3d {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #1a1a2e 0deg, #16213e 30deg, #0f3460 60deg, #1a1a2e 90deg,
+        #16213e 120deg, #0f3460 150deg, #1a1a2e 180deg,
+        #16213e 210deg, #0f3460 240deg, #1a1a2e 270deg,
+        #16213e 300deg, #0f3460 330deg, #1a1a2e 360deg
+      );
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.7),
+        inset 0 0 0 28px #0c0c14,
+        inset 0 0 0 30px rgba(200,180,255,0.06),
+        inset 0 0 0 48px #0c0c14;
+      animation: vinylSpin 4s linear infinite;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .vinyl-3d::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(200,180,255,0.5);
+    }
+    @keyframes vinylSpin {
+      to { transform: rotateY(20deg) rotate(360deg); }
+    }
+
+    /* ── 3D FLOATING SKILL ORBS ── */
+    .skill-orbs-3d {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0 8px;
+      perspective: 400px;
+    }
+    .sorb {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid rgba(200,180,255,0.18);
+      background: rgba(12,12,20,0.8);
+      color: var(--dim);
+      cursor: default;
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), border-color 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+    .sorb:hover {
+      transform: translateZ(16px) scale(1.08);
+      border-color: rgba(200,180,255,0.45);
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(124,92,191,0.3);
+    }
+
+    /* ── PARALLAX DEPTH LAYERS on hero ── */
+    .parallax-layer {
+      will-change: transform;
+    }
+
+    /* ── COUNTER NUMBER ROLL ── */
+    .count-up {
+      display: inline-block;
+    }
+
+    /* ── HORIZONTAL SCROLL REVEAL with clip ── */
+    .clip-reveal {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .clip-reveal.in-view {
+      clip-path: inset(0 0% 0 0);
+    }
+
+    /* ── GLOW PULSE on section entry ── */
+    @keyframes sectionGlow {
+      0% { box-shadow: 0 0 0 0 rgba(124,92,191,0); }
+      50% { box-shadow: 0 0 60px 0 rgba(124,92,191,0.12); }
+      100% { box-shadow: 0 0 0 0 rgba(124,92,191,0); }
+    }
+    section[id].scene-entered {
+      animation: sectionGlow 1.4s ease-out both;
+    }
+
+    /* ── MARQUEE SCROLL TEXT (subtle, between sections) ── */
+    .marquee-strip {
+      overflow: hidden;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      opacity: 0.5;
+    }
+    .marquee-inner {
+      display: flex;
+      gap: 48px;
+      width: max-content;
+      animation: marqueeScroll 22s linear infinite;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(200,180,255,0.3);
+      white-space: nowrap;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  </style>
+
+  <script>
+  (function() {
+    // ── ANIMATED TIMELINE LINE ──
+    function initTimeline() {
+      var timeline = document.querySelector('.about-timeline');
+      if (!timeline) return;
+
+      // Measure total height
+      var items = Array.from(timeline.querySelectorAll('.atl-item'));
+      var totalH = timeline.scrollHeight;
+
+      // Build SVG line
+      var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.classList.add('atl-svg-line');
+      svg.setAttribute('width','2');
+      svg.setAttribute('height', totalH);
+      svg.setAttribute('viewBox','0 0 2 '+totalH);
+
+      // Background track
+      var bgLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+      bgLine.setAttribute('x1','1'); bgLine.setAttribute('y1','0');
+      bgLine.setAttribute('x2','1'); bgLine.setAttribute('y2',totalH);
+      bgLine.setAttribute('stroke','rgba(255,255,255,0.05)'); bgLine.setAttribute('stroke-width','2');
+      svg.appendChild(bgLine);
+
+      // Animated progress line
+      var progLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+      progLine.setAttribute('x1','1'); progLine.setAttribute('y1','0');
+      progLine.setAttribute('x2','1'); progLine.setAttribute('y2',totalH);
+      progLine.setAttribute('stroke','url(#tlGrad)'); progLine.setAttribute('stroke-width','2');
+      progLine.setAttribute('stroke-linecap','round');
+      progLine.style.strokeDasharray = totalH;
+      progLine.style.strokeDashoffset = totalH;
+      progLine.style.transition = 'stroke-dashoffset 0.04s linear';
+      svg.appendChild(progLine);
+
+      // Gradient def
+      var defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+      var grad = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+      grad.setAttribute('id','tlGrad'); grad.setAttribute('gradientUnits','userSpaceOnUse');
+      grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
+      grad.setAttribute('x2','0'); grad.setAttribute('y2',totalH);
+      var s1=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#7c5cbf');
+      var s2=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#c8b4ff');
+      grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad);
+      svg.insertBefore(defs,svg.firstChild);
+
+      timeline.insertBefore(svg, timeline.firstChild);
+
+      // Hide all items initially
+      items.forEach(function(item) { item.classList.add('tl-hidden'); });
+
+      // Scroll-driven progress
+      function update() {
+        var rect = timeline.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // 0 = top of timeline at bottom of screen, 1 = bottom of timeline at center
+        var progress = Math.max(0, Math.min(1,
+          (vh - rect.top) / (rect.height + vh * 0.3)
+        ));
+        var offset = totalH * (1 - progress);
+        progLine.style.strokeDashoffset = offset;
+
+        // Reveal items as line reaches them
+        items.forEach(function(item) {
+          var itemRect = item.getBoundingClientRect();
+          var itemY = itemRect.top + itemRect.height * 0.3;
+          if (itemY < vh * 0.88) {
+            item.classList.remove('tl-hidden');
+            item.classList.add('tl-visible');
+          } else {
+            item.classList.remove('tl-visible');
+            item.classList.add('tl-hidden');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', update, {passive:true});
+      update();
+    }
+
+    // ── 3D TILT EFFECT ──
+    function initTilt() {
+      document.querySelectorAll('.tilt-card').forEach(function(card) {
+        // Add shine layer
+        if (!card.querySelector('.tilt-shine')) {
+          var shine = document.createElement('div');
+          shine.className = 'tilt-shine';
+          card.appendChild(shine);
+        }
+        card.addEventListener('mousemove', function(e) {
+          var r = card.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = 'perspective(600px) rotateY('+( x*10)+'deg) rotateX('+(-y*10)+'deg) translateZ(6px)';
+          var shine = card.querySelector('.tilt-shine');
+          if (shine) {
+            shine.style.setProperty('--mx', (e.clientX - r.left) / r.width * 100 + '%');
+            shine.style.setProperty('--my', (e.clientY - r.top) / r.height * 100 + '%');
+          }
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // ── SECTION SCENE TRANSITIONS ──
+    function initSceneTransitions() {
+      var sections = document.querySelectorAll('section[id]');
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('scene-in');
+            entry.target.classList.remove('scene-out');
+          } else {
+            // Determine direction
+            var rect = entry.boundingClientRect;
+            if (rect.top > 0) {
+              // Section scrolled above viewport — subtle fade out up
+              entry.target.classList.add('scene-out');
+              entry.target.classList.remove('scene-in');
+            }
+          }
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
+      sections.forEach(function(s) { s.classList.add('section-scene'); obs.observe(s); });
+    }
+
+    // ── COUNT-UP ANIMATION ──
+    function initCountUp() {
+      var statNums = document.querySelectorAll('.home-stat-num');
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var text = el.textContent;
+          var num = parseInt(text.replace(/\D/g,''));
+          if (isNaN(num) || num === 0) return;
+          var prefix = text.match(/^[^\d]*/)[0];
+          var suffix = text.match(/[^\d]*$/)[0];
+          var span = el.querySelector('span');
+          var spanText = span ? span.outerHTML : '';
+          var start = 0, duration = 1200, startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            var cur = Math.round(eased * num);
+            el.innerHTML = (span ? spanText : '') + cur + (suffix.replace(/\s/g,''));
+            if (p < 1) requestAnimationFrame(step);
+            else el.innerHTML = spanText + num + (suffix.replace(/\s/g,''));
+          }
+          requestAnimationFrame(step);
+          io.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      statNums.forEach(function(el) { io.observe(el); });
+    }
+
+    // ── CLIP REVEAL for section labels ──
+    function initClipReveal() {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) e.target.classList.add('in-view');
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.clip-reveal').forEach(function(el) { io.observe(el); });
+    }
+
+    // ── INIT ──
+    document.addEventListener('DOMContentLoaded', function() {
+      initTimeline();
+      setTimeout(initTilt, 300);
+      initSceneTransitions();
+      initCountUp();
+      initClipReveal();
+    });
+    if (document.readyState !== 'loading') {
+      initTimeline();
+      setTimeout(initTilt, 300);
+      initSceneTransitions();
+      initCountUp();
+      initClipReveal();
+    }
+  })();
   </script>
 </body>
 

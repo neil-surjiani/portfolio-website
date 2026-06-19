@@ -4106,6 +4106,1477 @@ FOpen
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    /* ══════════════════════════════════════════
+       APEX VENTURES — Parent Org Banner
+       Theme: graphite · gold
+    ══════════════════════════════════════════ */
+    :root {
+      --apex-gold: #f0b429;
+      --apex-line: rgba(255, 255, 255, 0.14);
+    }
+
+    .apex-banner {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      padding: clamp(28px, 4vw, 48px);
+    }
+
+    .apex-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6b7280, var(--apex-gold), #6b7280);
+      background-size: 300% 100%;
+      animation: shimmer 5s linear infinite;
+    }
+
+    .apex-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 15% 20%, rgba(240, 180, 41, 0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .apex-header-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .apex-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--apex-gold);
+      background: rgba(240, 180, 41, 0.08);
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .apex-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--apex-gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .apex-title {
+      font-weight: 800;
+      font-size: clamp(28px, 4.5vw, 42px);
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .apex-title span {
+      color: var(--apex-gold);
+    }
+
+    .apex-tagline {
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 300;
+      color: var(--dim);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .apex-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--apex-gold);
+      color: #1a1306;
+      border: 1px solid var(--apex-gold);
+      box-shadow: 0 0 28px rgba(240, 180, 41, 0.3);
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+
+    .apex-cta-primary:hover {
+      background: #ffce5c;
+      box-shadow: 0 0 44px rgba(240, 180, 41, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .apex-manifesto {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .apex-manifesto-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--apex-line);
+      border-radius: 12px;
+      padding: 16px 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .apex-manifesto-item:hover {
+      border-color: rgba(240, 180, 41, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .apex-manifesto-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--apex-gold);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      opacity: 0.75;
+    }
+
+    .apex-manifesto-head {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .apex-manifesto-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    .apex-companies {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid var(--apex-line);
+    }
+
+    .apex-companies-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-right: 6px;
+    }
+
+    .apex-company-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--apex-line);
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dim);
+      transition: all 0.2s;
+    }
+
+    .apex-company-chip:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .apex-company-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .apex-manifesto {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .apex-manifesto {
+        grid-template-columns: 1fr;
+      }
+      .apex-header-row {
+        flex-direction: column;
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       NUTRISENSE PROJECT CARD
+       Brand palette: emerald #10b981 · amber #f59e0b
+    ══════════════════════════════════════════ */
+    :root {
+      --ns-green: #10b981;
+      --ns-green-bright: #34d399;
+      --ns-amber: #f59e0b;
+    }
+
+    .nutrisense-project {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .nutrisense-project:hover {
+      border-color: rgba(52, 211, 153, 0.45);
+      transform: translateY(-4px);
+    }
+
+    .nutrisense-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981, #34d399, #f59e0b, #10b981);
+      background-size: 300% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .nutrisense-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.2;
+    }
+
+    .nutrisense-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 48px);
+      padding: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+
+    .nutrisense-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ns-green-bright);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .nutrisense-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ns-green-bright);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .nutrisense-title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .nutrisense-icon-wrap {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .nutrisense-title {
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .nutrisense-title span {
+      color: var(--ns-green-bright);
+    }
+
+    .nutrisense-subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(52, 211, 153, 0.5);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .nutrisense-desc {
+      font-size: clamp(13px, 1.8vw, 15px);
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .nutrisense-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .nutrisense-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 14px;
+      background: rgba(16, 185, 129, 0.04);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      border-radius: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .nutrisense-feature:hover {
+      border-color: rgba(52, 211, 153, 0.3);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .nutrisense-feature-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .nutrisense-feature strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .nutrisense-feature span {
+      font-size: 10px;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .nutrisense-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .nutrisense-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.18);
+      color: rgba(52, 211, 153, 0.85);
+      transition: all 0.2s;
+    }
+
+    .nutrisense-tag:hover {
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: var(--ns-green-bright);
+    }
+
+    .nutrisense-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: var(--ns-green);
+      border: 1px solid var(--ns-green);
+      border-radius: 8px;
+      color: #04130d;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      box-shadow: 0 0 32px rgba(16, 185, 129, 0.35);
+      transition: all 0.25s;
+    }
+
+    .nutrisense-cta-primary:hover {
+      background: var(--ns-green-bright);
+      border-color: var(--ns-green-bright);
+      box-shadow: 0 0 52px rgba(52, 211, 153, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .nutrisense-right {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .nutrisense-phone-mockup {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .nutrisense-phone-glow {
+      position: absolute;
+      inset: 20px 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(16, 185, 129, 0.28) 0%, transparent 70%);
+      filter: blur(20px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .nutrisense-phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 200px;
+      background: #07140f;
+      border: 1.5px solid rgba(16, 185, 129, 0.3);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.08) inset;
+    }
+
+    .nutrisense-phone-notch {
+      width: 60px;
+      height: 10px;
+      background: #07140f;
+      border-radius: 0 0 8px 8px;
+      margin: 8px auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .ns-screen {
+      padding: 10px 12px 16px;
+      min-height: 390px;
+    }
+
+    .ns-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .ns-logo {
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .ns-logo span {
+      color: var(--ns-green-bright);
+    }
+
+    .ns-live-chip {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ns-green-bright);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+
+    .ns-scan-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(245, 158, 11, 0.06));
+      border: 1px solid rgba(16, 185, 129, 0.22);
+      border-radius: 12px;
+      padding: 14px 12px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .ns-scan-icon {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .ns-scan-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .ns-scan-sub {
+      font-size: 9px;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .ns-macro-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .ns-macro-chip {
+      flex: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 7px 4px;
+    }
+
+    .ns-macro-chip span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ns-green-bright);
+    }
+
+    .ns-macro-chip small {
+      font-size: 7px;
+      color: var(--dim);
+    }
+
+    .ns-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+    }
+
+    .ns-meal-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    .ns-meal-icon {
+      font-size: 14px;
+    }
+
+    .ns-meal-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--white);
+      flex: 1;
+    }
+
+    .ns-meal-cal {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(52, 211, 153, 0.7);
+    }
+
+    .ns-coach-tip {
+      margin-top: 6px;
+      padding: 9px 10px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.18);
+      border-radius: 8px;
+      font-size: 9px;
+      color: var(--dim);
+      line-height: 1.4;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .nutrisense-inner {
+        grid-template-columns: 1fr;
+      }
+      .nutrisense-right {
+        justify-content: flex-start;
+      }
+      .nutrisense-features {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nutrisense-features {
+        grid-template-columns: 1fr;
+      }
+      .nutrisense-right {
+        display: none;
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       UNIPILOT PROJECT CARD — Coming Soon
+       Theme: deep blue · dark purple · red · green
+    ══════════════════════════════════════════ */
+    :root {
+      --up-blue: #1e3a8a;
+      --up-blue-bright: #60a5fa;
+      --up-purple: #581c87;
+      --up-purple-bright: #c084fc;
+      --up-red: #dc2626;
+      --up-green: #16a34a;
+    }
+
+    .unipilot-project {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .unipilot-project:hover {
+      border-color: rgba(192, 132, 252, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .unipilot-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--up-blue-bright), var(--up-purple-bright), var(--up-red), var(--up-green), var(--up-blue-bright));
+      background-size: 300% 100%;
+      animation: shimmer 5s linear infinite;
+    }
+
+    .unipilot-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    .unipilot-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 48px);
+      padding: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+
+    .unipilot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #facc15;
+      background: rgba(250, 204, 21, 0.08);
+      border: 1px solid rgba(250, 204, 21, 0.25);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .unipilot-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #facc15;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .unipilot-title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .unipilot-icon-wrap {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.28);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .unipilot-title {
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .unipilot-title span {
+      color: var(--up-purple-bright);
+    }
+
+    .unipilot-subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(96, 165, 250, 0.55);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .unipilot-desc {
+      font-size: clamp(13px, 1.8vw, 15px);
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .unipilot-desc em {
+      color: var(--white);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .unipilot-tiers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .unipilot-tier {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .up-tier-reach {
+      background: rgba(220, 38, 38, 0.1);
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      color: #f87171;
+    }
+
+    .up-tier-target {
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      color: #93c5fd;
+    }
+
+    .up-tier-safety {
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      color: #4ade80;
+    }
+
+    .up-tier-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .unipilot-modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .unipilot-module {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 14px;
+      background: rgba(96, 165, 250, 0.04);
+      border: 1px solid rgba(96, 165, 250, 0.1);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .unipilot-module:hover {
+      border-color: rgba(192, 132, 252, 0.3);
+      background: rgba(96, 165, 250, 0.08);
+    }
+
+    .unipilot-module-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .unipilot-module strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .unipilot-module span {
+      font-size: 10px;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .unipilot-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .unipilot-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(96, 165, 250, 0.07);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      color: rgba(147, 197, 253, 0.85);
+    }
+
+    .unipilot-cta-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      background: rgba(250, 204, 21, 0.08);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      border-radius: 8px;
+      color: #facc15;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: var(--mono);
+    }
+
+    .unipilot-right {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .unipilot-phone-mockup {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .unipilot-phone-glow {
+      position: absolute;
+      inset: 20px 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(96, 165, 250, 0.22) 0%, transparent 70%);
+      filter: blur(20px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .unipilot-phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 200px;
+      background: #0c0a1a;
+      border: 1.5px solid rgba(96, 165, 250, 0.25);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      opacity: 0.92;
+    }
+
+    .unipilot-phone-notch {
+      width: 60px;
+      height: 10px;
+      background: #0c0a1a;
+      border-radius: 0 0 8px 8px;
+      margin: 8px auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .up-screen {
+      padding: 10px 12px 16px;
+      min-height: 390px;
+      position: relative;
+    }
+
+    .up-concept-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-family: var(--mono);
+      font-size: 7px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(250, 204, 21, 0.7);
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid rgba(250, 204, 21, 0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .up-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .up-logo {
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .up-logo span {
+      color: var(--up-purple-bright);
+    }
+
+    .up-greeting-sub {
+      font-size: 10px;
+      color: var(--dim);
+      margin-bottom: 2px;
+    }
+
+    .up-greeting-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+
+    .up-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.3px;
+      margin: 10px 0 8px;
+    }
+
+    .up-school-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      border: 1px solid transparent;
+    }
+
+    .up-school-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--white);
+      flex: 1;
+    }
+
+    .up-school-chance {
+      font-family: var(--mono);
+      font-size: 8px;
+    }
+
+    /* ══════════════════════════════════════════
+       CRESCENDO PROJECT CARD — Coming Soon
+       Brand palette: blue #4F46E5 · purple #8B5CF6 · orange #F97316
+    ══════════════════════════════════════════ */
+    :root {
+      --cr-blue: #4F46E5;
+      --cr-purple: #8B5CF6;
+      --cr-orange: #F97316;
+      --cr-gray: #6B7280;
+      --cr-dark: #0F172A;
+    }
+
+    .crescendo-project {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(79, 70, 229, 0.22);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .crescendo-project:hover {
+      border-color: rgba(139, 92, 246, 0.45);
+      transform: translateY(-4px);
+    }
+
+    .crescendo-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cr-blue), var(--cr-purple), var(--cr-orange), var(--cr-blue));
+      background-size: 300% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .crescendo-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.22;
+    }
+
+    .crescendo-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 48px);
+      padding: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+
+    .crescendo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #facc15;
+      background: rgba(250, 204, 21, 0.08);
+      border: 1px solid rgba(250, 204, 21, 0.25);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .crescendo-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #facc15;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .crescendo-title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .crescendo-icon-wrap {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      background: rgba(79, 70, 229, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .crescendo-title {
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .crescendo-title span {
+      background: linear-gradient(135deg, var(--cr-blue), var(--cr-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .crescendo-subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(139, 92, 246, 0.55);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .crescendo-desc {
+      font-size: clamp(13px, 1.8vw, 15px);
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .crescendo-tools {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .crescendo-tool {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 14px;
+      background: rgba(79, 70, 229, 0.05);
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .crescendo-tool:hover {
+      border-color: rgba(139, 92, 246, 0.35);
+      background: rgba(79, 70, 229, 0.1);
+    }
+
+    .crescendo-tool-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .crescendo-tool strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .crescendo-tool span {
+      font-size: 10px;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .crescendo-streak-row {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .crescendo-streak-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .cr-chip-orange {
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: #fb923c;
+    }
+
+    .cr-chip-purple {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c4b5fd;
+    }
+
+    .cr-chip-blue {
+      background: rgba(79, 70, 229, 0.1);
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      color: #a5b4fc;
+    }
+
+    .crescendo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .crescendo-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      color: rgba(165, 180, 252, 0.85);
+    }
+
+    .crescendo-cta-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      background: rgba(250, 204, 21, 0.08);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      border-radius: 8px;
+      color: #facc15;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: var(--mono);
+    }
+
+    .crescendo-right {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .crescendo-phone-mockup {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .crescendo-phone-glow {
+      position: absolute;
+      inset: 20px 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(139, 92, 246, 0.28) 0%, transparent 70%);
+      filter: blur(20px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .crescendo-phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 200px;
+      background: var(--cr-dark);
+      border: 1.5px solid rgba(139, 92, 246, 0.3);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      opacity: 0.94;
+    }
+
+    .crescendo-phone-notch {
+      width: 60px;
+      height: 10px;
+      background: var(--cr-dark);
+      border-radius: 0 0 8px 8px;
+      margin: 8px auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cr-screen {
+      padding: 10px 12px 16px;
+      min-height: 390px;
+      position: relative;
+    }
+
+    .cr-concept-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-family: var(--mono);
+      font-size: 7px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(250, 204, 21, 0.7);
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid rgba(250, 204, 21, 0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .cr-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cr-logo {
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .cr-logo span {
+      color: var(--cr-purple);
+    }
+
+    .cr-streak-card {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.14), rgba(139, 92, 246, 0.08));
+      border: 1px solid rgba(249, 115, 22, 0.22);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .cr-streak-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fb923c;
+    }
+
+    .cr-streak-label {
+      font-size: 9px;
+      color: var(--dim);
+      margin-top: 2px;
+    }
+
+    .cr-xp-track {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .cr-xp-fill {
+      height: 100%;
+      width: 64%;
+      background: linear-gradient(90deg, var(--cr-blue), var(--cr-purple));
+      border-radius: 4px;
+    }
+
+    .cr-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.3px;
+      margin: 10px 0 8px;
+    }
+
+    .cr-lesson-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    .cr-lesson-icon {
+      font-size: 14px;
+    }
+
+    .cr-lesson-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--white);
+      flex: 1;
+    }
+
+    .cr-lesson-status {
+      font-size: 9px;
+    }
+
+    @media (max-width: 900px) {
+      .unipilot-inner,
+      .crescendo-inner {
+        grid-template-columns: 1fr;
+      }
+      .unipilot-right,
+      .crescendo-right {
+        justify-content: flex-start;
+      }
+      .unipilot-modules,
+      .crescendo-tools {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .unipilot-modules,
+      .crescendo-tools {
+        grid-template-columns: 1fr;
+      }
+      .unipilot-right,
+      .crescendo-right {
+        display: none;
+      }
+    }
+
+    /* Anchor scroll offset for all Work-section cards & the Apex banner */
+    .tripwise-project,
+    .kreator-project,
+    .folioai-project,
+    .ev-project,
+    .crescendo-project,
+    .nutrisense-project,
+    .unipilot-project,
+    .apex-banner {
+      scroll-margin-top: var(--nav-h);
+    }
   </style>
 
   <style>
@@ -5272,16 +6743,44 @@ FOpen
 
             <div class="atl-item">
               <div class="atl-dot" style="background:#38bdf8;box-shadow:0 0 12px rgba(56,189,248,0.5)"></div>
-              <div class="atl-year" style="color:#38bdf8;">2026 · May · Now</div>
+              <div class="atl-year" style="color:#38bdf8;">2026 · May</div>
               <div class="atl-title">Building TripWise ✈️</div>
               <div class="atl-desc">A full travel platform — from "I want to go somewhere" to complete itinerary in under 2 minutes. Next.js + AI + Amadeus API.</div>
             </div>
 
             <div class="atl-item">
               <div class="atl-dot" style="background:var(--accent);box-shadow:0 0 12px rgba(200,180,255,0.5)"></div>
-              <div class="atl-year" style="color:var(--accent);">2026 · May · Now</div>
-              <div class="atl-title">Building FolioAI 🤖✨</div>
-              <div class="atl-desc">AI-powered portfolio generator — paste your resume and get a live portfolio site in seconds. Next.js · OpenAI · Vercel. <a href="#work" style="color:var(--accent);text-decoration:none;font-weight:600;">→ See project</a></div>
+              <div class="atl-year" style="color:var(--accent);">2026 · May</div>
+              <div class="atl-title">Built & shipped FolioAI 🤖✨</div>
+              <div class="atl-desc">AI-powered portfolio generator — paste your resume and get a live portfolio site in seconds. Next.js · OpenAI · Vercel. <a href="#folioai" style="color:var(--accent);text-decoration:none;font-weight:600;">→ See project</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#34d399;box-shadow:0 0 12px rgba(52,211,153,0.5)"></div>
+              <div class="atl-year" style="color:#34d399;">2026 · Jun</div>
+              <div class="atl-title">Built & shipped NutriSense 🥗</div>
+              <div class="atl-desc">AI nutrition companion — scan your food, get instant nutrition intelligence, and daily coaching that actually adapts to you. <a href="#nutrisense" style="color:#34d399;text-decoration:none;font-weight:600;">→ See project</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#f0b429;box-shadow:0 0 12px rgba(240,180,41,0.5)"></div>
+              <div class="atl-year" style="color:#f0b429;">2026 · Jun</div>
+              <div class="atl-title">Started Apex Ventures 🏢</div>
+              <div class="atl-desc">Spun up Apex Ventures as the parent org behind TripWise, FolioAI, EVMate, UniPilot & NutriSense — one studio, no niche, no trends, no fluff, no ceiling. <a href="#apex" style="color:#f0b429;text-decoration:none;font-weight:600;">→ See Apex Ventures</a></div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#60a5fa;box-shadow:0 0 12px rgba(96,165,250,0.5)"></div>
+              <div class="atl-year" style="color:#60a5fa;">2026 · Jun</div>
+              <div class="atl-title">Building UniPilot 🎓</div>
+              <div class="atl-desc">An AI admissions strategist under Apex Ventures — answering one question: given who I am today, what's the best university I can realistically reach? <a href="#unipilot" style="color:#60a5fa;text-decoration:none;font-weight:600;">→ See project</a> · Coming Soon</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#8B5CF6;box-shadow:0 0 12px rgba(139,92,246,0.5)"></div>
+              <div class="atl-year" style="color:#8B5CF6;">2026 · Jun · Now</div>
+              <div class="atl-title">Started building Crescendo 🎮</div>
+              <div class="atl-desc">A gamified music learning platform — daily lessons, sheet music, theory & ear training, with streaks and unlockable instruments. Its own separate org, outside Apex Ventures. <a href="#crescendo" style="color:#8B5CF6;text-decoration:none;font-weight:600;">→ See project</a> · Coming Soon</div>
             </div>
 
           </div>
@@ -5294,25 +6793,45 @@ FOpen
           <!-- Project links -->
           <div class="section-label reveal" style="margin-bottom:12px;">Projects</div>
           <div class="reveal">
-            <a href="#work" class="about-proj-row">
-              <div class="about-proj-dot" style="background:var(--accent)"></div>
-              <div class="about-proj-info"><strong>FolioAI</strong><span>Next.js · OpenAI · Vercel · Live Product</span></div>
+            <a href="#apex" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#f0b429"></div>
+              <div class="about-proj-info"><strong>Apex Ventures</strong><span>Venture Studio · Parent Org</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#work" class="about-proj-row">
+            <a href="#tripwise" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#38bdf8"></div>
+              <div class="about-proj-info"><strong>TripWise</strong><span>Next.js · OpenAI · In Development</span></div>
+              <div class="about-proj-arrow">→</div>
+            </a>
+            <a href="#kreatorai" class="about-proj-row">
               <div class="about-proj-dot" style="background:var(--purple-bright)"></div>
               <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI ·
                   Firebase</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#work" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#00c96b"></div>
-              <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI</span></div>
+            <a href="#crescendo" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#8B5CF6"></div>
+              <div class="about-proj-info"><strong>Crescendo</strong><span>Gamified Music Learning · Coming Soon</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
-            <a href="#work" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#38bdf8"></div>
-              <div class="about-proj-info"><strong>TripWise</strong><span>Next.js · OpenAI · In Development</span></div>
+            <a href="#nutrisense" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#10b981"></div>
+              <div class="about-proj-info"><strong>NutriSense</strong><span>AI Nutrition Companion · Live Product</span></div>
+              <div class="about-proj-arrow">→</div>
+            </a>
+            <a href="#unipilot" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#60a5fa"></div>
+              <div class="about-proj-info"><strong>UniPilot</strong><span>AI Admissions Strategist · Coming Soon</span></div>
+              <div class="about-proj-arrow">→</div>
+            </a>
+            <a href="#folioai" class="about-proj-row">
+              <div class="about-proj-dot" style="background:var(--accent)"></div>
+              <div class="about-proj-info"><strong>FolioAI</strong><span>Next.js · OpenAI · Vercel · Live Product</span></div>
+              <div class="about-proj-arrow">→</div>
+            </a>
+            <a href="#evmate" class="about-proj-row">
+              <div class="about-proj-dot" style="background:#00c96b"></div>
+              <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI</span></div>
               <div class="about-proj-arrow">→</div>
             </a>
           </div>
@@ -5433,8 +6952,63 @@ FOpen
       <p class="section-label reveal">02 — Work</p>
       <h2 class="section-title reveal">What I've <span>been building</span></h2>
 
+      <!-- ══ APEX VENTURES — Parent Org ══ -->
+      <div class="apex-banner reveal" id="apex">
+        <div class="apex-top-bar"></div>
+        <div class="apex-glow"></div>
+
+        <div class="apex-header-row">
+          <div>
+            <div class="apex-badge"><span class="apex-badge-dot"></span>Venture Studio · Parent Org</div>
+            <h3 class="apex-title">Apex <span>Ventures</span></h3>
+            <p class="apex-tagline">We build tools that actually matter. Apex Ventures is the parent org behind TripWise, NutriSense, UniPilot, FolioAI &amp; EVMate.</p>
+          </div>
+          <a href="https://apexvens.vercel.app/" target="_blank" class="apex-cta-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            Visit Apex Ventures ↗
+          </a>
+        </div>
+
+        <div class="apex-manifesto">
+          <div class="apex-manifesto-item">
+            <div class="apex-manifesto-num">01</div>
+            <div class="apex-manifesto-head">No niche</div>
+            <div class="apex-manifesto-desc">We go where the problem is — not where the market report says to go.</div>
+          </div>
+          <div class="apex-manifesto-item">
+            <div class="apex-manifesto-num">02</div>
+            <div class="apex-manifesto-head">No trends</div>
+            <div class="apex-manifesto-desc">We build what should exist, not what everyone else is already building.</div>
+          </div>
+          <div class="apex-manifesto-item">
+            <div class="apex-manifesto-num">03</div>
+            <div class="apex-manifesto-head">No fluff</div>
+            <div class="apex-manifesto-desc">Ship, measure, improve. Repeat until it's obvious. Then do it again.</div>
+          </div>
+          <div class="apex-manifesto-item">
+            <div class="apex-manifesto-num">04</div>
+            <div class="apex-manifesto-head">No ceiling</div>
+            <div class="apex-manifesto-desc">Five products today and counting — every one a building block for the next.</div>
+          </div>
+        </div>
+
+        <div class="apex-companies">
+          <span class="apex-companies-label">Portfolio</span>
+          <a href="#tripwise" class="apex-company-chip"><span class="apex-company-dot" style="background:#38bdf8"></span>TripWise</a>
+          <a href="#nutrisense" class="apex-company-chip"><span class="apex-company-dot" style="background:#10b981"></span>NutriSense</a>
+          <a href="#unipilot" class="apex-company-chip"><span class="apex-company-dot" style="background:#60a5fa"></span>UniPilot</a>
+          <a href="#folioai" class="apex-company-chip"><span class="apex-company-dot" style="background:#4f8ef7"></span>FolioAI</a>
+          <a href="#evmate" class="apex-company-chip"><span class="apex-company-dot" style="background:#00c96b"></span>EVMate</a>
+        </div>
+      </div>
+
       <!-- ══ TRIPWISE ══ -->
-      <div class="tripwise-project reveal">
+      <div class="tripwise-project reveal" id="tripwise">
         <div class="tripwise-top-bar"></div>
         <canvas class="tripwise-canvas" id="tripwiseCanvas"></canvas>
 
@@ -5568,7 +7142,7 @@ FOpen
       </div>
 
       <!-- ══ KREATORAI STUDIO ══ -->
-      <div class="kreator-project reveal">
+      <div class="kreator-project reveal" id="kreatorai">
         <div class="kreator-top-bar"></div>
         <canvas class="kreator-canvas" id="kreatorCanvas"></canvas>
 
@@ -5729,8 +7303,334 @@ FOpen
         </div>
       </div>
 
+      <!-- ══ CRESCENDO ══ -->
+      <div class="crescendo-project reveal" id="crescendo">
+        <div class="crescendo-top-bar"></div>
+        <canvas class="crescendo-canvas" id="crescendoCanvas"></canvas>
+
+        <div class="crescendo-inner">
+          <!-- Left -->
+          <div class="crescendo-left">
+            <div class="crescendo-badge">
+              <span class="crescendo-badge-dot"></span>
+              Coming Soon · Separate Org
+            </div>
+
+            <div class="crescendo-title-row">
+              <div class="crescendo-icon-wrap">🎮</div>
+              <div>
+                <h3 class="crescendo-title">Cresc<span>endo</span></h3>
+                <p class="crescendo-subtitle">Gamified Music Learning Platform</p>
+              </div>
+            </div>
+
+            <p class="crescendo-desc">Crescendo teaches people to actually play instruments, read sheet music, understand music theory, and train their ear — through daily bite-sized lessons, interactive exercises, and competitive challenges. Think Duolingo, but for becoming a musician.</p>
+            <p class="crescendo-desc">Consistency is the whole game: streaks, achievements, and a progression system that unlocks rare instruments and advanced concepts the longer you stick with it. Crescendo is its own separate org — built independently from the Apex Ventures family of tools.</p>
+
+            <div class="crescendo-tools">
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">🎵</div>
+                <div><strong>Daily Lessons</strong><span>Bite-sized practice sessions that build real skill over time</span></div>
+              </div>
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">🎼</div>
+                <div><strong>Sheet Music Reading</strong><span>From note names to full notation, step by step</span></div>
+              </div>
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">🧠</div>
+                <div><strong>Music Theory</strong><span>Scales, chords & harmony explained through play</span></div>
+              </div>
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">👂</div>
+                <div><strong>Ear Training</strong><span>Interval & chord recognition exercises that level up</span></div>
+              </div>
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">🏆</div>
+                <div><strong>Competitive Challenges</strong><span>Leaderboards & head-to-head practice modes</span></div>
+              </div>
+              <div class="crescendo-tool">
+                <div class="crescendo-tool-icon">🔓</div>
+                <div><strong>Unlockable Instruments</strong><span>Progression unlocks rare instruments & advanced concepts</span></div>
+              </div>
+            </div>
+
+            <div class="crescendo-streak-row">
+              <span class="crescendo-streak-chip cr-chip-orange">🔥 Streaks</span>
+              <span class="crescendo-streak-chip cr-chip-purple">🏅 Achievements</span>
+              <span class="crescendo-streak-chip cr-chip-blue">📈 Progression</span>
+            </div>
+
+            <div class="crescendo-tags">
+              <span class="crescendo-tag">Gamification</span>
+              <span class="crescendo-tag">Music Theory</span>
+              <span class="crescendo-tag">Ear Training</span>
+              <span class="crescendo-tag">Sheet Music</span>
+              <span class="crescendo-tag">Mobile App</span>
+            </div>
+
+            <div class="crescendo-cta-soon">🚧 Coming Soon</div>
+          </div>
+
+          <!-- Right — concept mockup -->
+          <div class="crescendo-right">
+            <div class="crescendo-phone-mockup">
+              <div class="crescendo-phone-frame">
+                <div class="crescendo-phone-notch"></div>
+                <div class="cr-screen">
+                  <div class="cr-concept-tag">Concept</div>
+                  <div class="cr-header">
+                    <div class="cr-logo">Cresc<span>endo</span></div>
+                  </div>
+                  <div class="cr-streak-card">
+                    <div class="cr-streak-num">🔥 47</div>
+                    <div class="cr-streak-label">Day Streak</div>
+                    <div class="cr-xp-track">
+                      <div class="cr-xp-fill"></div>
+                    </div>
+                  </div>
+                  <div class="cr-section-label">Today's Lessons</div>
+                  <div class="cr-lesson-row">
+                    <div class="cr-lesson-icon">🎸</div>
+                    <div class="cr-lesson-name">Major Scales — Lesson 4</div>
+                    <div class="cr-lesson-status">✅</div>
+                  </div>
+                  <div class="cr-lesson-row">
+                    <div class="cr-lesson-icon">🎼</div>
+                    <div class="cr-lesson-name">Sight Reading — Bars 1–8</div>
+                    <div class="cr-lesson-status">▶️</div>
+                  </div>
+                  <div class="cr-lesson-row">
+                    <div class="cr-lesson-icon">👂</div>
+                    <div class="cr-lesson-name">Ear Training — Intervals</div>
+                    <div class="cr-lesson-status">🔒</div>
+                  </div>
+                  <div class="cr-section-label">Unlocks at Level 12</div>
+                  <div class="cr-lesson-row">
+                    <div class="cr-lesson-icon">🎻</div>
+                    <div class="cr-lesson-name">Violin — Rare Instrument</div>
+                    <div class="cr-lesson-status">🔒</div>
+                  </div>
+                </div>
+              </div>
+              <div class="crescendo-phone-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ NUTRISENSE ══ -->
+      <div class="nutrisense-project reveal" id="nutrisense">
+        <div class="nutrisense-top-bar"></div>
+        <canvas class="nutrisense-canvas" id="nutrisenseCanvas"></canvas>
+
+        <div class="nutrisense-inner">
+          <!-- Left -->
+          <div class="nutrisense-left">
+            <div class="nutrisense-badge">
+              <span class="nutrisense-badge-dot"></span>
+              Live Product · Apex Ventures
+            </div>
+
+            <div class="nutrisense-title-row">
+              <div class="nutrisense-icon-wrap">🥗</div>
+              <div>
+                <h3 class="nutrisense-title">Nutri<span>Sense</span></h3>
+                <p class="nutrisense-subtitle">Next.js · OpenAI Vision · Supabase · Vercel</p>
+              </div>
+            </div>
+
+            <p class="nutrisense-desc">NutriSense is an AI nutrition companion that helps users understand what they eat, track their health, and receive personalized guidance through food scanning, nutrition intelligence, and daily coaching.</p>
+            <p class="nutrisense-desc">No manual logging, no guesswork. Point the camera at a plate and NutriSense breaks down calories, macros and quality — then layers personalized coaching on top so the data turns into better habits, not just numbers.</p>
+
+            <div class="nutrisense-features">
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">📸</div>
+                <div><strong>Food Scanning</strong><span>Snap a photo, get an instant nutritional breakdown</span></div>
+              </div>
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">🧬</div>
+                <div><strong>Nutrition Intelligence</strong><span>Calories, macros & quality scoring per meal</span></div>
+              </div>
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">💬</div>
+                <div><strong>Daily Coaching</strong><span>Personalized guidance that adapts to your goals</span></div>
+              </div>
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">📊</div>
+                <div><strong>Health Tracking</strong><span>Trends over time — not just a single meal snapshot</span></div>
+              </div>
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">🎯</div>
+                <div><strong>Personalized Goals</strong><span>Guidance tuned to your body, habits & targets</span></div>
+              </div>
+              <div class="nutrisense-feature">
+                <div class="nutrisense-feature-icon">⚡</div>
+                <div><strong>Zero Manual Logging</strong><span>Skip the tedious food diary entirely</span></div>
+              </div>
+            </div>
+
+            <div class="nutrisense-tags">
+              <span class="nutrisense-tag">Next.js</span>
+              <span class="nutrisense-tag">OpenAI Vision</span>
+              <span class="nutrisense-tag">Supabase</span>
+              <span class="nutrisense-tag">Tailwind CSS</span>
+              <span class="nutrisense-tag">Vercel</span>
+            </div>
+
+            <a href="https://mynutrisense.vercel.app/" target="_blank" class="nutrisense-cta-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Try NutriSense Live
+            </a>
+          </div>
+
+          <!-- Right — phone mockup -->
+          <div class="nutrisense-right">
+            <div class="nutrisense-phone-mockup">
+              <div class="nutrisense-phone-frame">
+                <div class="nutrisense-phone-notch"></div>
+                <div class="ns-screen">
+                  <div class="ns-header">
+                    <div class="ns-logo">Nutri<span>Sense</span></div>
+                    <div class="ns-live-chip">● Live</div>
+                  </div>
+                  <div class="ns-scan-card">
+                    <div class="ns-scan-icon">📸</div>
+                    <div class="ns-scan-title">Grilled Chicken Bowl</div>
+                    <div class="ns-scan-sub">Scanned just now · 612 kcal</div>
+                  </div>
+                  <div class="ns-macro-row">
+                    <div class="ns-macro-chip"><span>48g</span><small>Protein</small></div>
+                    <div class="ns-macro-chip"><span>52g</span><small>Carbs</small></div>
+                    <div class="ns-macro-chip"><span>18g</span><small>Fat</small></div>
+                  </div>
+                  <div class="ns-section-label">Today's Meals</div>
+                  <div class="ns-meal-row">
+                    <div class="ns-meal-icon">🥣</div>
+                    <div class="ns-meal-name">Oats & Berries</div>
+                    <div class="ns-meal-cal">340 kcal</div>
+                  </div>
+                  <div class="ns-meal-row">
+                    <div class="ns-meal-icon">🥗</div>
+                    <div class="ns-meal-name">Grilled Chicken Bowl</div>
+                    <div class="ns-meal-cal">612 kcal</div>
+                  </div>
+                  <div class="ns-coach-tip">💡 <span>You're 22g short on protein today — add a snack to hit your goal.</span></div>
+                </div>
+              </div>
+              <div class="nutrisense-phone-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ UNIPILOT ══ -->
+      <div class="unipilot-project reveal" id="unipilot">
+        <div class="unipilot-top-bar"></div>
+        <canvas class="unipilot-canvas" id="unipilotCanvas"></canvas>
+
+        <div class="unipilot-inner">
+          <!-- Left -->
+          <div class="unipilot-left">
+            <div class="unipilot-badge">
+              <span class="unipilot-badge-dot"></span>
+              Coming Soon · Apex Ventures
+            </div>
+
+            <div class="unipilot-title-row">
+              <div class="unipilot-icon-wrap">🎓</div>
+              <div>
+                <h3 class="unipilot-title">Uni<span>Pilot</span></h3>
+                <p class="unipilot-subtitle">Your AI Admissions Strategist</p>
+              </div>
+            </div>
+
+            <p class="unipilot-desc">The goal isn't to find colleges — search engines already do that. The goal is to answer one real question: <em>"Given who I am today and how much time I have left, what's the best university I can realistically reach?"</em></p>
+            <p class="unipilot-desc">UniPilot reads your academic profile, extracurriculars and timeline, then builds a realistic, time-aware roadmap instead of a generic list of "dream schools."</p>
+
+            <div class="unipilot-tiers">
+              <span class="unipilot-tier up-tier-reach"><span class="up-tier-dot" style="background:#dc2626"></span>Reach</span>
+              <span class="unipilot-tier up-tier-target"><span class="up-tier-dot" style="background:#60a5fa"></span>Target</span>
+              <span class="unipilot-tier up-tier-safety"><span class="up-tier-dot" style="background:#16a34a"></span>Safety</span>
+            </div>
+
+            <div class="unipilot-modules">
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">📊</div>
+                <div><strong>Realistic Scoring</strong><span>Honest odds based on who you are today, not wishful thinking</span></div>
+              </div>
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">⏳</div>
+                <div><strong>Time-Aware Roadmap</strong><span>A plan that fits how much runway you actually have left</span></div>
+              </div>
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">🎯</div>
+                <div><strong>Reach / Target / Safety</strong><span>Every school sorted into a tier you can act on</span></div>
+              </div>
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">📝</div>
+                <div><strong>Application Strategy</strong><span>What to prioritize first, and what to skip</span></div>
+              </div>
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">📈</div>
+                <div><strong>Progress Tracking</strong><span>Watch your realistic ceiling rise as you improve</span></div>
+              </div>
+              <div class="unipilot-module">
+                <div class="unipilot-module-icon">🤖</div>
+                <div><strong>AI Strategist</strong><span>Ask it anything — it knows your full profile</span></div>
+              </div>
+            </div>
+
+            <div class="unipilot-tags">
+              <span class="unipilot-tag">AI Admissions</span>
+              <span class="unipilot-tag">Strategy Engine</span>
+              <span class="unipilot-tag">Apex Ventures</span>
+            </div>
+
+            <div class="unipilot-cta-soon">🚧 Coming Soon</div>
+          </div>
+
+          <!-- Right — concept mockup -->
+          <div class="unipilot-right">
+            <div class="unipilot-phone-mockup">
+              <div class="unipilot-phone-frame">
+                <div class="unipilot-phone-notch"></div>
+                <div class="up-screen">
+                  <div class="up-concept-tag">Concept</div>
+                  <div class="up-header">
+                    <div class="up-logo">Uni<span>Pilot</span></div>
+                  </div>
+                  <div class="up-greeting-sub">Your realistic ceiling, today</div>
+                  <div class="up-greeting-name">87% Profile Strength</div>
+                  <div class="up-section-label">Reach</div>
+                  <div class="up-school-row" style="background:rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.18);">
+                    <div class="up-school-name">Stanford University</div>
+                    <div class="up-school-chance" style="color:#f87171;">12%</div>
+                  </div>
+                  <div class="up-section-label">Target</div>
+                  <div class="up-school-row" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.18);">
+                    <div class="up-school-name">UC San Diego</div>
+                    <div class="up-school-chance" style="color:#93c5fd;">58%</div>
+                  </div>
+                  <div class="up-section-label">Safety</div>
+                  <div class="up-school-row" style="background:rgba(22,163,74,0.08);border-color:rgba(22,163,74,0.18);">
+                    <div class="up-school-name">Arizona State University</div>
+                    <div class="up-school-chance" style="color:#4ade80;">91%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="unipilot-phone-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ══ FOLIOAI ══ -->
-      <div class="folioai-project reveal">
+      <div class="folioai-project reveal" id="folioai">
         <div class="folioai-top-bar"></div>
         <canvas class="folioai-canvas" id="folioaiCanvas"></canvas>
 
@@ -5854,7 +7754,7 @@ FOpen
       </div>
 
       <!-- ══ EVMATE ══ -->
-      <div class="ev-project reveal" style="margin-bottom:24px;">
+      <div class="ev-project reveal" id="evmate" style="margin-bottom:24px;">
           <div class="ev-top-bar"></div>
           <canvas class="ev-canvas" id="evCanvas"></canvas>
 
@@ -8066,10 +9966,39 @@ FOpen
         loop();
       }
 
+      function initSimpleCanvas(canvasId, dotColor, lineColor, count) {
+        var canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var W, H, particles = [];
+        function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+        resize(); window.addEventListener('resize', resize);
+        function Particle() { this.x = Math.random() * W; this.y = Math.random() * H; this.vx = (Math.random() - 0.5) * 0.25; this.vy = (Math.random() - 0.5) * 0.25; this.r = Math.random() * 1.5 + 0.5; }
+        for (var i = 0; i < count; i++) particles.push(new Particle());
+        function loop() {
+          ctx.clearRect(0, 0, W, H);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i]; p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = dotColor; ctx.fill();
+            for (var j = i + 1; j < particles.length; j++) {
+              var q = particles[j]; var d = Math.hypot(p.x - q.x, p.y - q.y);
+              if (d < 120) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = lineColor.replace('ALPHA', (0.07 * (1 - d / 120)).toFixed(3)); ctx.lineWidth = 0.6; ctx.stroke(); }
+            }
+          }
+          requestAnimationFrame(loop);
+        }
+        loop();
+      }
+      function initNutriSenseCanvas() { initSimpleCanvas('nutrisenseCanvas', 'rgba(16,185,129,0.8)', 'rgba(52,211,153,ALPHA)', 36); }
+      function initUnipilotCanvas() { initSimpleCanvas('unipilotCanvas', 'rgba(96,165,250,0.75)', 'rgba(139,92,246,ALPHA)', 34); }
+      function initCrescendoCanvas() { initSimpleCanvas('crescendoCanvas', 'rgba(139,92,246,0.78)', 'rgba(79,70,229,ALPHA)', 36); }
+
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () { initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initWaveforms(); });
+        document.addEventListener('DOMContentLoaded', function () { initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initNutriSenseCanvas(); initUnipilotCanvas(); initCrescendoCanvas(); initWaveforms(); });
       } else {
-        initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initWaveforms();
+        initEVCanvas(); initKreatorCanvas(); initTripwiseCanvas(); initFolioAICanvas(); initNutriSenseCanvas(); initUnipilotCanvas(); initCrescendoCanvas(); initWaveforms();
       }
 
       // ── Music tab switcher ──

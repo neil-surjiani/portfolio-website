@@ -1424,7 +1424,7 @@ FOpen
     /* ── CONTACT ── */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: clamp(24px, 4vw, 40px);
       align-items: start;
     }
@@ -2086,25 +2086,15 @@ FOpen
     .kreator-plan {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 10px 12px;
       border-radius: 8px;
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 1px;
       text-transform: uppercase;
-    }
-
-    .plan-free {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--dim);
-    }
-
-    .plan-starter {
-      background: rgba(124, 92, 191, 0.1);
-      border: 1px solid rgba(124, 92, 191, 0.25);
-      color: var(--purple-bright);
+      flex: 1 1 0;
     }
 
     .plan-max {
@@ -2123,14 +2113,6 @@ FOpen
       width: 5px;
       height: 5px;
       border-radius: 50%;
-    }
-
-    .plan-free .kreator-plan-dot {
-      background: var(--dim);
-    }
-
-    .plan-starter .kreator-plan-dot {
-      background: var(--purple-bright);
     }
 
     .plan-max .kreator-plan-dot {
@@ -4317,6 +4299,82 @@ FOpen
       height: 7px;
       border-radius: 50%;
       flex-shrink: 0;
+    }
+
+    /* Apex apps dropdown/accordion */
+    .apex-apps-accordion {
+      margin-bottom: 32px;
+    }
+
+    .apex-apps-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 18px 24px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .apex-apps-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .apex-apps-summary:hover {
+      border-color: rgba(240, 180, 41, 0.35);
+      background: rgba(240, 180, 41, 0.04);
+    }
+
+    .apex-apps-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .apex-apps-summary-label {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+    }
+
+    .apex-apps-summary-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .apex-apps-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(240, 180, 41, 0.08);
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      color: var(--apex-gold);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .apex-apps-accordion[open] .apex-apps-chevron {
+      transform: rotate(180deg);
+    }
+
+    .apex-apps-body {
+      padding-top: 24px;
+    }
+
+    @media (max-width: 500px) {
+      .apex-apps-summary {
+        padding: 16px 18px;
+      }
     }
 
     @media (max-width: 900px) {
@@ -6789,52 +6847,6 @@ FOpen
             <p>"The best software is invisible. It just gets things done."</p>
             <span>— Neil Surjiani</span>
           </div>
-
-          <!-- Project links -->
-          <div class="section-label reveal" style="margin-bottom:12px;">Projects</div>
-          <div class="reveal">
-            <a href="#apex" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#f0b429"></div>
-              <div class="about-proj-info"><strong>Apex Ventures</strong><span>Venture Studio · Parent Org</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#tripwise" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#38bdf8"></div>
-              <div class="about-proj-info"><strong>TripWise</strong><span>Next.js · OpenAI · In Development</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#kreatorai" class="about-proj-row">
-              <div class="about-proj-dot" style="background:var(--purple-bright)"></div>
-              <div class="about-proj-info"><strong>KreatorAI Studio</strong><span>AI SaaS · Flutter · FastAPI ·
-                  Firebase</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#crescendo" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#8B5CF6"></div>
-              <div class="about-proj-info"><strong>Crescendo</strong><span>Gamified Music Learning · Coming Soon</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#nutrisense" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#10b981"></div>
-              <div class="about-proj-info"><strong>NutriSense</strong><span>AI Nutrition Companion · Live Product</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#unipilot" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#60a5fa"></div>
-              <div class="about-proj-info"><strong>UniPilot</strong><span>AI Admissions Strategist · Coming Soon</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#folioai" class="about-proj-row">
-              <div class="about-proj-dot" style="background:var(--accent)"></div>
-              <div class="about-proj-info"><strong>FolioAI</strong><span>Next.js · OpenAI · Vercel · Live Product</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-            <a href="#evmate" class="about-proj-row">
-              <div class="about-proj-dot" style="background:#00c96b"></div>
-              <div class="about-proj-info"><strong>EVMate</strong><span>Flutter · OpenStreetMap · Gemini AI</span></div>
-              <div class="about-proj-arrow">→</div>
-            </a>
-          </div>
         </div>
 
         <!-- Right col -->
@@ -6952,6 +6964,160 @@ FOpen
       <p class="section-label reveal">02 — Work</p>
       <h2 class="section-title reveal">What I've <span>been building</span></h2>
 
+      <!-- ══ KREATORAI STUDIO ══ -->
+      <div class="kreator-project reveal" id="kreatorai">
+        <div class="kreator-top-bar"></div>
+        <canvas class="kreator-canvas" id="kreatorCanvas"></canvas>
+
+        <div class="kreator-inner">
+          <!-- Left -->
+          <div class="kreator-left">
+            <div class="kreator-badge">
+              <span class="kreator-badge-dot"></span>
+              Live Product
+            </div>
+
+            <div class="kreator-title-row">
+              <div class="kreator-icon-wrap">🎬</div>
+              <div>
+                <h3 class="kreator-title">Kreator<span>AI</span> Studio</h3>
+                <p class="kreator-subtitle">Flutter · FastAPI · Firebase · Supabase · OpenAI · Gemini</p>
+              </div>
+            </div>
+
+            <p class="kreator-desc">A full-scale AI content creation platform, built solo from idea to live product with a real domain, payments, and a 15+ tool suite.</p>
+
+            <!-- Tool grid -->
+            <div class="kreator-tools">
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">✍️</div>
+                <div><strong>Script Writer</strong><span>AI-generated video scripts, hooks, and narrative flow</span>
+                </div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🎨</div>
+                <div><strong>Image Generation</strong><span>Text-to-image, image-to-image, remove background, aspect
+                    ratio control</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🎵</div>
+                <div><strong>Audio Tools</strong><span>Text-to-speech voiceover & AI background music suggester</span>
+                </div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">💡</div>
+                <div><strong>Content Ideas</strong><span>Topic & trend generator tailored to your niche</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🎞️</div>
+                <div><strong>Caption Generator</strong><span>Auto-generate styled captions for your clips</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">⚡</div>
+                <div><strong>Miscellaneous Suite</strong><span>Repurpose, Title Gen, Edit Guide, Hook Gen, Descriptions,
+                    Hashtags</span></div>
+              </div>
+            </div>
+
+            <!-- Subscription tiers -->
+            <div class="kreator-plans">
+              <div class="kreator-plan plan-max"><span class="kreator-plan-dot"></span>Max — 800 credits</div>
+              <div class="kreator-plan plan-studio"><span class="kreator-plan-dot"></span>Studio — 2,250 credits</div>
+            </div>
+
+            <div class="kreator-tags">
+              <span class="kreator-tag">Flutter</span>
+              <span class="kreator-tag">FastAPI</span>
+              <span class="kreator-tag">Python</span>
+              <span class="kreator-tag">Firebase Auth</span>
+              <span class="kreator-tag">Supabase</span>
+              <span class="kreator-tag">OpenAI API</span>
+              <span class="kreator-tag">Gemini AI</span>
+              <span class="kreator-tag">Session Management</span>
+              <span class="kreator-tag">Stripe Payments</span>
+            </div>
+
+            <div class="kreator-ctas">
+              <a href="https://kreatoraistudio.com" target="_blank" class="kreator-cta-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                Visit KreatorAI Studio
+              </a>
+              <a href="https://www.youtube.com/@KreatorAIStudio" target="_blank" class="kreator-cta-ghost">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                YouTube Channel
+              </a>
+            </div>
+          </div>
+
+          <!-- Right — phone mockup -->
+          <div class="kreator-right">
+            <div class="kreator-phone-mockup">
+              <div class="kreator-phone-frame">
+                <div class="kreator-phone-notch"></div>
+                <div class="kreator-phone-screen">
+                  <div class="kp-header">
+                    <div class="kp-logo">Kreator<span>AI</span></div>
+                    <div class="kp-plan-chip">MAX</div>
+                  </div>
+                  <div class="kp-greeting">
+                    <div class="kp-greeting-sub">Hey, Neil 👋</div>
+                    <div class="kp-greeting-name">What are we<br>creating today?</div>
+                  </div>
+                  <div class="kp-new-proj">
+                    <div class="kp-new-proj-icon">📁</div>
+                    <div class="kp-new-proj-text">
+                      <div class="kp-new-proj-title">New Project</div>
+                      <div class="kp-new-proj-sub">250 credits · All tools</div>
+                    </div>
+                    <div class="kp-create-btn">Create</div>
+                  </div>
+                  <div class="kp-section-label">AI Tools</div>
+                  <div class="kp-tools-grid">
+                    <div class="kp-tool-chip">
+                      <div class="kp-tool-chip-icon">🎬</div>
+                      <div class="kp-tool-chip-name">Video Gen</div>
+                      <div class="kp-tool-chip-sub">Text · Image</div>
+                    </div>
+                    <div class="kp-tool-chip">
+                      <div class="kp-tool-chip-icon">🎨</div>
+                      <div class="kp-tool-chip-name">Image Gen</div>
+                      <div class="kp-tool-chip-sub">Create · Style</div>
+                    </div>
+                    <div class="kp-tool-chip">
+                      <div class="kp-tool-chip-icon">🎵</div>
+                      <div class="kp-tool-chip-name">Audio Tools</div>
+                      <div class="kp-tool-chip-sub">Voice · Music</div>
+                    </div>
+                    <div class="kp-tool-chip">
+                      <div class="kp-tool-chip-icon">✍️</div>
+                      <div class="kp-tool-chip-name">Script Writer</div>
+                      <div class="kp-tool-chip-sub">Draft · Refine</div>
+                    </div>
+                  </div>
+                  <div class="kp-misc-chip">
+                    <div class="kp-misc-icon">⚡</div>
+                    <div>
+                      <div class="kp-misc-name">Miscellaneous Functions</div>
+                      <div class="kp-misc-sub">Repurpose · Hooks · Hashtags</div>
+                    </div>
+                    <div class="kp-misc-arrow">›</div>
+                  </div>
+                </div>
+              </div>
+              <div class="kreator-phone-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ══ APEX VENTURES — Parent Org ══ -->
       <div class="apex-banner reveal" id="apex">
         <div class="apex-top-bar"></div>
@@ -6961,7 +7127,7 @@ FOpen
           <div>
             <div class="apex-badge"><span class="apex-badge-dot"></span>Venture Studio · Parent Org</div>
             <h3 class="apex-title">Apex <span>Ventures</span></h3>
-            <p class="apex-tagline">We build tools that actually matter. Apex Ventures is the parent org behind TripWise, NutriSense, UniPilot, FolioAI &amp; EVMate.</p>
+            <p class="apex-tagline">We build tools that actually matter. Apex Ventures is the parent org behind TripWise, NutriSense, UniPilot, FolioAI, EVMate &amp; InboxOS.</p>
           </div>
           <a href="https://apexvens.vercel.app/" target="_blank" class="apex-cta-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -7004,8 +7170,22 @@ FOpen
           <a href="#unipilot" class="apex-company-chip"><span class="apex-company-dot" style="background:#60a5fa"></span>UniPilot</a>
           <a href="#folioai" class="apex-company-chip"><span class="apex-company-dot" style="background:#4f8ef7"></span>FolioAI</a>
           <a href="#evmate" class="apex-company-chip"><span class="apex-company-dot" style="background:#00c96b"></span>EVMate</a>
+          <a href="#inboxos" class="apex-company-chip"><span class="apex-company-dot" style="background:#f5b100"></span>InboxOS</a>
         </div>
       </div>
+
+      <details class="apex-apps-accordion reveal">
+        <summary class="apex-apps-summary">
+          <div class="apex-apps-summary-left">
+            <span style="font-size:20px;">🗂️</span>
+            <div>
+              <div class="apex-apps-summary-label">Explore the Apex Ventures Apps</div>
+              <div class="apex-apps-summary-sub">TripWise · Crescendo · NutriSense · UniPilot · FolioAI · EVMate · InboxOS</div>
+            </div>
+          </div>
+          <span class="apex-apps-chevron">▾</span>
+        </summary>
+        <div class="apex-apps-body">
 
       <!-- ══ TRIPWISE ══ -->
       <div class="tripwise-project reveal" id="tripwise">
@@ -7141,167 +7321,6 @@ FOpen
 
       </div>
 
-      <!-- ══ KREATORAI STUDIO ══ -->
-      <div class="kreator-project reveal" id="kreatorai">
-        <div class="kreator-top-bar"></div>
-        <canvas class="kreator-canvas" id="kreatorCanvas"></canvas>
-
-        <div class="kreator-inner">
-          <!-- Left -->
-          <div class="kreator-left">
-            <div class="kreator-badge">
-              <span class="kreator-badge-dot"></span>
-              Live Product
-            </div>
-
-            <div class="kreator-title-row">
-              <div class="kreator-icon-wrap">🎬</div>
-              <div>
-                <h3 class="kreator-title">Kreator<span>AI</span> Studio</h3>
-                <p class="kreator-subtitle">Flutter · FastAPI · Firebase · Supabase · OpenAI · Gemini</p>
-              </div>
-            </div>
-
-            <p class="kreator-desc">KreatorAI Studio is a full-scale AI content creation platform I built from the
-              ground up — from idea to live product with a real domain, payment infrastructure, and a 15+ tool suite. It
-              exists so creators can scale their output without scaling their stress.</p>
-            <p class="kreator-desc">Built with Flutter for cross-platform reach, FastAPI on the backend, Firebase for
-              auth and real-time data, and Supabase for credential management and subscriptions. Every tool — from
-              script writing to AI image generation — is connected to a tiered credit system with four subscription
-              plans.</p>
-
-            <!-- Tool grid -->
-            <div class="kreator-tools">
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">✍️</div>
-                <div><strong>Script Writer</strong><span>AI-generated video scripts, hooks, and narrative flow</span>
-                </div>
-              </div>
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">🎨</div>
-                <div><strong>Image Generation</strong><span>Text-to-image, image-to-image, remove background, aspect
-                    ratio control</span></div>
-              </div>
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">🎵</div>
-                <div><strong>Audio Tools</strong><span>Text-to-speech voiceover & AI background music suggester</span>
-                </div>
-              </div>
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">💡</div>
-                <div><strong>Content Ideas</strong><span>Topic & trend generator tailored to your niche</span></div>
-              </div>
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">🎞️</div>
-                <div><strong>Caption Generator</strong><span>Auto-generate styled captions for your clips</span></div>
-              </div>
-              <div class="kreator-tool">
-                <div class="kreator-tool-icon">⚡</div>
-                <div><strong>Miscellaneous Suite</strong><span>Repurpose, Title Gen, Edit Guide, Hook Gen, Descriptions,
-                    Hashtags</span></div>
-              </div>
-            </div>
-
-            <!-- Subscription tiers -->
-            <div class="kreator-plans">
-              <div class="kreator-plan plan-free"><span class="kreator-plan-dot"></span>Free — 3/day</div>
-              <div class="kreator-plan plan-starter"><span class="kreator-plan-dot"></span>Starter — 250 credits</div>
-              <div class="kreator-plan plan-max"><span class="kreator-plan-dot"></span>Max — 800 credits</div>
-              <div class="kreator-plan plan-studio"><span class="kreator-plan-dot"></span>Studio — 2,250 credits</div>
-            </div>
-
-            <div class="kreator-tags">
-              <span class="kreator-tag">Flutter</span>
-              <span class="kreator-tag">FastAPI</span>
-              <span class="kreator-tag">Python</span>
-              <span class="kreator-tag">Firebase Auth</span>
-              <span class="kreator-tag">Supabase</span>
-              <span class="kreator-tag">OpenAI API</span>
-              <span class="kreator-tag">Gemini AI</span>
-              <span class="kreator-tag">Session Management</span>
-              <span class="kreator-tag">Stripe Payments</span>
-            </div>
-
-            <div class="kreator-ctas">
-              <a href="https://kreatoraistudio.com" target="_blank" class="kreator-cta-primary">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Visit KreatorAI Studio
-              </a>
-              <a href="https://www.youtube.com/@KreatorAIStudio" target="_blank" class="kreator-cta-ghost">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                </svg>
-                YouTube Channel
-              </a>
-            </div>
-          </div>
-
-          <!-- Right — phone mockup -->
-          <div class="kreator-right">
-            <div class="kreator-phone-mockup">
-              <div class="kreator-phone-frame">
-                <div class="kreator-phone-notch"></div>
-                <div class="kreator-phone-screen">
-                  <div class="kp-header">
-                    <div class="kp-logo">Kreator<span>AI</span></div>
-                    <div class="kp-plan-chip">STARTER</div>
-                  </div>
-                  <div class="kp-greeting">
-                    <div class="kp-greeting-sub">Hey, Neil 👋</div>
-                    <div class="kp-greeting-name">What are we<br>creating today?</div>
-                  </div>
-                  <div class="kp-new-proj">
-                    <div class="kp-new-proj-icon">📁</div>
-                    <div class="kp-new-proj-text">
-                      <div class="kp-new-proj-title">New Project</div>
-                      <div class="kp-new-proj-sub">250 credits · All tools</div>
-                    </div>
-                    <div class="kp-create-btn">Create</div>
-                  </div>
-                  <div class="kp-section-label">AI Tools</div>
-                  <div class="kp-tools-grid">
-                    <div class="kp-tool-chip">
-                      <div class="kp-tool-chip-icon">🎬</div>
-                      <div class="kp-tool-chip-name">Video Gen</div>
-                      <div class="kp-tool-chip-sub">Text · Image</div>
-                    </div>
-                    <div class="kp-tool-chip">
-                      <div class="kp-tool-chip-icon">🎨</div>
-                      <div class="kp-tool-chip-name">Image Gen</div>
-                      <div class="kp-tool-chip-sub">Create · Style</div>
-                    </div>
-                    <div class="kp-tool-chip">
-                      <div class="kp-tool-chip-icon">🎵</div>
-                      <div class="kp-tool-chip-name">Audio Tools</div>
-                      <div class="kp-tool-chip-sub">Voice · Music</div>
-                    </div>
-                    <div class="kp-tool-chip">
-                      <div class="kp-tool-chip-icon">✍️</div>
-                      <div class="kp-tool-chip-name">Script Writer</div>
-                      <div class="kp-tool-chip-sub">Draft · Refine</div>
-                    </div>
-                  </div>
-                  <div class="kp-misc-chip">
-                    <div class="kp-misc-icon">⚡</div>
-                    <div>
-                      <div class="kp-misc-name">Miscellaneous Functions</div>
-                      <div class="kp-misc-sub">Repurpose · Hooks · Hashtags</div>
-                    </div>
-                    <div class="kp-misc-arrow">›</div>
-                  </div>
-                </div>
-              </div>
-              <div class="kreator-phone-glow"></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- ══ CRESCENDO ══ -->
       <div class="crescendo-project reveal" id="crescendo">
@@ -7896,6 +7915,106 @@ FOpen
             </div>
           </div>
         </div>
+
+      <!-- ══ INBOXOS ══ -->
+      <div class="kreator-project reveal" id="inboxos" style="margin-bottom:24px;">
+        <div class="kreator-top-bar"></div>
+
+        <div class="kreator-inner">
+          <div class="kreator-left" style="max-width:none;">
+            <div class="kreator-badge">
+              <span class="kreator-badge-dot"></span>
+              Live Product
+            </div>
+
+            <div class="kreator-title-row">
+              <div class="kreator-icon-wrap">📥</div>
+              <div>
+                <h3 class="kreator-title">Inbox<span>OS</span></h3>
+                <p class="kreator-subtitle">Next.js · Vercel · Gmail API · AI</p>
+              </div>
+            </div>
+
+            <p class="kreator-desc">InboxOS connects to any inbox and uses AI to read, categorise, and prioritise every message automatically — surfacing deadlines, opportunities, and follow-ups in a clean priority feed instead of a chronological flood.</p>
+
+            <div class="kreator-tools">
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">📬</div>
+                <div><strong>Multi-inbox Support</strong><span>Connect and monitor as many inboxes as you run</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">⏰</div>
+                <div><strong>Deadline Detection</strong><span>Surfaces deadlines buried inside messages</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">💡</div>
+                <div><strong>Opportunity Surfacing</strong><span>Flags partnership & meeting requests automatically</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🏷️</div>
+                <div><strong>Smart Categorisation</strong><span>Sorts every message the moment it lands</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">📊</div>
+                <div><strong>Priority Feed View</strong><span>Replaces the inbox flood with what matters now</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🤖</div>
+                <div><strong>Pattern Learning AI</strong><span>Gets smarter about your priorities over time</span></div>
+              </div>
+            </div>
+
+            <div class="kreator-tags">
+              <span class="kreator-tag">Next.js</span>
+              <span class="kreator-tag">Vercel</span>
+              <span class="kreator-tag">Gmail API</span>
+              <span class="kreator-tag">OpenAI</span>
+              <span class="kreator-tag">Google OAuth</span>
+            </div>
+
+            <div class="kreator-ctas">
+              <a href="https://inboxosai.vercel.app" target="_blank" class="kreator-cta-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                Visit InboxOS
+              </a>
+            </div>
+          </div>
+
+          <!-- Right — browser mockup -->
+          <div class="folioai-right">
+            <div class="folioai-browser-mockup">
+              <div class="folioai-browser-frame">
+                <div class="folioai-browser-bar">
+                  <div class="folioai-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="folioai-browser-url">inboxosai.vercel.app</div>
+                </div>
+                <div class="folioai-browser-screen">
+                  <div class="fb-header">
+                    <div class="fb-logo" style="color:#f5b100;">Inbox<span style="color:#f5b100;">OS</span></div>
+                    <div class="fb-live-chip" style="color:#f5b100;border-color:rgba(245,177,0,0.3);background:rgba(245,177,0,0.08);">● Live</div>
+                  </div>
+                  <div class="fb-hero">
+                    <div class="fb-hero-tag" style="color:#f5b100;border-color:rgba(245,177,0,0.3);background:rgba(245,177,0,0.08);">Multi-Inbox Command Center</div>
+                    <div class="fb-hero-headline">Stop checking email.<br>Start finding opportunities.</div>
+                    <div class="fb-hero-sub">Scans every inbox you run, finds the<br>deadlines, surfaces what matters.</div>
+                    <div class="fb-hero-btn" style="background:#f5b100;color:#1a1306;">Connect Gmail →</div>
+                  </div>
+                </div>
+              </div>
+              <div class="folioai-browser-glow" style="background:radial-gradient(circle, rgba(245,177,0,0.25), transparent 70%);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </details>
 
         <div class="project-card github-card reveal">
           <div class="github-icon">
@@ -9745,14 +9864,6 @@ FOpen
               <div class="contact-card-info"><strong>Instagram</strong><span>@neilsurjiani28</span></div>
             </a>
           </div>
-        </div>
-        <div class="contact-right reveal" style="animation-delay:0.15s;">
-          <h3>Send a message</h3>
-          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" /></div>
-          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
-          <div class="form-group"><label>Message</label><textarea rows="5"
-              placeholder="What's on your mind?"></textarea></div>
-          <button class="form-submit">Send Message →</button>
         </div>
       </div>
     </div>

@@ -6836,9 +6836,23 @@ FOpen
 
             <div class="atl-item">
               <div class="atl-dot" style="background:#8B5CF6;box-shadow:0 0 12px rgba(139,92,246,0.5)"></div>
-              <div class="atl-year" style="color:#8B5CF6;">2026 · Jun · Now</div>
+              <div class="atl-year" style="color:#8B5CF6;">2026 · Jun</div>
               <div class="atl-title">Started building Crescendo 🎮</div>
               <div class="atl-desc">A gamified music learning platform — daily lessons, sheet music, theory & ear training, with streaks and unlockable instruments. Its own separate org, outside Apex Ventures. <a href="#crescendo" style="color:#8B5CF6;text-decoration:none;font-weight:600;">→ See project</a> · Coming Soon</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#0a66c2;box-shadow:0 0 12px rgba(10,102,194,0.5)"></div>
+              <div class="atl-year" style="color:#0a66c2;">2026 · Jun</div>
+              <div class="atl-title">Started posting & creating on LinkedIn 💼</div>
+              <div class="atl-desc">Started sharing my projects, builds and progress publicly on LinkedIn — documenting the journey as it happens.</div>
+            </div>
+
+            <div class="atl-item">
+              <div class="atl-dot" style="background:#22d3ee;box-shadow:0 0 12px rgba(34,211,238,0.5)"></div>
+              <div class="atl-year" style="color:#22d3ee;">2026 · Jul · Now</div>
+              <div class="atl-title">Built AirWheel 🎮</div>
+              <div class="atl-desc">A hand-tracked virtual steering wheel for car games — Python, OpenCV, MediaPipe & vgamepad turn hand gestures into real steering, throttle and brake input. <a href="#airwheel" style="color:#22d3ee;text-decoration:none;font-weight:600;">→ See project</a></div>
             </div>
 
           </div>
@@ -7186,6 +7200,102 @@ FOpen
           <span class="apex-apps-chevron">▾</span>
         </summary>
         <div class="apex-apps-body">
+
+      <!-- ══ AIRWHEEL ══ -->
+      <style>
+        #airwheel .kreator-badge { color: #22d3ee; background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); }
+        #airwheel .kreator-badge-dot { background: #22d3ee; }
+        #airwheel .kreator-icon-wrap { background: rgba(34,211,238,0.12); border-color: rgba(34,211,238,0.3); }
+        #airwheel .kreator-title span { color: #67e8f9; }
+        #airwheel .kreator-subtitle { color: rgba(103,232,249,0.5); }
+        #airwheel .kreator-top-bar { background: linear-gradient(90deg, #0891b2, #67e8f9, #22d3ee, #67e8f9); background-size: 300% 100%; }
+        #airwheel .kreator-tool { background: rgba(34,211,238,0.05); border-color: rgba(34,211,238,0.12); }
+        #airwheel .kreator-tool:hover { border-color: rgba(103,232,249,0.3); background: rgba(34,211,238,0.1); }
+        #airwheel .kreator-tag { background: rgba(34,211,238,0.08); border-color: rgba(34,211,238,0.2); color: rgba(103,232,249,0.85); }
+        #airwheel .kreator-tag:hover { background: rgba(34,211,238,0.15); border-color: rgba(103,232,249,0.4); color: #67e8f9; }
+        #airwheel .kreator-cta-primary { background: #0891b2; border-color: #0891b2; box-shadow: 0 0 32px rgba(34,211,238,0.35); }
+        #airwheel .kreator-cta-primary:hover { background: #22d3ee; border-color: #22d3ee; color: #05050a; box-shadow: 0 0 52px rgba(103,232,249,0.45); }
+        #airwheel:hover { border-color: rgba(34,211,238,0.45); }
+      </style>
+      <div class="kreator-project reveal" id="airwheel" style="margin-bottom:24px;">
+        <div class="kreator-top-bar"></div>
+
+        <div class="kreator-inner" style="grid-template-columns:1fr;">
+          <div class="kreator-left" style="max-width:none;">
+            <div class="kreator-badge">
+              <span class="kreator-badge-dot"></span>
+              Open Source
+            </div>
+
+            <div class="kreator-title-row">
+              <div class="kreator-icon-wrap">🎮</div>
+              <div>
+                <h3 class="kreator-title">Air<span>Wheel</span></h3>
+                <p class="kreator-subtitle">Python · OpenCV · MediaPipe · ViGEmBus / vgamepad</p>
+              </div>
+            </div>
+
+            <p class="kreator-desc">A hand-tracked virtual steering wheel for car games. AirWheel watches your hands through a webcam and turns their position and tilt into real steering, throttle, and brake input — no physical wheel required, just your hands in the air.</p>
+            <p class="kreator-desc">Built on an open-source stack: OpenCV handles the camera feed, MediaPipe tracks hand landmarks in real time, and ViGEmBus/vgamepad emulates a virtual Xbox controller so any racing game on Windows picks it up like a standard gamepad.</p>
+
+            <div class="kreator-tools">
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">✋</div>
+                <div><strong>Real-Time Hand Tracking</strong><span>MediaPipe landmarks read from a live webcam feed</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🛞</div>
+                <div><strong>Virtual Steering Wheel</strong><span>Hand tilt &amp; position mapped to steering angle</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🎮</div>
+                <div><strong>Virtual Gamepad Output</strong><span>ViGEmBus/vgamepad emulates an Xbox controller</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🕶️</div>
+                <div><strong>Computer Vision Pipeline</strong><span>OpenCV powers frame capture &amp; processing</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🖐️</div>
+                <div><strong>Gesture-Based Controls</strong><span>Drive using natural hand gestures, no hardware</span></div>
+              </div>
+              <div class="kreator-tool">
+                <div class="kreator-tool-icon">🆓</div>
+                <div><strong>Free &amp; Open Source</strong><span>Full source and packaged release on GitHub</span></div>
+              </div>
+            </div>
+
+            <div class="kreator-tags">
+              <span class="kreator-tag">Python</span>
+              <span class="kreator-tag">OpenCV</span>
+              <span class="kreator-tag">MediaPipe</span>
+              <span class="kreator-tag">ViGEmBus</span>
+              <span class="kreator-tag">vgamepad</span>
+            </div>
+
+            <div class="kreator-ctas">
+              <a href="https://github.com/neil-surjiani/AirWheel/releases/tag/v1.0" target="_blank" class="kreator-cta-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download v1.0
+              </a>
+              <a href="https://github.com/neil-surjiani/AirWheel" target="_blank" class="kreator-cta-ghost">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <!-- ══ TRIPWISE ══ -->
       <div class="tripwise-project reveal" id="tripwise">
